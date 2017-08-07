@@ -14,6 +14,8 @@
     <link href="<?php $this->options->themeUrl('css/single.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this->options->themeUrl('css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <?php if ($this->options->custom_css): ?><style><?php $this->options->custom_css() ?></style>
+    <?php endif; ?>
     <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw='); ?>
 </head>
 <body>

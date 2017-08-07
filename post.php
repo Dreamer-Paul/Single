@@ -15,12 +15,10 @@
         <article class="post-content">
             <?php $this->content(); ?>
         </article>
-        <section>
-            <ul class="post-near">
-                <li>上一篇: <?php $this->thePrev('%s','看完啦 (つд⊂)'); ?></li>
-                <li>下一篇: <?php $this->theNext('%s','看完啦 (つд⊂)'); ?></li>
-            </ul>
-        </section>
+        <ul class="post-near">
+            <li>上一篇: <?php $this->thePrev('%s','看完啦 (つд⊂)'); ?></li>
+            <li>下一篇: <?php $this->theNext('%s','看完啦 (つд⊂)'); ?></li>
+        </ul>
         <?php $this->need('comments.php'); ?>
     </div>
 </main>

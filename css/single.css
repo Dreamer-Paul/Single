@@ -76,7 +76,7 @@ input, textarea, code, hr, blockquote{
 
 /* - 夜间风格 */
 body.neon{
-    color: #777;
+    color: #999;
     background: #333;
 }
 
@@ -108,6 +108,11 @@ body.neon input, body.neon textarea, body.neon .btn, body.neon .link-friends .it
 body.neon img{
     filter: brightness(60%);
     -webkit-filter: brightness(60%);
+}
+
+/* -- 代码块突出 */
+body.neon pre{
+    border: 1px solid #555;
 }
 
 /* -- 背景与颜色变黑 */
@@ -356,9 +361,18 @@ header .search-form input{
 /* 2 - 正文
 -------------------------------- */
 main{
-    color: #777;
     padding: 60px 0;
     margin-top: 50px;
+}
+
+/* - 高分屏支持 */
+@media screen and (min-width: 1930px){
+    main{
+        font-size: 18px;
+    }
+    header .wrap, main .wrap, footer .wrap{
+        max-width: 1000px !important;
+    }
 }
 
 /* - 首页大标题 */
@@ -379,10 +393,11 @@ main .home-title span{
 }
 
 /* - 头像 */
-main .home-title .avatar{
+main .home-title img{
     max-width: 150px;
-    border: 3px solid #fff;
     border-radius: 100%;
+    border: 3px solid #fff;
+    margin-bottom: 1em;
 }
 
 /* - 社交链接 */
@@ -502,10 +517,6 @@ main .page-title h2{
     margin-bottom: 0;
 }
 
-main .page-title .edit-link{
-    vertical-align: text-top;
-}
-
 main .post-title, main .page-title,
 main .post-comments h2{
     margin-bottom: 1rem;
@@ -514,7 +525,8 @@ main .post-comments h2{
     border-bottom: 1px solid #ddd;
 }
 
-main .post-title .edit-link{
+/* - 编辑文章 */
+main .post-item .edit-link, main .page-title .edit-link, main .post-title .edit-link{
     display: inline-block;
 }
 
@@ -538,9 +550,13 @@ main .post-content > *:last-child, main .page-content > *:last-child{
     margin-bottom: 0;
 }
 
+main .post-near{
+    animation: fade-in-top .3s .3s both;
+}
+
 /* - 阅读页评论 */
 main .post-comments{
-    animation: fade-in-top .3s .3s both;
+    animation: fade-in-top .3s .4s both;
 }
 main .post-comments label{
     display: block;
@@ -555,12 +571,13 @@ main .post-comments input, main .post-comments textarea{
 .post-comments form{
     margin-bottom: 3em;
 }
-
 .post-comments .comment-list{
     margin-left: 0;
     list-style: none;
-    font-size: .95rem;
     margin-bottom: 2em;
+}
+.post-comments > .comment-list{
+    font-size: .95em;
 }
 .post-comments .comment-list:last-child{
     margin-bottom: 0;

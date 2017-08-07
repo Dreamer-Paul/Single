@@ -148,8 +148,6 @@ code{
     background-color: #f7f2f4;
 }
 
-
-
 /* - 引用*/
 blockquote{
     margin: 0 0 1em;
@@ -206,7 +204,6 @@ hr.light{
 }
 
 .bk-form textarea{
-    display: block;
     min-width: 100%;
 }
 
@@ -268,6 +265,7 @@ input, textarea{
 }
 
 textarea{
+    display: block;
     overflow: auto;
     max-width: 100%;
     resize: vertical;
@@ -721,6 +719,10 @@ iframe{
 }
 .wrap.full{
     max-width: 100%;
+}
+.wrap.thin{
+    margin-left: -10px;
+    margin-right: -10px;
 }
 .wrap.clear{
     padding-left: 0;

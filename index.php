@@ -4,7 +4,7 @@
  * 
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.0
+ * @version 1.1
  * @link https://hi-paul.space
  */
 
@@ -17,23 +17,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <section class="home-title">
             <h1><?php $this->options->title() ?></h1>
             <span><?php $this->options->description() ?></span>
-            <div class="home-social">
-                <a rel="nofollow" title="新浪微博" href="http://weibo.com/234891753" target="_blank">
-                    <i class="fa fa-weibo"></i>
-                </a>
-                <a rel="nofollow" title="QQ" href="http://shang.qq.com/wpa/qunwpa?idkey=8a11cea032c2362cf21573e774864329d29550f2bb0780adea5e9e0de39a19f7" target="_blank">
-                    <i class="fa fa-qq"></i>
-                </a>
-                <a rel="nofollow" title="GitHub" href="https://github.com/Dreamer-Paul" target="_blank">
-                    <i class="fa fa-github"></i>
-                </a>
-                <a rel="nofollow" title="Facebook" href="https://www.facebook.com/dreamer.paul.china" target="_blank">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a rel="nofollow" title="Steam" href="http://steamcommunity.com/id/dreamer-paul" target="_blank">
-                    <i class="fa fa-steam"></i>
-                </a>
-            </div>
+            <?php if ($this->options->home_social): ?>
+<div class="home-social">
+<?php $this->options->home_social() ?>
+</div>
+<?php endif; ?>
         </section>
         <section class="home-posts">
             <?php while($this->next()): ?>
