@@ -12,7 +12,7 @@
             <div class="row">
                 <?php if($this->user->hasLogin()): ?>
                 <div class="col-m-12">
-                    <p><?php _e('已登录：'); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a href="<?php $this->options->logoutUrl(); ?>" title="登出"><?php _e('登出'); ?> &raquo;</a></p>
+                    <p><?php _e('已登录: '); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a href="<?php $this->options->logoutUrl(); ?>" title="登出"><?php _e('登出'); ?> &raquo;</a></p>
                     <p>
                         <textarea rows="2" name="text" id="textarea" placeholder="快来评论吧 (*≧ω≦)ﾉ" required=""><?php $this->remember('text'); ?></textarea>
                     </p>

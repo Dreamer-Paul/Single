@@ -147,7 +147,7 @@ body.neon header .head-menu .sub-menu{
 }
 
 body.neon hr,
-body.neon .post-item h2 a, body.neon .post-title, body.neon .page-title,
+body.neon .post-item h2 a, body.neon .post-title, body.neon .page-title, body.neon .post-author,
 body.neon footer, body.neon .turn-up{
     border-color: #555;
 }
@@ -467,14 +467,15 @@ main .post-meta > *:before{
     font-family: FontAwesome;
 }
 
-main .post-meta .category:before{
-    content: "\f07b";
-}
-
 main .post-meta .date:before{
     content: "\f017";
 }
-
+main .post-meta .category:before{
+    content: "\f07b";
+}
+main .post-meta .tags:before{
+    content: " \f02c";
+}
 main .post-meta .comments:before{
     content: " \f086";
 }
@@ -534,7 +535,7 @@ main .post-item .edit-link, main .page-title .edit-link, main .post-title .edit-
 main .post-content, main .page-content{
     animation: fade-in-top .3s .2s both;
 }
-main .post-content, main .page-content, main .post-near{
+main .post-content, main .page-content, main .post-near, main .post-author{
     margin-bottom: 3em;
 }
 
@@ -554,9 +555,33 @@ main .post-near{
     animation: fade-in-top .3s .3s both;
 }
 
+/* - 阅读页作者信息 */
+main .post-author{
+    display: flex;
+    padding: 1.5em 0;
+    align-items: center;
+    transition: border 0.3s;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    animation: fade-in-top .3s .4s both;
+}
+
+main .post-author img{
+    max-width: 80px;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+main .post-author div{
+    margin-left: 1.5em;
+}
+main .post-author h4{
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
 /* - 阅读页评论 */
 main .post-comments{
-    animation: fade-in-top .3s .4s both;
+    animation: fade-in-top .3s .5s both;
 }
 main .post-comments label{
     display: block;

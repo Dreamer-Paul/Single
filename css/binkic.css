@@ -4,7 +4,7 @@
 
 # Kico Style 1.02
 # By: Dreamer-Paul
-# Last Update: 2017.7.27
+# Last Update: 2017.8.7
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -19,7 +19,7 @@ html, body,
 dl, dt, dd, ol, ul,
 h1, h2, h3, h4, h5, h6,
 pre, code, form, p,
-fieldset, legend{
+fieldset, legend, figure{
     margin: 0;
     padding: 0;
 }
@@ -181,74 +181,7 @@ hr.light{
     border-top: 1px rgba(255,255,255,0.5) solid;
 }
 
-/* - 表单*/
-.bk-form label{
-    display: block;
-    user-select: none;
-}
-.bk-form label:last-child{
-    margin-bottom: 0;
-}
-.bk-form-group label.submit > input[type="text"]{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.bk-form-group label.submit > input[type="text"]+button{
-    vertical-align: middle;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.bk-form label > button input{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.bk-form textarea{
-    min-width: 100%;
-}
-
-.bk-form input{
-    vertical-align: middle;
-}
-.bk-form input[type="checkbox"], .bk-form input[type="radio"]{
-    cursor: pointer;
-    margin: 0 .5em 0 0;
-}
-
-/* -- 单组表单*/
-.bk-form .bk-form-group{
-    cursor: default;
-    overflow: hidden;
-    margin-bottom: 2em;
-}
-.bk-form .bk-form-group:last-child{
-    margin-bottom: 0;
-}
-
-.bk-form .bk-form-group > *{
-    margin-bottom: 1em;
-}
-.bk-form .bk-form-group > *:last-child{
-    margin-bottom: 0;
-}
-
-@media screen and (max-width: 600px){
-    .bk-form .bk-form-group textarea{
-        width: 100%;
-    }
-}
-.bk-form.inline .bk-form-group label, .bk-form .bk-form-group.inline label{
-    float: left;
-    display: block;
-    margin: 0 1em 1em 0;
-}
-
-.bk-form .bk-form-group.inline:after{
-    content: '';
-    clear: both;
-    display: block;
-}
-
+/* - 表单 */
 input[disabled]{
     cursor: no-drop;
 }
@@ -258,6 +191,8 @@ input[readonly]{
 input, textarea{
     outline: 0;
     font: inherit;
+}
+input[type="text"], input[type="email"], input[type="url"], textarea{
     padding: .5em;
     color: inherit;
     border-radius: 4px;
@@ -269,6 +204,119 @@ textarea{
     overflow: auto;
     max-width: 100%;
     resize: vertical;
+}
+
+/* - 缤奇表单模组 */
+.bk-form label{
+    display: block;
+    cursor: pointer;
+    user-select: none;
+}
+.bk-form label:last-child{
+    margin-bottom: 0;
+}
+
+.bk-form label.submit > input[type="text"]{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.bk-form label.submit > input[type="text"]+button{
+    vertical-align: middle;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.bk-form input{
+    vertical-align: middle;
+}
+.bk-form textarea{
+    min-width: 100%;
+}
+
+/* -- 单选多选框 */
+.bk-form input[type="checkbox"], .bk-form input[type="radio"]{
+    width: 1em;
+    cursor: pointer;
+    margin: 0 .5em 0 0;
+    vertical-align: top;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+.bk-form input[type="checkbox"]:before, .bk-form input[type="radio"]:before{
+    width: 1em;
+    height: 1em;
+    content: '';
+    display: block;
+    margin-top: .3em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.bk-form input[type="radio"]:before{
+    border-radius: 100%;
+}
+
+.bk-form input[type="checkbox"]:checked:before, .bk-form input[type="radio"]:checked:before{
+    background: #3498db;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 2px #3498db;
+}
+
+/* -- 开关按钮 */
+.bk-form input[type="checkbox"].switch{
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    background: rgba(0,0,0,.05);
+}
+.bk-form input[type="checkbox"].switch:before{
+    margin: 0;
+    border: 0;
+    content: "";
+    width: 28px;
+    height: 28px;
+    display: block;
+    box-shadow: none;
+    position: absolute;
+    border-radius: 100%;
+    background: rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.3s;
+}
+.bk-form input[type="checkbox"].switch:checked:before{
+    background: #3498db;
+    transform: translateX(30px);
+}
+
+/* -- 单组表单*/
+.bk-form fieldset{
+    cursor: default;
+    border: none;
+    margin-bottom: 2em;
+}
+.bk-form fieldset:last-child{
+    margin-bottom: 0;
+}
+
+.bk-form fieldset > *{
+    margin-bottom: 1em;
+}
+.bk-form fieldset > *:last-child{
+    margin-bottom: 0;
+}
+
+/* -- 单行表单 */
+.bk-form.inline fieldset label, .bk-form fieldset.inline label{
+    float: left;
+    display: block;
+    margin: 0 1em 1em 0;
+}
+
+.bk-form fieldset.inline:after{
+    content: '';
+    clear: both;
+    display: block;
 }
 
 /* - 表格*/
@@ -782,33 +830,6 @@ iframe{
 .btn.yellow:active { background: #eb9c26; }
 .btn.blue:active   { background: #2084c7; }
 .btn.green:active  { background: #138d6a; }
-
-/* - 开关按钮 */
-.sw-btn{
-    width: 60px;
-    height: 30px;
-    cursor: pointer;
-    position: relative;
-    border-radius: 50px;
-    display: inline-block;
-    vertical-align: middle;
-    background: rgba(0,0,0,.05);
-}
-.sw-btn:before{
-    left: 0;
-    width: 30px;
-    height: 30px;
-    content: "";
-    display: block;
-    position: absolute;
-    border-radius: 100%;
-    background: rgba(0,0,0,0.2);
-    transition: background 0.3s, left 0.3s;
-}
-.sw-btn.active.sw-btn:before{
-    background: #3498db;
-    left: calc(100% - 30px);
-}
 
 /* - 弹窗 */
 .bk-alert{

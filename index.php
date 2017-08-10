@@ -4,7 +4,7 @@
  * 
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.1
+ * @version 1.2
  * @link https://hi-paul.space
  */
 
@@ -17,10 +17,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <section class="home-title">
             <h1><?php $this->options->title() ?></h1>
             <span><?php $this->options->description() ?></span>
-            <?php if ($this->options->home_social): ?>
-<div class="home-social">
+<?php if ($this->options->home_social): ?>
+            <div class="home-social">
 <?php $this->options->home_social() ?>
-</div>
+            </div>
 <?php endif; ?>
         </section>
         <section class="home-posts">
@@ -33,8 +33,15 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 <p><?php $this->excerpt(100); ?></p>
                 <div class="post-meta">
                     <time class="date"><?php $this->date('Y.m.d'); ?></time>
-                    <span class="category"><?php $this->category('、'); ?></span>
-                    <span class="comments"><?php $this->commentsNum('%d °C'); ?></span>
+<?php if (!empty($this->options->archive_meta) && in_array('show_category', $this->options->archive_meta)): ?>
+                        <span class="category"><?php $this->category('，'); ?></span>
+<?php endif; ?>
+<?php if (!empty($this->options->archive_meta) && in_array('show_tags', $this->options->archive_meta)): ?>
+                        <span class="tags"><?php $this->tags('，', true, 'none'); ?></span>
+<?php endif; ?>
+<?php if (!empty($this->options->archive_meta) && in_array('show_comments', $this->options->archive_meta)): ?>
+                        <span class="comments"><?php $this->commentsNum('%d °C'); ?></span>
+<?php endif; ?>
                 </div>
             </div>
             <?php endwhile; ?>

@@ -69,25 +69,6 @@ function overlay(count_down){
     }
 }
 
-// 开关按钮
-function sw_btn(){
-    var sw_btns = document.getElementsByClassName("sw-btn");
-    var sw_btns_length = sw_btns.length;
-    if(sw_btns[0]){
-        for (var i = 0; i < sw_btns_length; i++) {
-            sw_btns[i].addEventListener("click", function () {
-                if(sw_btns[i].className == "sw-btn"){
-                    sw_btns[i].classList.add("active");
-                }
-                else{
-                    sw_btns[i].classList.remove("active");
-                }
-            });
-        }
-    }
-}
-sw_btn();
-
 if (window.console && window.console.log) {
     console.log("\n %c Kico Style %c https://www.binkic.com \n\n","color: #fff; background: #3498db; padding: 5px 0;","background: #efefef; padding: 5px 0;");
 }

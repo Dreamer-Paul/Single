@@ -9,14 +9,23 @@
             'tag'       =>  _t('标签 %s 下的文章'),
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
+<?php if ($this->options->favicon_small): ?>
+    <link rel="icon" href="<?php $this->options->favicon_small() ?>" sizes="32x32"/>
+<?php else: ?>
     <link rel="icon" href="<?php $this->options->themeUrl('img/icon/32.png'); ?>" sizes="32x32"/>
+<?php endif; ?>
+<?php if ($this->options->favicon_large): ?>
+    <link rel="icon" href="<?php $this->options->favicon_small() ?>" sizes="192x192"/>
+<?php else: ?>
     <link rel="icon" href="<?php $this->options->themeUrl('img/icon/192.png'); ?>" sizes="192x192"/>
+<?php endif; ?>
     <link href="<?php $this->options->themeUrl('css/single.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this->options->themeUrl('css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
-    <?php if ($this->options->custom_css): ?><style><?php $this->options->custom_css() ?></style>
-    <?php endif; ?>
-    <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw='); ?>
+<?php if ($this->options->custom_css): ?>
+    <style><?php $this->options->custom_css() ?></style>
+<?php endif; ?>
+<?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw='); ?>
 </head>
 <body>
 <header>
