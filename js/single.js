@@ -11,6 +11,8 @@
 
  ---- */
 
+var body = document.body;
+
 // 菜单按钮
 function head_menu() {
     var btn = document.getElementsByClassName("toggle-btn")[0];
@@ -33,7 +35,6 @@ search_btn();
 
 // 关灯切换
 function style_select() {
-    var body = document.body;
     var neon_btn = document.getElementsByClassName("light-btn")[0];
 
     function style_load() {
@@ -54,6 +55,44 @@ function style_select() {
     });
 }
 style_select();
+
+(function () {
+    var wrap = document.getElementsByClassName("wrap")[0];
+    var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
+    if(content){
+        var headings = content.querySelectorAll("h2, h3, h4, h5, h6");
+
+        if(headings.length > 0){
+            body.classList.add("has-trees");
+
+            var trees = document.createElement("aside");
+            trees.classList.add("article-list");
+
+            var title = document.createElement("h3");
+            title.innerHTML = "文章目录：";
+
+            trees.appendChild(title);
+            headings.forEach(function (t) {
+                t.id = t.innerText;
+                var item = document.createElement("a");
+                item.innerText = (t.innerText);
+                item.href = "#" + t.innerText;
+
+                var i = t.tagName;
+                switch (i){
+                    case "H3": item.style = "margin-left: .5em;"; break;
+                    case "H4": item.style = "margin-left: .75em;"; break;
+                    case "H5": item.style = "margin-left: 1em;"; break;
+                    case "H6": item.style = "margin-left: 1.25em;"; break;
+                }
+
+                trees.appendChild(item);
+            });
+            wrap.appendChild(trees);
+        }
+    }
+})();
+
 
 // 返回页首
 function turn_up() {

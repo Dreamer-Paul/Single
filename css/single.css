@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.8.2
+# Last Update: 2017.8.17
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -21,7 +21,7 @@ body{
     color: #555;
     background: #fafafa;
     font-weight: lighter;
-    transition: background 0.3s;
+    transition: margin 0.3s, background 0.3s;
 }
 
 ::-webkit-scrollbar{
@@ -146,6 +146,14 @@ body.neon header .head-menu .sub-menu{
     border-color: #333;
 }
 
+body.neon aside.article-list{
+    border-color: #555;
+}
+
+body.neon main .article-list{
+    background: none;
+}
+
 body.neon hr,
 body.neon .post-item h2 a, body.neon .post-title, body.neon .page-title, body.neon .post-author,
 body.neon footer, body.neon .turn-up{
@@ -158,8 +166,8 @@ header{
     top: 0;
     left: 0;
     right: 0;
+    z-index: 11;
     color: #666;
-    z-index: 520;
     position: fixed;
     background: #fff;
     border-bottom: 1px solid #ddd;
@@ -170,7 +178,7 @@ header{
 header .head-title{
     left: 0;
     right: 0;
-    line-height: 50px;
+    line-height: 3.5em;
     position: absolute;
     text-align: center;
 }
@@ -248,8 +256,8 @@ header .head-menu li.has-child > a:after{
     }
 
     header .head-menu > li{
-        padding: 10px 0;
-        line-height: 30px;
+        padding: .75em 0;
+        line-height: 2em;
         margin-right: 1em;
     }
 
@@ -275,7 +283,7 @@ header .head-menu .sub-menu a{
 
     header .head-menu .sub-menu{
         margin: 0;
-        top: 50px;
+        top: 3.5em;
         width: 180px;
         display: none;
         list-style: none;
@@ -294,12 +302,16 @@ header .head-menu .sub-menu a{
 header .toggle-btn, header .light-btn, header .search-btn{
     z-index: 1;
     float: left;
-    width: 30px;
-    margin: 10px;
+    width: 2em;
+    margin: .75em;
     cursor: pointer;
     position: relative;
     border-radius: 4px;
     transition: color 0.3s, background 0.3s;
+}
+
+header .toggle-btn{
+    margin-right: 0;
 }
 
 header .toggle-btn:hover, header .light-btn:hover, header .search-btn:hover{
@@ -313,7 +325,7 @@ header .search-btn{
 header .toggle-btn:before, header .light-btn:before, header .search-btn:before{
     display: block;
     text-align: center;
-    font: 1em/30px "FontAwesome";
+    font: 1em/2em "FontAwesome";
 }
 
 header .toggle-btn:before{
@@ -332,7 +344,7 @@ header .search-form{
     z-index: 1;
     opacity: 0;
     float: right;
-    padding: 8.5px 0;
+    padding: .75em 0;
     position: relative;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -344,14 +356,14 @@ header .search-form.active{
 header .search-form input{
     width: 150px;
     font-size: .9em;
-    padding: 5px 10px;
+    padding: .3em .75em;
     border-radius: 50px;
 }
 @media screen and (max-width: 600px){
     header .search-form{
         float: none;
-        margin-left: 100px;
-        margin-right: 50px;
+        margin-left: 6.5em;
+        margin-right: 3.5em;
     }
     header .search-form input{
         width: 100%;
@@ -361,13 +373,16 @@ header .search-form input{
 /* 2 - 正文
 -------------------------------- */
 main{
-    padding: 60px 0;
-    margin-top: 50px;
+    padding: 3.5em 0;
+    margin-top: 3.5em;
+}
+main img{
+    transition: filter 0.3s;
 }
 
 /* - 高分屏支持 */
 @media screen and (min-width: 1930px){
-    main{
+    body{
         font-size: 18px;
     }
     header .wrap, main .wrap, footer .wrap{
@@ -378,7 +393,7 @@ main{
 /* - 首页大标题 */
 main .home-title{
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 3em;
     animation: fade-in-bottom .3s both;
 }
 
@@ -414,7 +429,7 @@ main .home-title .home-social i{
 
 /* - 文章简要 */
 main .post-item{
-    margin-bottom: 3.5em;
+    margin-bottom: 3em;
 }
 main .post-item:last-child{
     margin-bottom: 0;
@@ -437,12 +452,17 @@ main .post-item:nth-child(5n){
     animation: fade-in-top .3s .6s both;
 }
 
+main .post-item h2{
+    margin-bottom: .5em;
+}
 main .post-item h2 a{
-    padding-bottom: .5rem;
+    line-height: 2em;
+    padding-bottom: .3rem;
     border-bottom: 2px solid #eee;
 }
 main .post-item h2 a.edit-link{
     font-size: 1rem;
+    line-height: inherit;
 }
 
 /* - 文章属性 */
@@ -518,10 +538,9 @@ main .page-title h2{
     margin-bottom: 0;
 }
 
-main .post-title, main .page-title,
-main .post-comments h2{
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+main .post-title, main .page-title{
+    margin-bottom: 1em;
+    padding-bottom: 1em;
     transition: border 0.3s;
     border-bottom: 1px solid #ddd;
 }
@@ -539,10 +558,6 @@ main .post-content, main .page-content, main .post-near, main .post-author{
     margin-bottom: 3em;
 }
 
-main .post-content img, main .page-content img{
-    transition: filter 0.3s;
-}
-
 main .post-content > *, main .page-content > *{
     margin-bottom: 1em;
 }
@@ -550,6 +565,26 @@ main .post-content > *, main .page-content > *{
 main .post-content > *:last-child, main .page-content > *:last-child{
     margin-bottom: 0;
 }
+
+main .post-content h1, main .page-content h1,
+main .post-content h2, main .page-content h2,
+main .post-content h3, main .page-content h3{
+    font-size: 1.17em;
+}
+main .post-content h4, main .page-content h4,
+main .post-content h5, main .page-content h5,
+main .post-content h6, main .page-content h6{
+    font-size: 1em;
+    font-weight: bold;
+}
+main .post-content h1:before, main .page-content h1:before,
+main .post-content h2:before, main .page-content h2:before,
+main .post-content h3:before, main .page-content h3:before{
+    opacity: .5;
+    content: "#";
+    margin-right: .3em;
+}
+
 
 main .post-near{
     animation: fade-in-top .3s .3s both;
@@ -560,10 +595,10 @@ main .post-author{
     display: flex;
     padding: 1.5em 0;
     align-items: center;
-    transition: border 0.3s;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     animation: fade-in-top .3s .4s both;
+    transition: border 0.3s, filter 0.3s;
 }
 
 main .post-author img{
@@ -572,6 +607,7 @@ main .post-author img{
     vertical-align: middle;
 }
 main .post-author div{
+    max-width: 750px;
     margin-left: 1.5em;
 }
 main .post-author h4{
@@ -590,51 +626,52 @@ main .post-comments label{
 
 main .post-comments input, main .post-comments textarea{
     width: 100%;
+    display: block;
 }
 
 /* -- 评论列表 */
-.post-comments form{
+main .post-comments form{
     margin-bottom: 3em;
 }
-.post-comments .comment-list{
+main .post-comments .comment-list{
     margin-left: 0;
     list-style: none;
     margin-bottom: 2em;
 }
-.post-comments > .comment-list{
+main .post-comments > .comment-list{
     font-size: .95em;
 }
-.post-comments .comment-list:last-child{
+main .post-comments .comment-list:last-child{
     margin-bottom: 0;
 }
 
-.comment-list li{
+main .comment-list li{
     padding-left: 60px;
     margin-bottom: 1em;
 }
 
-.comments-list li:last-child{
+main .comments-list li:last-child{
     margin-bottom: 0;
 }
 
-.comment-list .comment-author,
-.comment-list .comment-meta{
+main .comment-list .comment-author,
+main .comment-list .comment-meta{
     float: left;
     margin-bottom: .25em;
 }
 
 /* --- 评论者信息与头像 */
-.comment-list .comment-author{
+main .comment-list .comment-author{
     margin-right: .5em;
     position: relative;
 }
 
-.comment-list .comment-author cite{
+main .comment-list .comment-author cite{
     float: left;
     margin-right: .5em;
 }
 
-.comment-list .comment-author .avatar{
+main .comment-list .comment-author .avatar{
     top: 0;
     left: -60px;
     min-width: 45px;
@@ -643,13 +680,13 @@ main .post-comments input, main .post-comments textarea{
     transition: transform .3s ease-in-out;
 }
 
-.comment-list li:hover .avatar{
+main .comment-list li:hover .avatar{
     transform: rotate(1turn);
     -webkit-transform: rotate(1turn);
 }
 
 /* --- 评论信息 */
-.comment-list .comment-meta:before{
+main .comment-list .comment-meta:before{
     content: "\f017";
     font-size: inherit;
     margin-right: .2em;
@@ -657,26 +694,58 @@ main .post-comments input, main .post-comments textarea{
     font-family: "FontAwesome";
 }
 
-.comment-list .comment-meta a{
+main .comment-list .comment-meta a{
     color: #aaa;
 }
 
 /* --- 评论内容 */
-.comment-list .comment-content{
+main .comment-list .comment-content{
     clear: both;
     margin-bottom: .25em;
 }
-.comment-children > .comment-list{
+main .comment-children > .comment-list{
     margin-top: 1em;
 }
 
 
-.comment-list .comment-reply a{
+main .comment-list .comment-reply a{
     color: #aaa;
 }
-
-.comment-list .comment-reply a:hover{
+main .comment-list .comment-reply a:hover{
     color: #555;
+}
+
+/* -- 文章目录 */
+.article-list{
+    top: 3.5em;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    padding: 1em;
+    position: fixed;
+    min-width: 15em;
+    border-radius: 4px;
+    pointer-events: none;
+    border-left: 1px solid #ccc;
+    background: rgba(255, 255, 255, .5);
+    transition: border 0.3s, opacity 0.3s, background 0.3s;
+}
+.article-list a{
+    display: block;
+    margin-bottom: .5em;
+}
+.article-list a:last-child{
+    margin-bottom: 0;
+}
+@media screen and (min-width: 800px){
+    body.has-trees{
+        margin-right: 15em;
+    }
+
+    .article-list{
+        opacity: 1;
+        pointer-events: inherit;
+    }
 }
 
 /* - 友链列表 */
@@ -749,7 +818,6 @@ main .post-comments input, main .post-comments textarea{
 }
 
 footer{
-    font-size: .875em;
     text-align: center;
     border-top: 1px solid #eee;
     transition: border 0.3s, background 0.3s;
@@ -757,4 +825,5 @@ footer{
 
 footer p{
     padding: 1em 0;
+    font-size: .875em;
 }

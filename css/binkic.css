@@ -2,9 +2,9 @@
 
 /* ----
 
-# Kico Style 1.02
+# Kico Style 1.5
 # By: Dreamer-Paul
-# Last Update: 2017.8.7
+# Last Update: 2017.8.27
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -24,8 +24,19 @@ fieldset, legend, figure{
     padding: 0;
 }
 body{
-    color: #222;
-    font: 16px /1.5 "微软雅黑";
+    color: #353535;
+    font: 16px /1.5 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+}
+
+@media screen and (max-width: 500px){
+    body[enable-scale]{
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 1930px){
+    body[enable-scale]{
+        font-size: 18px;
+    }
 }
 
 *, *:before, *:after{
@@ -49,12 +60,64 @@ nav, section, main{
     background-color: rgba(0,0,0,0.66);
 }
 
-/* - 排版 */
-p{
-    line-height: 1.8em;
-    margin-bottom: 1em;
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px
+}
+::-webkit-scrollbar-thumb {
+    min-height: 28px;
+    background-color: rgba(0,0,0,.2);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07)
+}
+::-webkit-scrollbar-track:hover {
+    background-color: rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1)
 }
 
+::-webkit-scrollbar-track:active {
+    background-color: rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.14),inset -1px -1px 0 rgba(0,0,0,.07)
+}
+
+/* 1 - 容器
+-------------------------------- */
+main, footer{
+    overflow: hidden;
+}
+
+.wrap{
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: content-box;
+}
+.wrap.min{
+    max-width: 800px;
+}
+.wrap.mid{
+    max-width: 1000px;
+}
+.wrap.max{
+    max-width: 1600px;
+}
+.wrap.full{
+    max-width: 100%;
+}
+.wrap.thin{
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.wrap.clear{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* 2 - 元素
+-------------------------------- */
 h1{
     font-size: 2em;
 }
@@ -65,9 +128,9 @@ h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:la
     margin-bottom: 0;
 }
 
-img{
-    height: auto;
-    max-width: 100%;
+p{
+    line-height: 1.8em;
+    margin-bottom: 1em;
 }
 
 a{
@@ -78,40 +141,82 @@ a:hover{
     color: #ffc670;
 }
 
-/* - 项目列表 */
-ul, ol{
-    margin-left: 1.25em;
-}
-ul.clear{
-    margin-left: 0;
-    list-style: none;
-}
-dl dd{
-    margin-left: 1.5em;
-}
-dl dd:before{
-    content: "--";
-    margin-right: .25em;
+em{
+    color: #fff;
+    margin: 0 .2em;
+    font-style: normal;
+    border-radius: 5px;
+    padding: .2em .5em;
+    background: #3498db;
 }
 
-/* - 补间动画 */
-a, h1, h2, h3, h4, h5, h6, .btn{
-    transition: color 0.3s, background 0.3s, border 0.3s;
-    -moz-transition: color 0.3s, background 0.3s, border 0.3s;
-    -webkit-transition: color 0.3s, background 0.3s, border 0.3s;
-    -o-transition: color 0.3s, background 0.3s, border 0.3s;
-    backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+img, svg, video{
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
-/* - 代码*/
+/* - 按钮 */
+.btn{
+    outline: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: #eee;
+    user-select: none;
+    border-radius: 4px;
+    padding: .8em 1.5em;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+.btn:hover{
+    color: inherit;
+}
+.btn:active{
+    background: #ddd;
+}
+
+/* -- 禁用的按钮 */
+.btn[disabled]{
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* -- 有图标的按钮 */
+.btn i{
+    margin-right: 5px;
+}
+
+/* -- 按钮尺寸 */
+.btn.small{
+    padding: .5em 1em;
+}
+.btn.large{
+    font-size: 1.2em;
+    padding: 1em 2.5em;
+}
+
+/* -- 按钮颜色 */
+.btn.red, .btn.yellow, .btn.blue, .btn.green{ color: #fff; }
+.btn.red:hover, .btn.yellow:hover, .btn.blue:hover, .btn.green:hover{ color: #fff; }
+
+.btn.red    { background: #c40b00; }
+.btn.yellow { background: #ffb03a; }
+.btn.blue   { background: #3498db; }
+.btn.green  { background: #27a17e; }
+
+.btn.red:active    { background: #b00000; }
+.btn.yellow:active { background: #eb9c26; }
+.btn.blue:active   { background: #2084c7; }
+.btn.green:active  { background: #138d6a; }
+
+/* - 代码 */
 pre, code{
     font-size: 1em;
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
 
-pre code{
+pre > code{
     padding: 0;
     color: #fff;
     font-size: 1em;
@@ -148,6 +253,33 @@ code{
     background-color: #f7f2f4;
 }
 
+/* - 项目列表 */
+ul, ol{
+    margin-left: 1.25em;
+}
+ul.clear{
+    margin-left: 0;
+    list-style: none;
+}
+dl dd{
+    margin-left: 1.5em;
+}
+dl dd:before{
+    content: "--";
+    margin-right: .25em;
+}
+
+/* - 补间动画 */
+a, h1, h2, h3, h4, h5, h6, .btn{
+    transition: color 0.3s, background 0.3s, border 0.3s;
+    -moz-transition: color 0.3s, background 0.3s, border 0.3s;
+    -webkit-transition: color 0.3s, background 0.3s, border 0.3s;
+    -o-transition: color 0.3s, background 0.3s, border 0.3s;
+    backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
 /* - 引用*/
 blockquote{
     margin: 0 0 1em;
@@ -162,14 +294,7 @@ cite{
     font-style: normal;
 }
 
-em{
-    color: #fff;
-    margin: 0 .2em;
-    font-style: normal;
-    border-radius: 5px;
-    padding: .2em .5em;
-    background: #3498db;
-}
+
 
 /* - 分割线 */
 hr{
@@ -188,11 +313,11 @@ input[disabled]{
 input[readonly]{
     background: rgb(235, 235, 228);
 }
-input, textarea{
+input, textarea, select{
     outline: 0;
     font: inherit;
 }
-input[type="text"], input[type="email"], input[type="url"], textarea{
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], textarea, select{
     padding: .5em;
     color: inherit;
     border-radius: 4px;
@@ -220,7 +345,7 @@ textarea{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.bk-form label.submit > input[type="text"]+button{
+.bk-form label.submit > input[type="text"] + button{
     vertical-align: middle;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -250,6 +375,7 @@ textarea{
     margin-top: .3em;
     border-radius: 4px;
     border: 1px solid #ccc;
+    transition: border 0.3s, background 0.3s, box-shadow 0.3s;
 }
 .bk-form input[type="radio"]:before{
     border-radius: 100%;
@@ -289,7 +415,7 @@ textarea{
     transform: translateX(30px);
 }
 
-/* -- 单组表单*/
+/* - 表单小组 */
 .bk-form fieldset{
     cursor: default;
     border: none;
@@ -324,20 +450,32 @@ textarea{
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    border-radius: 5px;
 }
 
 table{
     border: 0;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
-    border-radius: 5px;
     border-collapse: collapse;
 }
 table th, table td{
-    padding: 10px;
+    padding: .75em;
     text-align: left;
     vertical-align: top;
+}
+
+table > thead > tr{
+    border-bottom: 2px solid #ccc;
+}
+table > tbody > tr > td{
+    border-bottom: 1px solid #ddd;
+}
+table > tbody > tr{
+    transition: background .3s;
+}
+table > tbody > tr:hover{
+    background: #eee !important;
 }
 
 table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th,
@@ -345,23 +483,20 @@ table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td{
     white-space: nowrap;
 }
 
-table > tbody > tr:hover{
-    background: #eee !important;
+/* - 蓝色风格 */
+table.fill{
+    border: 1px solid #3498db;
 }
-
-/* - 线条 */
-table.border > thead > tr{
-    border-bottom: 2px solid #ccc;
+table.fill > thead > tr{
+    border-bottom: none;
 }
-table.border > tbody > tr > td{
-    border-bottom: 1px solid #ddd;
+table.fill > tbody{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
-
-/* - 头部变蓝 */
 table.fill > thead > tr > th, table.fill > thead > tr > td{
     color: #fff;
-    font-weight: bold;
-    padding: 15px 10px;
+    padding: 1em .75em;
     background: #3498db;
 }
 table.fill > tbody > tr:nth-child(2n) > th, table.fill > tbody > tr:nth-child(2n){
@@ -373,7 +508,7 @@ iframe{
     border: none;
 }
 
-/* - 响应式网格 */
+/* - 栅格系统 */
 .row{
     display: flex;
     flex-wrap: wrap;
@@ -421,6 +556,7 @@ iframe{
 .row [class*="col-s-"], [class*="col-m-"], [class*="col-l-"]{
     flex: 0 0 100%;
     max-width: 100%;
+    position: relative;
     margin-bottom: 2em;
 }
 .row [class*="col-s-"]:last-child, [class*="col-m-"]:last-child, [class*="col-l-"]:last-child{
@@ -707,6 +843,9 @@ iframe{
     align-items: center;
     justify-content: center;
 }
+.row > *.center-fixed{
+    text-align: center;
+}
 .row > *.left{
     -webkit-box-align: start;
     align-items: flex-start;
@@ -729,147 +868,83 @@ iframe{
 
 /* - 隐藏栅格功能 */
 @media screen and (max-width: 600px){
-    .row .s-hide{
+    .row > *.hide-small{
         display: none;
     }
 }
 @media screen and (max-width: 900px){
-    .row .m-hide{
+    .row > *.hide-middle{
         display: none;
     }
 }
 @media screen and (max-width: 1024px){
-    .row .l-hide{
+    .row > *.hide-large{
         display: none;
     }
 }
 
-/* 2 - 主体内容
+/* 4 - 组件
 -------------------------------- */
-.container{
-    overflow: hidden;
-}
-.wrap{
-    margin: 0 auto;
-    max-width: 1200px;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: content-box;
-}
-.wrap.min{
-    max-width: 800px;
-}
-.wrap.mid{
-    max-width: 1000px;
-}
-.wrap.max{
-    max-width: 1600px;
-}
-.wrap.full{
-    max-width: 100%;
-}
-.wrap.thin{
-    margin-left: -10px;
-    margin-right: -10px;
-}
-.wrap.clear{
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* - 按钮 */
-.btn{
-    outline: 0;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    background: #eee;
-    user-select: none;
-    border-radius: 4px;
-    padding: .8em 1.5em;
-    display: inline-block;
-    border: 1px solid transparent;
-}
-.btn:hover{
-    color: inherit;
-}
-.btn:active{
-    background: #ddd;
-}
-
-/* -- 禁用的按钮 */
-.btn[disabled]{
-    opacity: .5;
-    cursor: not-allowed;
-}
-
-/* -- 有图标的按钮 */
-.btn i{
-    margin-right: 5px;
-}
-
-/* -- 按钮尺寸 */
-.btn.small{
-    padding: .5em 1em;
-}
-.btn.large{
-    font-size: 1.2em;
-    padding: 1em 2.5em;
-}
-
-/* -- 按钮颜色 */
-.btn.red, .btn.yellow, .btn.blue, .btn.green{ color: #fff; }
-.btn.red:hover, .btn.yellow:hover, .btn.blue:hover, .btn.green:hover{ color: #fff; }
-
-.btn.red    { background: #c40b00; }
-.btn.yellow { background: #ffb03a; }
-.btn.blue   { background: #3498db; }
-.btn.green  { background: #27a17e; }
-
-.btn.red:active    { background: #b00000; }
-.btn.yellow:active { background: #eb9c26; }
-.btn.blue:active   { background: #2084c7; }
-.btn.green:active  { background: #138d6a; }
 
 /* - 弹窗 */
-.bk-alert{
-    top: 100px;
+.bk-notice-list{
+    top: 3em;
     left: 0;
     right: 0;
     z-index: 60;
-    margin: 0 auto;
     position: fixed;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 10px;
-    animation: fade-in-bottom 0.3s both;
-    box-shadow: 0 5px 5px -2px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
 }
-.bk-alert.remove{
+.bk-notice-list .bk-notice {
+    color: #fff;
+    overflow: hidden;
+    background: #333;
+    padding: .5em 1em;
+    border-radius: 3em;
+    pointer-events: auto;
+    animation: fade-in-bottom 0.3s backwards;
+    box-shadow: 0 5px 5px -2px rgba(0, 0, 0, 0.2);
+
+    max-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+.bk-notice.remove{
     animation: fade-in-top 0.3s both reverse;
 }
-.bk-alert.red{
+
+/* -- 弹窗颜色 */
+.bk-notice.red{
     color: #f55d5b;
     background: #ffe8e0;
 }
-.bk-alert.yellow{
+.bk-notice.yellow{
     color: #eb9c26;
     background: #fcf8e3;
 }
-.bk-alert.blue{
+.bk-notice.blue{
     color: #3498db;
     background: #d9edf7;
 }
-.bk-alert.green{
+.bk-notice.green{
     color: #27a17e;
     background: #dff0d8;
 }
 
-.bk-alert .close{
+.bk-notice .close{
     float: right;
+    cursor: pointer;
+    padding: .5em 1em;
+    margin: -.5em -1em;
+    transition: background .3s;
 }
-.bk-alert .content{
-    padding: 1em;
+.bk-notice .close:hover{
+    background: rgba(0, 0, 0, .1);
+}
+.bk-notice .close:after{
+    content: 'X';
+    font: inherit;
 }
 
 /* - 遮罩 */
@@ -887,29 +962,77 @@ iframe{
     animation: fade-off 0.5s both;
 }
 
-/* 3 - 动画
+/* - 图片放大 */
+img[bk-imgs=active]{
+    cursor: zoom-in;
+}
+.bk-imgs{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 66;
+}
+.bk-imgs:before{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    animation: fade-in .5s both;
+    background: rgba(0, 0, 0, .5);
+}
+.bk-imgs img{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 90%;
+    max-height: 90%;
+    cursor: zoom-out;
+    position: absolute;
+    animation: scale-large .3s both;
+}
+.bk-imgs.remove:before{
+    animation: fade-off .3s both;
+}
+.bk-imgs.remove img{
+    animation: scale-small .3s both;
+}
+
+.bk-imgs img[src$=".jpg"]{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+
+/* 4 - 动画
 -------------------------------- */
-.ani{
+.bk-animate{
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
 }
-.ani.infinite{
+.bk-animate.infinite{
     animation-iteration-count: infinite;
 }
-.ani.loop{
+.bk-animate.loop{
     animation-direction: alternate;
+}
+.bk-animate.reverse{
+    animation-direction: reverse;
 }
 
 /* - 动画时长 */
-.ani.slow{
+.bk-animate.slow{
     animation-duration: 2s;
 }
-.ani.fast{
+.bk-animate.fast{
     animation-duration: 0.5s;
 }
 
 /* - 位移动画 */
-.ani.up-and-down{
+.bk-animate.up-and-down{
     animation-name: up-and-down;
     animation-direction: alternate;
 }
@@ -918,7 +1041,7 @@ iframe{
     100%{ transform: translateY(20px); }
 }
 
-.ani.left-and-right{
+.bk-animate.left-and-right{
     animation-name: left-and-right;
     animation-direction: alternate;
 }
@@ -928,7 +1051,7 @@ iframe{
 }
 
 /* - 旋转动画 */
-.ani.rotate{
+.bk-animate.rotate{
     animation-name: rotate;
 }
 @keyframes rotate{
@@ -936,7 +1059,7 @@ iframe{
     100%{ transform: rotate(360deg); }
 }
 
-.ani.slide-left-right{
+.bk-animate.slide-left-right{
     animation-name: slide-left-right;
     animation-direction: alternate;
 }
@@ -946,15 +1069,22 @@ iframe{
 }
 
 /* - 淡入动画 */
-.ani.fade-in{
+.bk-animate.fade-in{
     animation-name: fade-in;
 }
 @keyframes fade-in {
     0% { opacity: 0 }
     100%{ opacity: 1 }
 }
+.bk-animate.fade-off{
+    animation-name: fade-in;
+}
+@keyframes fade-off {
+    0% { opacity: 1 }
+    100%{ opacity: 0 }
+}
 
-.ani.fade-in-top{
+.bk-animate.fade-in-top{
     animation-name: fade-in-top;
 }
 @keyframes fade-in-top{
@@ -968,7 +1098,7 @@ iframe{
     }
 }
 
-.ani.fade-in-bottom{
+.bk-animate.fade-in-bottom{
     animation-name: fade-in-bottom;
 }
 @keyframes fade-in-bottom{
@@ -982,7 +1112,7 @@ iframe{
     }
 }
 
-.ani.fade-in-left{
+.bk-animate.fade-in-left{
     animation-name: fade-in-left;
 }
 @keyframes fade-in-left {
@@ -996,7 +1126,7 @@ iframe{
     }
 }
 
-.ani.fade-in-right{
+.bk-animate.fade-in-right{
     animation-name: fade-in-right;
 }
 @keyframes fade-in-right {
@@ -1009,34 +1139,40 @@ iframe{
         transform: translateX(0);
     }
 }
-
-/* - 淡出动画 */
-.ani.fade-off{
-    animation-name: fade-off;
+.bk-animate.fade-small{
+    animation-name: fade-small;
 }
-@keyframes fade-off {
-    0% { opacity: 1 }
-    100%{ opacity: 0 }
+@keyframes fade-small {
+    0%{ opacity: 0; transform: scale(1.5, 1.5); }
+    100%{ opacity: 1; transform: scale(1, 1); }
+}
+
+.bk-animate.fade-large{
+    animation-name: fade-large;
+}
+@keyframes fade-large {
+    0%{ opacity: 0; transform: scale(.5, .5); }
+    100%{ opacity: 1; transform: scale(1, 1); }
 }
 
 /* - 缩放动画 */
-.ani.scale-small{
+.bk-animate.scale-small{
     animation-name: scale-small;
 }
 @keyframes scale-small {
-    0%{ transform: scale(1.5, 1.5); }
-    100%{ transform: scale(1, 1); }
+    0%{ transform: scale(1, 1); }
+    100%{ transform: scale(0, 0); }
 }
 
-.ani.scale-large{
+.bk-animate.scale-large{
     animation-name: scale-large;
 }
 @keyframes scale-large {
-    0%{ transform: scale(0.5, 0.5); }
+    0%{ transform: scale(0, 0); }
     100%{ transform: scale(1, 1); }
 }
 
-.ani.scale-small-left{
+.bk-animate.scale-small-left{
     animation-name: scale-small-left;
 }
 @keyframes scale-small-left {
@@ -1044,7 +1180,7 @@ iframe{
     100%{ transform: scale(1, 1) translateX(0);}
 }
 
-.ani.scale-small-right{
+.bk-animate.scale-small-right{
     animation-name: scale-small-right;
 }
 @keyframes scale-small-right {

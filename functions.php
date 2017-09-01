@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 function themeConfig($form) {
     // 输出主题信息
-    $version = "1.2";
+    $version = "1.3";
     echo("<style>.single-info{text-align:center; margin:1em 0;}.single-info > *{margin:0 0 1rem}.single-info p:last-child a{background:#467B96;color:#fff;border-radius:4px;padding:.5em .75em;display:inline-block}</style>");
     echo("<div class='single-info'>");
     echo("<h2>Single 主题 (".$version.")</h2>");
@@ -39,6 +39,15 @@ function themeConfig($form) {
     // 自定义作者信息
     $author_text = new Typecho_Widget_Helper_Form_Element_Text('author_text', NULL, NULL, _t('作者信息'), _t('显示在文章底部的作者信息，可以是版权声明等'));
     $form->addInput($author_text);
+
+    // Pjax
+    $pjax_set = new Typecho_Widget_Helper_Form_Element_Radio('pjax_set',
+        array(
+            '0' => _t('关闭'),
+            '1' => _t('开启'),
+        ),
+        '0', _t('是否开启 PJAX'), _t('给网站开启 PJAX，提升浏览体验。使用 “instantclick” 实现'));
+    $form->addInput($pjax_set);
 
     // 首页、存档页属性显示
     $archive_meta = new Typecho_Widget_Helper_Form_Element_Checkbox('archive_meta',
