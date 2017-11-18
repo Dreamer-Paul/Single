@@ -4,7 +4,7 @@
  * 
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.3
+ * @version 1.4
  * @link https://hi-paul.space
  */
 

@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 function themeConfig($form) {
     // 输出主题信息
-    $version = "1.3";
+    $version = "1.4";
     echo("<style>.single-info{text-align:center; margin:1em 0;}.single-info > *{margin:0 0 1rem}.single-info p:last-child a{background:#467B96;color:#fff;border-radius:4px;padding:.5em .75em;display:inline-block}</style>");
     echo("<div class='single-info'>");
     echo("<h2>Single 主题 (".$version.")</h2>");
@@ -33,12 +33,20 @@ function themeConfig($form) {
             '0' => _t('关闭'),
             '1' => _t('开启')
         ), '1', _t('显示作者信息'),  _t('在文章底部显示作者信息'));
-
     $form->addInput($show_author->multiMode());
 
     // 自定义作者信息
     $author_text = new Typecho_Widget_Helper_Form_Element_Text('author_text', NULL, NULL, _t('作者信息'), _t('显示在文章底部的作者信息，可以是版权声明等'));
     $form->addInput($author_text);
+
+    // 信息栏
+    $widget_set = new Typecho_Widget_Helper_Form_Element_Radio('widget_set',
+        array(
+          '0' => _t('关闭'),
+          '1' => _t('开启'),
+        ),
+        '0', _t('是否显示信息栏'), _t('在页尾显示 “最近评论”、“最新文章” 和 “时光机”'));
+    $form->addInput($widget_set);
 
     // Pjax
     $pjax_set = new Typecho_Widget_Helper_Form_Element_Radio('pjax_set',
@@ -56,7 +64,6 @@ function themeConfig($form) {
             'show_tags' => _t('文章标签'),
             'show_comments' => _t('评论数')),
         array('show_category', 'show_comments'), _t('首页、存档页属性显示'));
-
     $form->addInput($archive_meta->multiMode());
 
     // 文章页属性显示
@@ -66,6 +73,5 @@ function themeConfig($form) {
             'show_tags' => _t('文章标签'),
             'show_comments' => _t('评论数')),
         array('show_category', 'show_comments'), _t('文章页属性显示'));
-
     $form->addInput($post_meta->multiMode());
 }

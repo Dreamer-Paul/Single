@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.8.2
+# Last Update: 2017.11.19
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -72,27 +72,39 @@ style_select();
             title.innerHTML = "文章目录：";
 
             trees.appendChild(title);
-            headings.forEach(function (t) {
-                t.id = t.innerText;
+
+            for(var i = 0; i < headings.length; i++){
+                headings[i].id = headings[i].innerText;
                 var item = document.createElement("a");
-                item.innerText = (t.innerText);
-                item.href = "#" + t.innerText;
+                item.innerText = headings[i].innerText;
+                item.href = "#" + headings[i].innerText;
 
-                var i = t.tagName;
-                switch (i){
-                    case "H3": item.style = "margin-left: .5em;"; break;
-                    case "H4": item.style = "margin-left: .75em;"; break;
-                    case "H5": item.style = "margin-left: 1em;"; break;
-                    case "H6": item.style = "margin-left: 1.25em;"; break;
+                switch (headings[i].tagName){
+                    case "H3": item.className = "item-3"; break;
+                    case "H4": item.className = "item-4"; break;
+                    case "H5": item.className = "item-5"; break;
+                    case "H6": item.className = "item-6"; break;
                 }
-
                 trees.appendChild(item);
-            });
+            }
             wrap.appendChild(trees);
         }
     }
 })();
 
+// 自动添加外链
+(function () {
+    var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
+    if(content){
+        var links = content.getElementsByTagName("a");
+
+        if(links[0]){
+            for(var i = 0; i < links.length; i++){
+                links[i].target = "_blank";
+            }
+        }
+    }
+})();
 
 // 返回页首
 function turn_up() {

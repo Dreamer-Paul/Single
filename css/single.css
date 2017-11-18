@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.8.17
+# Last Update: 2017.11.19
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -55,6 +55,10 @@ hr{
     border-color: #eee;
 }
 
+em{
+    background: #6f9fc7;
+}
+
 .btn{
     color: #fff;
     background: #6f9fc7;
@@ -93,7 +97,7 @@ body.neon a:hover{
 }
 
 /* -- 透明度变黑 */
-body.neon code, body.neon blockquote, body.neon iframe{
+body.neon code, body.neon blockquote, body.neon iframe, body.neon em{
     opacity: .6;
 }
 
@@ -169,6 +173,7 @@ header{
     z-index: 11;
     color: #666;
     position: fixed;
+    line-height: 1em;
     background: #fff;
     border-bottom: 1px solid #ddd;
     transition: border 0.3s, background 0.3s;
@@ -178,7 +183,7 @@ header{
 header .head-title{
     left: 0;
     right: 0;
-    line-height: 3.5em;
+    line-height: 3.2em;
     position: absolute;
     text-align: center;
 }
@@ -216,7 +221,7 @@ header .head-menu li a:hover{
 
 header .head-menu li.has-child > a:after{
     float: right;
-    content: '\f107';
+    content: "\f107";
     margin-left: .3em;
     font-family: "FontAwesome";
 }
@@ -256,7 +261,7 @@ header .head-menu li.has-child > a:after{
     }
 
     header .head-menu > li{
-        padding: .75em 0;
+        padding: .6em 0;
         line-height: 2em;
         margin-right: 1em;
     }
@@ -277,21 +282,24 @@ header .head-menu .sub-menu a{
 
 /* -- 电脑版 */
 @media screen and (min-width: 600px){
-    header .head-menu li:hover > ul{
-        display: block;
+    header .head-menu li:hover > .sub-menu{
+        opacity: 1;
+        visibility: visible;
     }
 
     header .head-menu .sub-menu{
         margin: 0;
-        top: 3.5em;
+        top: 3.25em;
+        opacity: 0;
         width: 180px;
-        display: none;
         list-style: none;
         background: #fff;
         padding: .5em 1em;
+        visibility: hidden;
         position: absolute;
         border: 1px solid #ddd;
         border-radius: 0 0 5px 5px;
+        transition: opacity .15s, visibility .15s;
     }
 
     header .toggle-btn{
@@ -303,7 +311,7 @@ header .toggle-btn, header .light-btn, header .search-btn{
     z-index: 1;
     float: left;
     width: 2em;
-    margin: .75em;
+    margin: .6em;
     cursor: pointer;
     position: relative;
     border-radius: 4px;
@@ -329,22 +337,23 @@ header .toggle-btn:before, header .light-btn:before, header .search-btn:before{
 }
 
 header .toggle-btn:before{
-    content: '\f0c9';
+    content: "\f0c9";
 }
 
 header .light-btn:before{
-    content: '\f0eb';
+    content: "\f0eb";
 }
 
 header .search-btn:before{
-    content: '\f002';
+    content: "\f002";
 }
 
 header .search-form{
     z-index: 1;
     opacity: 0;
     float: right;
-    padding: .75em 0;
+    margin: .6em 0;
+    line-height: 1.5em;
     position: relative;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -356,7 +365,7 @@ header .search-form.active{
 header .search-form input{
     width: 150px;
     font-size: .9em;
-    padding: .3em .75em;
+    padding: .25em .75em;
     border-radius: 50px;
 }
 @media screen and (max-width: 600px){
@@ -436,20 +445,23 @@ main .post-item:last-child{
 }
 
 /* -- 动画 */
-main .post-item:nth-child(1n){
+main .post-item:nth-child(1){
     animation: fade-in-top .3s .2s both;
 }
-main .post-item:nth-child(2n){
+main .post-item:nth-child(2){
     animation: fade-in-top .3s .3s both;
 }
-main .post-item:nth-child(3n){
+main .post-item:nth-child(3){
     animation: fade-in-top .3s .4s both;
 }
-main .post-item:nth-child(4n){
+main .post-item:nth-child(4){
     animation: fade-in-top .3s .5s both;
 }
-main .post-item:nth-child(5n){
+main .post-item:nth-child(5){
     animation: fade-in-top .3s .6s both;
+}
+main .post-item:nth-child(6){
+    animation: fade-in-top .3s .7s both;
 }
 
 main .post-item h2{
@@ -494,10 +506,10 @@ main .post-meta .category:before{
     content: "\f07b";
 }
 main .post-meta .tags:before{
-    content: " \f02c";
+    content: "\f02c";
 }
 main .post-meta .comments:before{
-    content: " \f086";
+    content: "\f086";
 }
 
 /* - 换页 */
@@ -601,8 +613,11 @@ main .post-author{
     transition: border 0.3s, filter 0.3s;
 }
 
-main .post-author img{
+main .post-author figure{
+    flex: 0 0 80px;
     max-width: 80px;
+}
+main .post-author img{
     border-radius: 100%;
     vertical-align: middle;
 }
@@ -716,33 +731,53 @@ main .comment-list .comment-reply a:hover{
 }
 
 /* -- 文章目录 */
-.article-list{
+main .article-list{
     top: 3.5em;
     right: 0;
     bottom: 0;
     opacity: 0;
+    width: 15em;
     padding: 1em;
     position: fixed;
-    min-width: 15em;
     border-radius: 4px;
     pointer-events: none;
     border-left: 1px solid #ccc;
     background: rgba(255, 255, 255, .5);
     transition: border 0.3s, opacity 0.3s, background 0.3s;
 }
-.article-list a{
+main .article-list a{
     display: block;
     margin-bottom: .5em;
 }
-.article-list a:last-child{
+main .article-list a:last-child{
     margin-bottom: 0;
 }
+
+main .article-list a.item-3:before,
+main .article-list a.item-4:before,
+main .article-list a.item-5:before{
+    margin-right: .5em;
+}
+
+main .article-list a.item-3:before{
+    content: "-";
+}
+main .article-list a.item-4:before{
+    content: "--";
+}
+main .article-list a.item-5:before{
+    content: "---";
+}
+main .article-list a.item-6:before{
+    content: "----";
+}
+
 @media screen and (min-width: 800px){
     body.has-trees{
         margin-right: 15em;
     }
 
-    .article-list{
+    main .article-list{
         opacity: 1;
         pointer-events: inherit;
     }
@@ -812,18 +847,53 @@ main .comment-list .comment-reply a:hover{
 .turn-up:before{
     width: 1.5em;
     display: block;
-    content: '\f062';
+    content: "\f062";
     text-align: center;
     font-family: "FontAwesome";
 }
 
 footer{
-    text-align: center;
     border-top: 1px solid #eee;
     transition: border 0.3s, background 0.3s;
 }
 
-footer p{
+footer .widget{
+    padding: 2em 0;
+}
+footer .title-comments:after,
+footer .title-recent:after,
+footer .title-date:after{
+    float: right;
+    margin-right: .75em;
+    font-family: "FontAwesome";
+}
+footer .title-comments:after{
+    content: "\f0e6";
+}
+footer .title-recent:after{
+    content: "\f040";
+}
+footer .title-date:after{
+    content: "\f017";
+}
+
+footer .widget ul{
+    margin: 0;
+    list-style: none;
+}
+footer .widget ul li{
+    margin-bottom: .5em;
+}
+footer .widget ul li:before{
+    content: "\f105";
+    margin-right: .75em;
+    font-family: "FontAwesome";
+}
+
+footer .sub-footer{
     padding: 1em 0;
-    font-size: .875em;
+    text-align: center;
+}
+footer .sub-footer p{
+     font-size: .875em;
 }

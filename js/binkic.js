@@ -15,26 +15,25 @@ var body = document.body;
 
 // 弹框
 function bk_notice(content, attr) {
-    var check_list = document.getElementsByClassName("bk-notice-list")[0];
-
-
-    if(check_list == undefined){
-        var notice_list = document.createElement("div");
+    // 生成框架
+    var notice_list = document.createElement("div");
         notice_list.classList.add("bk-notice-list");
-    }
 
+    // 判断是否存在
+    var check_list = document.querySelector("body > .bk-notice-list");
+
+    // 生成子元素
     var notice_item = document.createElement("div");
-    notice_item.classList.add("bk-notice");
+        notice_item.classList.add("bk-notice");
 
     var inner = document.createElement("p");
-    inner.classList.add("content");
-    inner.innerHTML = content;
+        inner.classList.add("content");
+        inner.innerHTML = content;
 
     notice_item.appendChild(inner);
 
     if(check_list){
         check_list.appendChild(notice_item);
-        body.appendChild(check_list);
     }
     else{
         notice_list.appendChild(notice_item);
@@ -42,7 +41,7 @@ function bk_notice(content, attr) {
     }
 
     if(attr && attr.overlay == true){
-        overlay(attr.dtime);
+        bk_overlay({time: attr.dtime});
     }
     if(attr && attr.dtime != null){
         setTimeout(notice_remove, attr.dtime);
@@ -57,24 +56,28 @@ function bk_notice(content, attr) {
     function notice_remove() {
         notice_item.classList.add("remove");
         setTimeout(function () {
-            if(check_list){
-                check_list.removeChild(notice_item);
-            }
-            else{
-                notice_list.removeChild(notice_item);
-            }
+            check_list ? check_list.removeChild(notice_item) : notice_list.removeChild(notice_item);
         }, 300);
     }
 }
 
 // 遮罩
-function overlay(count_down){
+function bk_overlay(attr){
     var overlay = document.createElement("div");
     overlay.classList.add("overlay");
     body.appendChild(overlay);
 
-    if(count_down != null){
-        setTimeout(overlay_remove, count_down);
+    if(attr.execute){
+        overlay.addEventListener("click", function () {
+            attr.execute();
+            overlay_remove();
+        });
+    }
+    if(attr.close){
+        attr.close.addEventListener("click", overlay_remove);
+    }
+    if(attr.time){
+        setTimeout(overlay_remove, attr.time);
     }
 
     function overlay_remove() {
@@ -94,8 +97,6 @@ function bk_imgs(selector) {
     var image = document.createElement("img");
 
     if(selector){
-        //var img_list = document.body.getElementsByTagName("img");
-        console.log(img_list);
         img_list.forEach(function (t) {
             t.setAttribute("bk-imgs", "active");
             t.addEventListener("click", function () {

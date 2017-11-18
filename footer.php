@@ -3,7 +3,38 @@
 <footer>
     <a class="turn-up" href="#"></a>
     <div class="wrap min">
-        <p>© <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
+<?php if ($this->options->widget_set == '1'): ?>
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-comments">最近评论：</h3>
+                    <ul>
+                        <?php $this->widget('Widget_Comments_Recent')->to($comments); ?>
+                        <?php while($comments->next()): ?>
+                            <li><?php $comments->author(false); ?>: <a href="<?php $comments->permalink(); ?>"><?php $comments->excerpt(10, '...'); ?></a></li>
+                        <?php endwhile; ?>
+                    </ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul>
+                        <?php $this->widget('Widget_Contents_Post_Recent', 'pageSize=6')
+                                   ->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
+                    </ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul>
+                        <?php $this->widget('Widget_Contents_Post_Date', 'type=month&format=Y 年 m 月&limit=6')
+                                   ->parse('<li><a href="{permalink}">{date}</a></li>'); ?>
+                    </ul>
+                </div>
+            </div>
+        </section>
+<?php endif; ?>
+        <section class="sub-footer">
+            <p>© <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
+        </section>
     </div>
 </footer>
 
