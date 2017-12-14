@@ -2,14 +2,14 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.11.19
+# Last Update: 2017.12.14
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
 欢迎你加入缤奇，和我们一起改变世界。
-本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://hi-paul.space
+本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
- ---- */
+---- */
 
 var body = document.body;
 
@@ -123,6 +123,9 @@ window.onscroll = function () {
     turn_up();
 };
 
+// 图片缩放
+bk_image(".post-content img, .page-content img");
+
 if (window.console && window.console.log) {
-    console.log("\n %c Single %c https://hi-paul.space \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0;");
+    console.log("\n %c Single %c https://paugram.com \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0;");
 }

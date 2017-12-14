@@ -4,16 +4,16 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.11.19
+# Last Update: 2017.12.14
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
 欢迎你加入缤奇，和我们一起改变世界。
-本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://hi-paul.space
+本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
 ---- */
 
-@import url("binkic.css"); /* 引用缤奇基层框架 */
+@import url("kico.css"); /* 引用缤奇基层框架 */
 
 /* 0 - 全局
 -------------------------------- */
@@ -289,9 +289,9 @@ header .head-menu .sub-menu a{
 
     header .head-menu .sub-menu{
         margin: 0;
-        top: 3.25em;
         opacity: 0;
-        width: 180px;
+        top: 3.25em;
+        width: 11em;
         list-style: none;
         background: #fff;
         padding: .5em 1em;
@@ -299,6 +299,7 @@ header .head-menu .sub-menu a{
         position: absolute;
         border: 1px solid #ddd;
         border-radius: 0 0 5px 5px;
+        border-top-color: transparent !important;
         transition: opacity .15s, visibility .15s;
     }
 
@@ -363,10 +364,10 @@ header .search-form.active{
     pointer-events: inherit;
 }
 header .search-form input{
-    width: 150px;
-    font-size: .9em;
-    padding: .25em .75em;
+    height: 2em;
+    width: 10em;
     border-radius: 50px;
+    padding: .25em .75em;
 }
 @media screen and (max-width: 600px){
     header .search-form{
@@ -383,7 +384,7 @@ header .search-form input{
 -------------------------------- */
 main{
     padding: 3.5em 0;
-    margin-top: 3.5em;
+    margin-top: 3.2em;
 }
 main img{
     transition: filter 0.3s;
@@ -564,6 +565,7 @@ main .post-item .edit-link, main .page-title .edit-link, main .post-title .edit-
 
 /* - 阅读页正文 */
 main .post-content, main .page-content{
+    overflow: hidden;
     animation: fade-in-top .3s .2s both;
 }
 main .post-content, main .page-content, main .post-near, main .post-author{
@@ -653,43 +655,31 @@ main .post-comments .comment-list{
     list-style: none;
     margin-bottom: 2em;
 }
-main .post-comments > .comment-list{
-    font-size: .95em;
-}
 main .post-comments .comment-list:last-child{
     margin-bottom: 0;
 }
 
 main .comment-list li{
+    overflow: hidden;
+    position: relative;
     padding-left: 60px;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
-
-main .comments-list li:last-child{
+main .comment-list li:after{
+    content: "";
+    clear: both;
+    display: block;
+}
+main .comment-list li:last-child{
     margin-bottom: 0;
 }
 
-main .comment-list .comment-author,
-main .comment-list .comment-meta{
-    float: left;
-    margin-bottom: .25em;
-}
-
-/* --- 评论者信息与头像 */
-main .comment-list .comment-author{
-    margin-right: .5em;
-    position: relative;
-}
-
-main .comment-list .comment-author cite{
-    float: left;
-    margin-right: .5em;
-}
-
-main .comment-list .comment-author .avatar{
+/* --- 评论头像 */
+main .comment-list .avatar{
     top: 0;
-    left: -60px;
+    left: 0;
     min-width: 45px;
+    max-width: 45px;
     position: absolute;
     border-radius: 100%;
     transition: transform .3s ease-in-out;
@@ -701,27 +691,31 @@ main .comment-list li:hover .avatar{
 }
 
 /* --- 评论信息 */
-main .comment-list .comment-meta:before{
+main .comment-list .comment-meta{
+    float: left;
+    margin-bottom: .25em;
+}
+
+main .comment-list .comment-time:before{
     content: "\f017";
-    font-size: inherit;
-    margin-right: .2em;
+    margin-right: .4em;
     display: inline-block;
     font-family: "FontAwesome";
 }
 
-main .comment-list .comment-meta a{
-    color: #aaa;
+main .comment-list .comment-author,
+main .comment-list .comment-time{
+    margin-right: .8em;
 }
 
 /* --- 评论内容 */
 main .comment-list .comment-content{
     clear: both;
-    margin-bottom: .25em;
 }
 main .comment-children > .comment-list{
-    margin-top: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 0;
 }
-
 
 main .comment-list .comment-reply a{
     color: #aaa;
@@ -730,16 +724,20 @@ main .comment-list .comment-reply a:hover{
     color: #555;
 }
 
+main .comment-list .cancel-comment-reply{
+    display: block;
+    text-align: right;
+}
+
 /* -- 文章目录 */
 main .article-list{
-    top: 3.5em;
+    top: 3.2em;
     right: 0;
     bottom: 0;
     opacity: 0;
     width: 15em;
     padding: 1em;
     position: fixed;
-    border-radius: 4px;
     pointer-events: none;
     border-left: 1px solid #ccc;
     background: rgba(255, 255, 255, .5);
@@ -838,8 +836,8 @@ main .article-list a.item-6:before{
     background: #fff;
     border-radius: 4px;
     border: 1px solid #eee;
-    transition: transform 0.3s;
     transform: translateX(60px);
+    transition: color .3s, border .3s, background .3s, transform .3s;
 }
 .turn-up.active{
     transform: translateX(0);

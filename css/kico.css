@@ -4,12 +4,12 @@
 
 # Kico Style 1.5
 # By: Dreamer-Paul
-# Last Update: 2017.9.24
+# Last Update: 2017.12.3
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
 欢迎你加入缤奇，和我们一起改变世界。
-本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://hi-paul.space
+本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://paugram.com
 
 ---- */
 
@@ -92,7 +92,7 @@ nav, section, main{
 
 /* 1 - 容器
 -------------------------------- */
-body > main, body > footer{
+.container{
     overflow: hidden;
 }
 
@@ -550,12 +550,12 @@ iframe{
 }
 
 /* - 详细信息 */
-details > summary{
+details summary{
     outline: none;
     cursor: pointer;
     user-select: none;
 }
-details > summary + *{
+details summary + *{
     margin-top: .5em;
 }
 
@@ -923,51 +923,51 @@ details > summary + *{
 }
 
 /* -- 网格对齐方式 */
-.row > *.left, .row > *.right, .row > *.top, .row > *.bottom, .row > *.center{
+.row > .left, .row > .right, .row > .top, .row > .bottom, .row > .center{
     display: flex;
     flex-direction: column;
 }
 
-.row > *.center{
+.row > .center{
     align-items: center;
     justify-content: center;
 }
-.row > *.center-fixed{
+.row > .center-fixed{
     text-align: center;
 }
-.row > *.left{
+.row > .left{
     -webkit-box-align: start;
     align-items: flex-start;
 }
-.row > *.right{
+.row > .right{
     align-items: flex-end;
 }
-.row > *.top{
+.row > .top{
     justify-content: flex-start;
 }
-.row > *.bottom{
+.row > .bottom{
     justify-content: flex-end;
 }
 
 @media screen and (max-width: 900px){
-    .row > *.to-center{
+    .row > .to-center{
         align-items: center !important;
     }
 }
 
 /* - 隐藏栅格功能 */
 @media screen and (max-width: 600px){
-    .row > *.hide-small{
+    .row > .hide-s{
         display: none;
     }
 }
 @media screen and (max-width: 900px){
-    .row > *.hide-middle{
+    .row > .hide-m{
         display: none;
     }
 }
 @media screen and (max-width: 1024px){
-    .row > *.hide-large{
+    .row > .hide-l{
         display: none;
     }
 }
@@ -1049,10 +1049,10 @@ details > summary + *{
 }
 
 /* - 图片放大 */
-img[bk-imgs=active]{
+img[bk-image=active]{
     cursor: zoom-in;
 }
-.bk-imgs{
+.bk-image{
     top: 0;
     left: 0;
     right: 0;
@@ -1061,7 +1061,7 @@ img[bk-imgs=active]{
     position: fixed;
     user-select: none;
 }
-.bk-imgs:before{
+.bk-image:before{
     top: 0;
     left: 0;
     right: 0;
@@ -1071,7 +1071,7 @@ img[bk-imgs=active]{
     animation: fade-in .5s both;
     background: rgba(0, 0, 0, .5);
 }
-.bk-imgs img{
+.bk-image img{
     top: 0;
     left: 0;
     right: 0;
@@ -1083,14 +1083,14 @@ img[bk-imgs=active]{
     position: absolute;
     animation: scale-large .3s both;
 }
-.bk-imgs.remove:before{
+.bk-image.remove:before{
     animation: fade-off .3s both;
 }
-.bk-imgs.remove img{
+.bk-image.remove img{
     animation: scale-small .3s both;
 }
 
-.bk-imgs img[src$=".jpg"]{
+.bk-image img[src$=".jpg"]{
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
 }
 

@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
  
-<main class="container">
+<main>
     <div class="wrap min">
         <section class="post-title">
             <h2><?php $this->title() ?></h2>
@@ -28,14 +28,14 @@
             <li>上一篇: <?php $this->thePrev('%s','看完啦 (つд⊂)'); ?></li>
             <li>下一篇: <?php $this->theNext('%s','看完啦 (つд⊂)'); ?></li>
         </ul>
-<?php if($this->options->show_author==1): ?>
+<?php if($this->options->author_text): ?>
         <section class="post-author">
             <figure>
                 <?php $this->author->gravatar(200); ?>
             </figure>
             <div>
                 <h4><?php $this->author(); ?></h4>
-                <p><?php if ($this->options->author_text): ?><?php $this->options->author_text() ?><?php else: ?>此人很懒啥都没写<?php endif; ?></p>
+                <p><?php $this->options->author_text() ?></p>
             </div>
         </section>
 <?php endif; ?>

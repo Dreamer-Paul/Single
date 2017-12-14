@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<main class="container">
+<main>
     <div class="wrap">
         <div class="error-page">
             <h1>404</h1>

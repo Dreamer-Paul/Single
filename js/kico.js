@@ -2,12 +2,12 @@
 
 # Kico Style 1.5
 # By: Dreamer-Paul
-# Last Update: 2017.8.25
+# Last Update: 2017.12.3
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
 欢迎你加入缤奇，和我们一起改变世界。
-本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://hi-paul.space
+本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
 ---- */
 
@@ -89,16 +89,16 @@ function bk_overlay(attr){
 }
 
 // 图片放大
-function bk_imgs(selector) {
+function bk_image(selector) {
     var img_list = document.querySelectorAll(selector);
     var img_box = document.createElement("div");
-    img_box.className = "bk-imgs";
+    img_box.className = "bk-image";
 
     var image = document.createElement("img");
 
     if(selector){
         img_list.forEach(function (t) {
-            t.setAttribute("bk-imgs", "active");
+            t.setAttribute("bk-image", "active");
             t.addEventListener("click", function () {
                 image.src = t.src;
                 img_box.appendChild(image);
@@ -113,13 +113,6 @@ function bk_imgs(selector) {
                 img_box.classList.remove("remove");
             }, 300);
         });
-    }
-
-    function remove() {
-        img_box.classList.add("remove");
-        setTimeout(function () {
-            body.removeChild(img_box);
-        }, 300);
     }
 }
 

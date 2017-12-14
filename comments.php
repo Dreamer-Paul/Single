@@ -1,13 +1,42 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php function threadedComments($comments, $options) {
+    $commentClass = '';
+    if ($comments->authorId) {
+        if ($comments->authorId == $comments->ownerId) {
+            $commentClass .= ' comment-by-author';
+        } else {
+            $commentClass .= ' comment-by-user';
+        }
+    }
+
+    $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
+?>
+
+    <li id="<?php $comments->theId(); ?>">
+        <?php $comments->gravatar('150', ''); ?>
+        <div class="comment-meta">
+            <span class="comment-author"><?php $comments->author(); ?></span>
+            <time class="comment-time"><?php $comments->date('y.m.d'); ?></time>
+            <span class="comment-reply"><?php $comments->reply(); ?></span>
+        </div>
+        <div class="comment-content">
+            <?php $comments->content(); ?>
+        </div>
+<?php if ($comments->children) { ?>
+        <div class="comment-children">
+            <?php $comments->threadedComments($options); ?>
+        </div>
+<?php } ?>
+    </li>
+<?php } ?>
 <section id="comments" class="post-comments">
     <h3><?php $this->commentsNum(_t('没有评论'), _t('只有一条评论 (QwQ)'), _t('已有 %d 条评论')); ?></h3>
     <?php $this->comments()->to($comments); ?>
     <?php if($this->allow('comment')): ?>
     <div id="<?php $this->respondId(); ?>" class="respond">
-        <div class="cancel-comment-reply">
-        <?php $comments->cancelReply(); ?>
-        </div>
-        
+        <span class="cancel-comment-reply">
+            <?php $comments->cancelReply(); ?>
+        </span>
         <form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
             <div class="row">
                 <?php if($this->user->hasLogin()): ?>
