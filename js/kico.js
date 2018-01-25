@@ -1,8 +1,8 @@
 /* ----
 
-# Kico Style 1.5
+# Kico Style 1.5.1
 # By: Dreamer-Paul
-# Last Update: 2017.12.3
+# Last Update: 2017.1.25
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -40,10 +40,10 @@ function bk_notice(content, attr) {
         body.appendChild(notice_list);
     }
 
-    if(attr && attr.overlay == true){
+    if(attr && attr.overlay === true){
         bk_overlay({time: attr.dtime});
     }
-    if(attr && attr.dtime != null){
+    if(attr && attr.dtime !== null){
         setTimeout(notice_remove, attr.dtime);
     }
 

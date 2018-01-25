@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.12.14
+# Last Update: 2018.1.25
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -38,7 +38,7 @@ function style_select() {
     var neon_btn = document.getElementsByClassName("light-btn")[0];
 
     function style_load() {
-        if(localStorage.style == "neon"){
+        if(localStorage.style === "neon"){
             body.classList.add("neon");
         }
     }
@@ -60,13 +60,13 @@ style_select();
     var wrap = document.getElementsByClassName("wrap")[0];
     var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
     if(content){
-        var headings = content.querySelectorAll("h2, h3, h4, h5, h6");
+        var headings = content.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
         if(headings.length > 0){
             body.classList.add("has-trees");
 
             var trees = document.createElement("aside");
-            trees.classList.add("article-list");
+            trees.className = "article-list";
 
             var title = document.createElement("h3");
             title.innerHTML = "文章目录：";
@@ -80,6 +80,7 @@ style_select();
                 item.href = "#" + headings[i].innerText;
 
                 switch (headings[i].tagName){
+                    case "H2": item.className = "item-2"; break;
                     case "H3": item.className = "item-3"; break;
                     case "H4": item.className = "item-4"; break;
                     case "H5": item.className = "item-5"; break;

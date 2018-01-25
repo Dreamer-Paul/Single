@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2017.12.14
+# Last Update: 2018.1.25
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -73,7 +73,9 @@ blockquote{
     background: #ecf1f5;
     border-color: #6f9fc7;
 }
-
+input, textarea{
+    background: #fff;
+}
 input, textarea, code, hr, blockquote{
     transition: border 0.3s, background 0.3s, filter 0.3s;
 }
@@ -162,6 +164,12 @@ body.neon hr,
 body.neon .post-item h2 a, body.neon .post-title, body.neon .page-title, body.neon .post-author,
 body.neon footer, body.neon .turn-up{
     border-color: #555;
+}
+
+@media screen and (max-width: 600px) {
+    body.neon header .head-menu .sub-menu{
+        background: none;
+    }
 }
 
 /* 1 - 页眉
@@ -253,7 +261,7 @@ header .head-menu li.has-child > a:after{
 }
 
 /* -- 电脑版 */
-@media screen and (min-width: 600px){
+@media screen and (min-width: 599px){
     header .head-menu{
         left: 0;
         right: 0;
@@ -281,7 +289,7 @@ header .head-menu .sub-menu a{
 }
 
 /* -- 电脑版 */
-@media screen and (min-width: 600px){
+@media screen and (min-width: 599px){
     header .head-menu li:hover > .sub-menu{
         opacity: 1;
         visibility: visible;
@@ -565,32 +573,12 @@ main .post-item .edit-link, main .page-title .edit-link, main .post-title .edit-
 
 /* - 阅读页正文 */
 main .post-content, main .page-content{
-    overflow: hidden;
     animation: fade-in-top .3s .2s both;
 }
 main .post-content, main .page-content, main .post-near, main .post-author{
     margin-bottom: 3em;
 }
 
-main .post-content > *, main .page-content > *{
-    margin-bottom: 1em;
-}
-
-main .post-content > *:last-child, main .page-content > *:last-child{
-    margin-bottom: 0;
-}
-
-main .post-content h1, main .page-content h1,
-main .post-content h2, main .page-content h2,
-main .post-content h3, main .page-content h3{
-    font-size: 1.17em;
-}
-main .post-content h4, main .page-content h4,
-main .post-content h5, main .page-content h5,
-main .post-content h6, main .page-content h6{
-    font-size: 1em;
-    font-weight: bold;
-}
 main .post-content h1:before, main .page-content h1:before,
 main .post-content h2:before, main .page-content h2:before,
 main .post-content h3:before, main .page-content h3:before{
@@ -647,6 +635,9 @@ main .post-comments input, main .post-comments textarea{
 }
 
 /* -- 评论列表 */
+main .post-comments{
+    word-wrap: break-word;
+}
 main .post-comments form{
     margin-bottom: 3em;
 }
@@ -660,7 +651,6 @@ main .post-comments .comment-list:last-child{
 }
 
 main .comment-list li{
-    overflow: hidden;
     position: relative;
     padding-left: 60px;
     margin-bottom: 1.5em;
@@ -750,24 +740,28 @@ main .article-list a{
 main .article-list a:last-child{
     margin-bottom: 0;
 }
-
+main .article-list a.item-2:before,
 main .article-list a.item-3:before,
 main .article-list a.item-4:before,
-main .article-list a.item-5:before{
+main .article-list a.item-5:before,
+main .article-list a.item-6:before{
     margin-right: .5em;
 }
 
-main .article-list a.item-3:before{
+main .article-list a.item-2:before{
     content: "-";
 }
-main .article-list a.item-4:before{
+main .article-list a.item-3:before{
     content: "--";
 }
-main .article-list a.item-5:before{
+main .article-list a.item-4:before{
     content: "---";
 }
-main .article-list a.item-6:before{
+main .article-list a.item-5:before{
     content: "----";
+}
+main .article-list a.item-6:before{
+    content: "-----";
 }
 
 @media screen and (min-width: 800px){

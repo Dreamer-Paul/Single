@@ -13,7 +13,7 @@
 ?>
 
     <li id="<?php $comments->theId(); ?>">
-        <?php $comments->gravatar('150', ''); ?>
+        <?php $comments->gravatar('150', 'robohash');?>
         <div class="comment-meta">
             <span class="comment-author"><?php $comments->author(); ?></span>
             <time class="comment-time"><?php $comments->date('y.m.d'); ?></time>

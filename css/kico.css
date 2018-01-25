@@ -2,14 +2,14 @@
 
 /* ----
 
-# Kico Style 1.5
+# Kico Style 1.5.1
 # By: Dreamer-Paul
-# Last Update: 2017.12.3
+# Last Update: 2018.1.25
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
 欢迎你加入缤奇，和我们一起改变世界。
-本代码为缤奇保罗原创，并遵守 MIT 开源协议。保罗的个人博客：https://paugram.com
+本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
 ---- */
 
@@ -51,14 +51,14 @@ nav, section, main{
     display: block;
 }
 
-/* - 已选内容 */
+/* - 选择内容 */
 ::-moz-selection{
     color: #fff;
-    background-color: rgba(0,0,0,0.66);
+    background-color: rgba(0, 0, 0, .66);
 }
 ::selection{
     color: #fff;
-    background-color: rgba(0,0,0,0.66);
+    background-color: rgba(0, 0, 0, .66);
 }
 
 /* - 滚动条 */
@@ -67,20 +67,18 @@ nav, section, main{
     height: 10px;
 }
 ::-webkit-scrollbar-thumb{
+    background: #ccc;
     border-radius: 5px;
-    background: rgba(0,0,0,.2);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07)
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
 }
 ::-webkit-scrollbar-track:hover{
-    background: rgba(0,0,0,.05);
-    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1)
+    background: rgba(0, 0, 0, .05);
 }
 
-::-webkit-scrollbar-track:active{
-    background-color: rgba(0,0,0,.05);
-    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.14),inset -1px -1px 0 rgba(0,0,0,.07)
+body::-webkit-scrollbar-track:hover{
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
 }
 
 .bk-scroll-hover::-webkit-scrollbar{
@@ -99,8 +97,7 @@ nav, section, main{
 .wrap{
     margin: 0 auto;
     max-width: 1200px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 1.25em;
     box-sizing: content-box;
 }
 .wrap.min{
@@ -116,12 +113,20 @@ nav, section, main{
     max-width: 100%;
 }
 .wrap.thin{
-    margin-left: -10px;
-    margin-right: -10px;
+    padding: 0 .75em;
+}
+.wrap.thick{
+    padding: 0 1.5em;
 }
 .wrap.clear{
     padding-left: 0;
     padding-right: 0;
+}
+
+.clearfix:after{
+    content: '';
+    clear: both;
+    display: block;
 }
 
 /* 2 - 元素
@@ -178,6 +183,25 @@ img, svg, video{
     height: auto;
     max-width: 100%;
     vertical-align: middle;
+}
+
+/* - 文章 */
+article{
+    word-wrap: break-word;
+}
+article > *{
+    margin-bottom: 1em;
+}
+article > *:last-child{
+    margin-bottom: 0;
+}
+
+article h1, article h2, article h3{
+    font-size: 1.2em;
+}
+article h4, article h5, article h6{
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* - 按钮 */
@@ -240,41 +264,22 @@ pre, code{
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
 
-pre > code{
-    padding: 0;
-    color: #fff;
-    font-size: 1em;
-    background-color: transparent;
-}
-
-pre{
-    color: #fff;
-    padding: 10px;
-    margin: 0 0 1em;
-    overflow-x: auto;
-    border-radius: 5px;
-    background: #333333;
-}
-
-pre::-webkit-scrollbar{
-    width: 10px;
-    height: 10px;
-}
-pre::-webkit-scrollbar-track-piece{
-    background: #555555;
-    border-radius: 0 0 5px 5px;
-}
-pre::-webkit-scrollbar-thumb{
-    border-radius: 5px;
-    background: rgba(52, 152, 219, 0.9);
-}
-
 code{
     color: #c40b00;
-    font-size: .8em;
-    padding: .25em .5em;
+    font-size: 90%;
     border-radius: 4px;
+    padding: .25em .5em;
     background-color: #f7f2f4;
+}
+
+pre > code{
+    color: #fff;
+    padding: 1em;
+    display: block;
+    overflow-x: auto;
+    font-size: inherit;
+    border-radius: 5px;
+    background-color: #333;
 }
 
 /* - 项目列表 */
@@ -285,6 +290,7 @@ ul.clear{
     margin-left: 0;
     list-style: none;
 }
+
 dl dd{
     margin-left: 1.5em;
 }
@@ -294,14 +300,11 @@ dl dd:before{
 }
 
 /* - 补间动画 */
-a, h1, h2, h3, h4, h5, h6, .btn{
-    transition: color 0.3s, background 0.3s, border 0.3s;
-    -moz-transition: color 0.3s, background 0.3s, border 0.3s;
-    -webkit-transition: color 0.3s, background 0.3s, border 0.3s;
-    -o-transition: color 0.3s, background 0.3s, border 0.3s;
-    backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+a, .btn{
+    transition: color 0.3s, background 0.3s;
+    -o-transition: color 0.3s, background 0.3s;
+    -moz-transition: color 0.3s, background 0.3s;
+    -webkit-transition: color 0.3s, background 0.3s;
 }
 
 /* - 引用*/
@@ -340,6 +343,7 @@ input[readonly]{
 input, textarea, select{
     outline: none;
     font: inherit;
+    background: none;
 }
 input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="search"], textarea, select{
     padding: .5em;
@@ -378,6 +382,10 @@ progress::-webkit-progress-bar {
     margin-bottom: 0;
 }
 
+.bk-form label input{
+    display: inline-block;
+}
+
 .bk-form label.submit > input[type="text"]{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -389,6 +397,7 @@ progress::-webkit-progress-bar {
 }
 
 .bk-form input{
+    display: block;
     vertical-align: middle;
 }
 .bk-form textarea{
@@ -397,21 +406,22 @@ progress::-webkit-progress-bar {
 
 /* -- 单选多选框 */
 .bk-form input[type="checkbox"], .bk-form input[type="radio"]{
-    width: 1em;
+    float: left;
+    width: 1.5em;
+    height: 1.5em;
     cursor: pointer;
     margin: 0 .5em 0 0;
-    vertical-align: top;
     -moz-appearance: none;
     -webkit-appearance: none;
 }
 .bk-form input[type="checkbox"]:before, .bk-form input[type="radio"]:before{
-    width: 1em;
-    height: 1em;
     content: '';
+    width: 1.5em;
+    height: 1.5em;
     display: block;
-    margin-top: .3em;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 0 solid #3498db;
+    box-shadow: 0 0 0 1px #ccc inset;
     transition: border 0.3s, background 0.3s, box-shadow 0.3s;
 }
 .bk-form input[type="radio"]:before{
@@ -420,27 +430,29 @@ progress::-webkit-progress-bar {
 
 .bk-form input[type="checkbox"]:checked:before, .bk-form input[type="radio"]:checked:before{
     background: #3498db;
-    border: 4px solid #fff;
-    box-shadow: 0 0 0 2px #3498db;
+    border: 2px solid #3498db;
+    box-shadow: 0 0 0 4px #fff inset;
 }
 
 /* -- 开关按钮 */
 .bk-form input[type="checkbox"].switch{
-    width: 60px;
-    height: 30px;
+    width: 4em;
+    height: 2em;
+    float: none;
     cursor: pointer;
     background: #eee;
     position: relative;
     border-radius: 50px;
     border: 1px solid #ddd;
+    box-sizing: content-box;
     transition: border .3s, background .3s;
 }
 .bk-form input[type="checkbox"].switch:before{
     margin: 0;
     border: 0;
-    content: "";
-    width: 28px;
-    height: 28px;
+    width: 2em;
+    height: 2em;
+    content: '';
     display: block;
     box-shadow: none;
     background: #fff;
@@ -453,13 +465,13 @@ progress::-webkit-progress-bar {
     border-color: #3498db;
 }
 .bk-form input[type="checkbox"].switch:checked:before{
-    transform: translateX(30px);
+    transform: translateX(2em);
 }
 
 /* - 表单小组 */
 .bk-form fieldset{
-    cursor: default;
     border: none;
+    cursor: default;
     margin-bottom: 2em;
 }
 .bk-form fieldset:last-child{
@@ -477,7 +489,7 @@ progress::-webkit-progress-bar {
 .bk-form.inline fieldset label, .bk-form fieldset.inline label{
     float: left;
     display: block;
-    margin: 0 1em 1em 0;
+    margin: 0 1em .5em 0;
 }
 
 .bk-form fieldset.inline:after{
@@ -512,11 +524,14 @@ table > thead > tr{
 table > tbody > tr > td{
     border-bottom: 1px solid #ddd;
 }
+table > tbody > tr:last-child > td{
+    border-bottom: 0;
+}
 table > tbody > tr{
     transition: background .3s;
 }
 table > tbody > tr:hover{
-    background: #eee !important;
+    background: #eee;
 }
 
 table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th,
@@ -526,7 +541,7 @@ table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td{
 
 /* - 蓝色风格 */
 table.fill{
-    border: 1px solid #3498db;
+    border: 1px solid transparent;
 }
 table.fill > thead > tr{
     border-bottom: none;
@@ -534,6 +549,7 @@ table.fill > thead > tr{
 table.fill > tbody{
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 table.fill > thead > tr > th, table.fill > thead > tr > td{
     color: #fff;
@@ -563,12 +579,12 @@ details summary + *{
 .row{
     display: flex;
     flex-wrap: wrap;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: -1.25em;
+    margin-right: -1.25em;
 }
 .row.thin{
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -1em;
+    margin-right: -1em;
 }
 .row.full{
     margin-left: 0;
@@ -592,12 +608,12 @@ details summary + *{
 /* -- 网格间距 */
 .row [class*="col-"]{
     position: relative;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 1.25em;
+    padding-right: 1.25em;
 }
 .row.thin [class*="col-"]{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 .row.full [class*="col-"]{
     padding: 0;
@@ -1262,6 +1278,6 @@ img[bk-image=active]{
 
 /* ----
 
-:) Copyright (C) 2017 Binkic Team. Made With ♥ By Paul.
+:) Copyright (C) 2018 Binkic Team. Made With ♥ By Paul.
 
 ---- */
