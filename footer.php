@@ -42,6 +42,21 @@
 <script src="<?php $this->options->themeUrl('js/single.js'); ?>"></script>
 <script src="https://cdn.bootcss.com/smooth-scroll/12.1.3/js/smooth-scroll.min.js"></script>
 <script>var scroll = new SmoothScroll('a.turn-up, .article-list a', {offset: 100});</script>
+<?php if ($this->is('single')) : ?>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+    var str = document.getElementsByClassName("page-content")[0];
+    var isKaTex = str.innerHTML.match('$$');
+    if(isKaTex) {
+        join_js("//cdn.bootcss.com/KaTeX/0.8.3/contrib/auto-render.min.js");
+        join_js("//cdn.bootcss.com/KaTeX/0.8.3/katex.min.js");
+    }
+    window.onload = function() {
+        if(isKaTex) renderMathInElement(document.body);
+    }
+</script>
+<?php endif; ?>
 
 <?php $this->footer(); ?>
 </body>

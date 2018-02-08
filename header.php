@@ -21,6 +21,8 @@
 <?php endif; ?>
     <link href="<?php $this->options->themeUrl('css/single.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this->options->themeUrl('css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
+    <link href="//cdn.bootcss.com/KaTeX/0.8.3/katex.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
 <?php if ($this->options->background_img): ?>
     <style>body:before{content:''; display:block;  opacity:.06; z-index:-1; position:fixed; top:0; bottom:0; left:0; right:0; background: url(<?php $this->options->background_img() ?>) center/cover no-repeat;}</style>

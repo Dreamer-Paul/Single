@@ -127,6 +127,14 @@ window.onscroll = function () {
 // 图片缩放
 bk_image(".post-content img, .page-content img");
 
+//引入JS
+function join_js(adr) {
+	new_node = document.createElement("script");
+	new_node.setAttribute("type","text/javascript");
+	new_node.setAttribute("src",adr);
+	document.body.appendChild(new_node);
+}
+
 if (window.console && window.console.log) {
     console.log("\n %c Single %c https://paugram.com \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0;");
 }
