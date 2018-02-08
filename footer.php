@@ -47,7 +47,7 @@
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
     var str = document.getElementsByClassName("page-content")[0];
-    var isKaTex = str.innerHTML.match('$$'), isHighlight = str.innerHTML.match('<pre>');
+    var isKaTex = str.innerHTML.match('$$');
     if(isKaTex) {
         join_js("//cdn.bootcss.com/KaTeX/0.8.3/contrib/auto-render.min.js");
         join_js("//cdn.bootcss.com/KaTeX/0.8.3/katex.min.js");
