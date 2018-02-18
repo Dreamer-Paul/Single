@@ -1,7 +1,9 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
  
 <footer>
-    <a class="turn-up" href="#"></a>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
     <div class="wrap min">
 <?php if ($this->options->widget_set == '1'): ?>
         <section class="widget">
@@ -41,8 +43,8 @@
 <script src="<?php $this->options->themeUrl('js/kico.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('js/single.js'); ?>"></script>
 <script src="https://cdn.bootcss.com/smooth-scroll/12.1.3/js/smooth-scroll.min.js"></script>
-<script>var scroll = new SmoothScroll('a.turn-up, .article-list a', {offset: 100});</script>
-
+<script>var scroll = new SmoothScroll('.to-top, .article-list a', {offset: 100});</script>
 <?php $this->footer(); ?>
+
 </body>
 </html>

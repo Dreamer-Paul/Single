@@ -1,8 +1,8 @@
 /* ----
 
-# Kico Style 1.5.1
+# Kico Style 1.5.3
 # By: Dreamer-Paul
-# Last Update: 2017.1.25
+# Last Update: 2017.2.5
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -11,111 +11,126 @@
 
 ---- */
 
-var body = document.body;
+var kico = {};
 
 // 弹框
+kico.notice_list = document.createElement("div");
+kico.notice_list.classList.add("bk-notice-list");
+
 function bk_notice(content, attr) {
-    // 生成框架
-    var notice_list = document.createElement("div");
-        notice_list.classList.add("bk-notice-list");
-
-    // 判断是否存在
-    var check_list = document.querySelector("body > .bk-notice-list");
-
-    // 生成子元素
     var notice_item = document.createElement("div");
-        notice_item.classList.add("bk-notice");
+    notice_item.className = "bk-notice";
+    notice_item.innerHTML += "<span class='content'>" + content + "</span>";
 
-    var inner = document.createElement("p");
-        inner.classList.add("content");
-        inner.innerHTML = content;
+    kico.notice_list.appendChild(notice_item);
 
-    notice_item.appendChild(inner);
+    if(!document.querySelector("body > .bk-notice-list")){document.body.appendChild(kico.notice_list);}
 
-    if(check_list){
-        check_list.appendChild(notice_item);
+    if(attr && attr.time){
+        setTimeout(notice_remove, attr.time);
     }
     else{
-        notice_list.appendChild(notice_item);
-        body.appendChild(notice_list);
+        var close = document.createElement("span");
+        close.className = "close";
+
+        close.addEventListener("click", function () {
+            notice_remove();
+        });
+
+        notice_item.classList.add("dismiss");
+        notice_item.appendChild(close);
     }
 
-    if(attr && attr.overlay === true){
-        bk_overlay({time: attr.dtime});
-    }
-    if(attr && attr.dtime !== null){
-        setTimeout(notice_remove, attr.dtime);
-    }
+    if(attr && attr.color){notice_item.classList.add(attr.color);}
+    if(attr && attr.time && attr.overlay === true){bk_overlay({time: attr.time});}
 
-    // 颜色
-    if(attr && attr.color){
-        notice_item.classList.add(attr.color);
-    }
-
-    // 移除
     function notice_remove() {
         notice_item.classList.add("remove");
+
         setTimeout(function () {
-            check_list ? check_list.removeChild(notice_item) : notice_list.removeChild(notice_item);
+            try{
+                kico.notice_list.removeChild(notice_item);
+                document.querySelector("body > .bk-notice-list").removeChild(notice_item);
+            }
+            catch(err) {}
+
+            if(document.querySelector("body > .bk-notice-list") && kico.notice_list.childNodes.length === 0){
+                document.body.removeChild(kico.notice_list);
+            }
         }, 300);
     }
 }
 
 // 遮罩
-function bk_overlay(attr){
-    var overlay = document.createElement("div");
-    overlay.classList.add("overlay");
-    body.appendChild(overlay);
+kico.overlay = document.createElement("div");
+kico.overlay.classList.add("bk-overlay");
 
-    if(attr.execute){
-        overlay.addEventListener("click", function () {
-            attr.execute();
+function bk_overlay(attr){
+    document.body.appendChild(kico.overlay);
+
+    if(attr && attr.time){
+        setTimeout(overlay_remove, attr.time);
+    }
+    else{
+        kico.overlay.addEventListener("click", function () {
             overlay_remove();
         });
     }
-    if(attr.close){
-        attr.close.addEventListener("click", overlay_remove);
-    }
-    if(attr.time){
-        setTimeout(overlay_remove, attr.time);
+
+    if(attr && attr.code){
+        kico.overlay.addEventListener("click", function () {
+            attr.code();
+        });
     }
 
     function overlay_remove() {
-        overlay.classList.add("remove");
+        kico.overlay.classList.add("remove");
+
         setTimeout(function () {
-            body.removeChild(overlay);
+            if(document.querySelector("body > .bk-overlay")){
+                kico.overlay.classList.remove("remove");
+                document.body.removeChild(kico.overlay);
+            }
         }, 300);
     }
 }
 
 // 图片放大
+kico.image_box = document.createElement("div");
+kico.image_box.className = "bk-image";
+kico.image_single = document.createElement("img");
+kico.image_box.appendChild(kico.image_single);
+
 function bk_image(selector) {
-    var img_list = document.querySelectorAll(selector);
-    var img_box = document.createElement("div");
-    img_box.className = "bk-image";
+    var get_images = document.querySelectorAll(selector);
 
-    var image = document.createElement("img");
-
-    if(selector){
-        img_list.forEach(function (t) {
-            t.setAttribute("bk-image", "active");
-            t.addEventListener("click", function () {
-                image.src = t.src;
-                img_box.appendChild(image);
-                body.appendChild(img_box);
-            });
-        });
-
-        img_box.addEventListener("click", function () {
-            img_box.classList.add("remove");
-            setTimeout(function () {
-                body.removeChild(img_box);
-                img_box.classList.remove("remove");
-            }, 300);
+    function item(obj) {
+        obj.setAttribute("bk-image", "active");
+        obj.addEventListener("click", function () {
+            kico.image_single.src = obj.src;
+            if(!document.querySelector("body > .bk-image")){
+                document.body.appendChild(kico.image_box);
+            }
         });
     }
+
+    for(var i = 0; i < get_images.length; i++){
+        item(get_images[i]);
+    }
+
+    kico.image_box.addEventListener("click", function () {
+        kico.image_box.classList.add("remove");
+        setTimeout(function () {
+            try{
+                document.body.removeChild(kico.image_box);
+                kico.image_box.classList.remove("remove");
+            }
+            catch (err){}
+        }, 300);
+    });
 }
 
+// 请保留版权说明
 if (window.console && window.console.log) {
-    console.log("\n %c Kico Style %c https://www.binkic.com \n\n","color: #fff; background: #3498db; padding: 5px 0;","background: #efefef; padding: 5px 0;");
+    console.log("\n %c Kico Style %c https://www.binkic.com \n\n","color: #fff; background: #3498db; padding: 5px 0;","background: #efefef; padding: 5px 0; text-decoration: none;");
 }

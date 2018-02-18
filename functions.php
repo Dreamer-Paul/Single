@@ -3,7 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 function themeConfig($form) {
     // 输出主题信息
-    $version = "1.5";
+    $version = "1.7";
     echo("<style>.single-info{text-align:center; margin:1em 0;}.single-info > *{margin:0 0 1rem}.single-info p:last-child a{background:#467B96;color:#fff;border-radius:4px;padding:.5em .75em;display:inline-block}</style>");
     echo("<div class='single-info'>");
     echo("<h2>Single 主题 (".$version.")</h2>");

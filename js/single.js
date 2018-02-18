@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2018.1.25
+# Last Update: 2018.2.5
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -17,6 +17,7 @@ var body = document.body;
 function head_menu() {
     var btn = document.getElementsByClassName("toggle-btn")[0];
     var menu = document.getElementsByClassName("head-menu")[0];
+
     btn.addEventListener("click", function () {
         menu.classList.toggle("active");
     })
@@ -27,6 +28,7 @@ head_menu();
 function search_btn() {
     var btn = document.getElementsByClassName("search-btn")[0];
     var bar = document.getElementsByClassName("search-form")[0];
+
     btn.addEventListener("click", function () {
         bar.classList.toggle("active");
     })
@@ -34,31 +36,31 @@ function search_btn() {
 search_btn();
 
 // 关灯切换
-function style_select() {
+function single_night() {
     var neon_btn = document.getElementsByClassName("light-btn")[0];
 
-    function style_load() {
-        if(localStorage.style === "neon"){
-            body.classList.add("neon");
-        }
+    if (localStorage.style === "neon") {
+        body.classList.add("neon");
     }
-    style_load();
 
     neon_btn.addEventListener("click", function () {
-        switch (body.classList.contains("neon")){
-            case true: body.classList.remove("neon"); style_save(null); break;
-            case false: body.classList.add("neon"); style_save("neon"); break;
+        if(body.classList.contains("neon")){
+            body.classList.remove("neon");
+            localStorage.style = null;
         }
-        function style_save(style) {
-            localStorage.style = style;
+        else{
+            body.classList.add("neon");
+            localStorage.style = "neon";
         }
     });
 }
-style_select();
+single_night();
 
-(function () {
+// 目录树
+function single_tree() {
     var wrap = document.getElementsByClassName("wrap")[0];
     var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
+
     if(content){
         var headings = content.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
@@ -66,18 +68,15 @@ style_select();
             body.classList.add("has-trees");
 
             var trees = document.createElement("aside");
-            trees.className = "article-list";
-
-            var title = document.createElement("h3");
-            title.innerHTML = "文章目录：";
-
-            trees.appendChild(title);
+                trees.className = "article-list";
+                trees.innerHTML += "<h3>文章目录：</h3>";
 
             for(var i = 0; i < headings.length; i++){
                 headings[i].id = headings[i].innerText;
+
                 var item = document.createElement("a");
-                item.innerText = headings[i].innerText;
-                item.href = "#" + headings[i].innerText;
+                    item.innerText = headings[i].innerText;
+                    item.href = "#" + headings[i].innerText;
 
                 switch (headings[i].tagName){
                     case "H2": item.className = "item-2"; break;
@@ -86,47 +85,64 @@ style_select();
                     case "H5": item.className = "item-5"; break;
                     case "H6": item.className = "item-6"; break;
                 }
+
                 trees.appendChild(item);
             }
+
             wrap.appendChild(trees);
+
+            function toggle_tree() {
+                var buttons = document.getElementsByTagName("footer")[0].getElementsByClassName("buttons")[0];
+                var btn = document.createElement("a");
+                btn.className = "toggle-list";
+                buttons.appendChild(btn);
+
+                btn.addEventListener("click", function () {
+                    trees.classList.toggle("active");
+                })
+            }
+            toggle_tree();
         }
     }
-})();
+}
+single_tree();
 
 // 自动添加外链
-(function () {
+function single_links() {
     var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
-    if(content){
-        var links = content.getElementsByTagName("a");
+    var comment = document.getElementsByClassName("comment-list")[0];
 
-        if(links[0]){
+    function add(selector) {
+        if(selector){
+            var links = selector.getElementsByTagName("a");
+
             for(var i = 0; i < links.length; i++){
                 links[i].target = "_blank";
             }
         }
     }
-})();
+
+    add(content);
+    add(comment);
+}
+single_links();
 
 // 返回页首
-function turn_up() {
-    var btn = document.getElementsByClassName("turn-up")[0];
+function to_top() {
+    var btn = document.getElementsByClassName("to-top")[0];
     var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
-    if(scroll >= window.innerHeight / 2) {
-        btn.classList.add("active");
-    }
-    else {
-        btn.classList.remove("active");
-    }
+    scroll >= window.innerHeight / 2 ? btn.classList.add("active") : btn.classList.remove("active");
 }
 
-window.onscroll = function () {
-    turn_up();
-};
+window.addEventListener("scroll", function () {
+    to_top();
+});
 
 // 图片缩放
 bk_image(".post-content img, .page-content img");
 
+// 请保留版权说明
 if (window.console && window.console.log) {
-    console.log("\n %c Single %c https://paugram.com \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0;");
+    console.log("\n %c Single %c https://paugram.com \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0; text-decoration: none;");
 }

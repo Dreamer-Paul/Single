@@ -4,8 +4,8 @@
  * 
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.4
- * @link https://hi-paul.space
+ * @version 1.7
+ * @link https://paugram.com
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -37,7 +37,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         <span class="category"><?php $this->category('，'); ?></span>
 <?php endif; ?>
 <?php if (!empty($this->options->archive_meta) && in_array('show_tags', $this->options->archive_meta)): ?>
-                        <span class="tags"><?php $this->tags('，', true, 'none'); ?></span>
+                        <span class="tags"><?php $this->tags('，', true, '暂无'); ?></span>
 <?php endif; ?>
 <?php if (!empty($this->options->archive_meta) && in_array('show_comments', $this->options->archive_meta)): ?>
                         <span class="comments"><?php $this->commentsNum('%d °C'); ?></span>
