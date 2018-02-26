@@ -35,7 +35,8 @@
         </section>
 <?php endif; ?>
         <section class="sub-footer">
-            <p>© <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
+            <p>CopyRight &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>, All Rights Reserved. <?php if($this->options->umeng_cnzz_text): ?><div style="display:none;"><?php $this->options->umeng_cnzz_text() ?></div>
+			<?php endif; ?> Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
         </section>
     </div>
 </footer>
@@ -45,6 +46,8 @@
 <script src="https://cdn.bootcss.com/smooth-scroll/12.1.3/js/smooth-scroll.min.js"></script>
 <script>var scroll = new SmoothScroll('.to-top, .article-list a', {offset: 100});</script>
 <?php $this->footer(); ?>
-
 </body>
 </html>
+<?php if (!empty($this->options->Gzip_compress_html)): ?>
+<?php $html_source = ob_get_contents(); ob_clean(); print compressHtml($html_source); ob_end_flush(); ?>
+<?php endif;?>
