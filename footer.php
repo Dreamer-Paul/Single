@@ -35,7 +35,7 @@
         </section>
 <?php endif; ?>
         <section class="sub-footer">
-            <p>© <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>. All Rights Reserved. <?php if($this->options->umeng_cnzz_text): ?><div style="display:none;"><?php $this->options->umeng_cnzz_text() ?></div>
+            <p>CopyRight &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>, All Rights Reserved. <?php if($this->options->umeng_cnzz_text): ?><div style="display:none;"><?php $this->options->umeng_cnzz_text() ?></div>
 			<?php endif; ?> Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
         </section>
     </div>
