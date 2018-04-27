@@ -2,15 +2,25 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 function themeConfig($form) {
-    // 输出主题信息
-    $version = "1.7";
-    echo("<style>.single-info{text-align:center; margin:1em 0;}.single-info > *{margin:0 0 1rem}.single-info p:last-child a{background:#467B96;color:#fff;border-radius:4px;padding:.5em .75em;display:inline-block}</style>");
-    echo("<div class='single-info'>");
-    echo("<h2>Single 主题 (".$version.")</h2>");
-    echo("<p>By: <a href='https://github.com/Dreamer-Paul'>Dreamer-Paul</a></p>");
-    echo("<p><a href='https://github.com/Dreamer-Paul/Single/releases'>版本列表</a>
-             <a href='https://github.com/Dreamer-Paul/Single/releases/tag/".$version."'>更新日志</a></p>");
-    echo("</div>");
+
+    // 插件信息与更新检测
+    function paul_update($name, $version){
+        echo "<style>.paul-info{text-align:center; margin:1em 0;} .paul-info > *{margin:0 0 1rem} .buttons a{background:#467b96; color:#fff; border-radius:4px; padding:.5em .75em; display:inline-block}</style>";
+        echo "<div class='paul-info'>";
+        echo "<h2>Single 主题 (".$version.")</h2>";
+        echo "<p>By: <a href='https://github.com/Dreamer-Paul'>Dreamer-Paul</a></p>";
+        echo "<p class='buttons'><a href='https://paugram.com/essay/single-theme-and-single-dog.html'>项目介绍</a>
+              <a href='https://github.com/Dreamer-Paul/Single/releases'>更新日志</a></p>";
+
+        $update = file_get_contents("https://api.paugram.com/update/?name=".$name."&current=".$version."&site=".$_SERVER['HTTP_HOST']);
+        $update = json_decode($update, true);
+
+        if(isset($update['text'])){echo "<p>".$update['text']."</p>"; };
+        if(isset($update['message'])){echo "<p>".$update['message']."</p>"; };
+
+        echo "</div>";
+    }
+    paul_update("Single", "1.8");
 
     // 自定义站点图标
     $favicon_small = new Typecho_Widget_Helper_Form_Element_Text('favicon_small', NULL, NULL, _t('站点图标'), _t('在这里填入一张 png 图片地址（<a>32x32px</a>），不填则使用默认图标'));
@@ -30,6 +40,10 @@ function themeConfig($form) {
     // 自定义样式表
     $custom_css = new Typecho_Widget_Helper_Form_Element_Textarea('custom_css', NULL, NULL, _t('自定义样式表'), _t('在这里填入你的自定义样式表，不填则不输出。'));
     $form->addInput($custom_css);
+
+    // 自定义统计代码
+    $custom_script = new Typecho_Widget_Helper_Form_Element_Textarea('custom_script', NULL, NULL, _t('统计代码'), _t('在这里填入你的统计代码，不填则不输出。'));
+    $form->addInput($custom_script);
 
     // 自定义作者信息
     $author_text = new Typecho_Widget_Helper_Form_Element_Text('author_text', NULL, NULL, _t('作者信息'), _t('显示在文章底部的作者信息，不填则不输出。'));

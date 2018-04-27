@@ -16,7 +16,7 @@
         <?php $comments->gravatar('150', 'robohash'); ?>
         <div class="comment-meta">
             <span class="comment-author"><?php $comments->author(); ?></span>
-            <time class="comment-time"><?php $comments->date('y.m.d'); ?></time>
+            <time class="comment-time"><?php $comments->date(); ?></time>
             <span class="comment-reply"><?php $comments->reply(); ?></span>
         </div>
         <div class="comment-content">

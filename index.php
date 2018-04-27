@@ -1,17 +1,17 @@
 <?php
 /**
  * 一个简洁大气，含夜间模式的 Typecho 博客模板。
- * 
+ *
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.7
+ * @version 1.8
  * @link https://paugram.com
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  $this->need('header.php');
  ?>
- 
+
 <main>
     <div class="wrap min">
         <section class="home-title">
@@ -32,7 +32,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 </h2>
                 <p><?php $this->excerpt(100); ?></p>
                 <div class="post-meta">
-                    <time class="date"><?php $this->date('Y.m.d'); ?></time>
+                    <time class="date"><?php $this->date(); ?></time>
 <?php if (!empty($this->options->archive_meta) && in_array('show_category', $this->options->archive_meta)): ?>
                         <span class="category"><?php $this->category('，'); ?></span>
 <?php endif; ?>

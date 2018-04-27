@@ -1,6 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
- 
+
 <main>
     <div class="wrap min">
         <section class="home-title">
@@ -18,7 +18,7 @@
                 <h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
                 <p><?php $this->excerpt(100); ?></p>
                 <div class="post-meta">
-                    <time class="date"><?php $this->date('Y.m.d'); ?></time>
+                    <time class="date"><?php $this->date(); ?></time>
 <?php if (!empty($this->options->archive_meta) && in_array('show_category', $this->options->archive_meta)): ?>
                         <span class="category"><?php $this->category('，'); ?></span>
 <?php endif; ?>

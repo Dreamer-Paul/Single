@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2018.2.5
+# Last Update: 2018.4.27
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -27,7 +27,7 @@ head_menu();
 // 搜索按钮
 function search_btn() {
     var btn = document.getElementsByClassName("search-btn")[0];
-    var bar = document.getElementsByClassName("search-form")[0];
+    var bar = document.getElementsByClassName("head-search")[0];
 
     btn.addEventListener("click", function () {
         bar.classList.toggle("active");
@@ -140,9 +140,9 @@ window.addEventListener("scroll", function () {
 });
 
 // 图片缩放
-bk_image(".post-content img, .page-content img");
+ks.image(".post-content img, .page-content img");
 
 // 请保留版权说明
 if (window.console && window.console.log) {
-    console.log("\n %c Single %c https://paugram.com \n\n","color: #fff; background: #ffa628; padding:5px 0;","background: #efefef; padding:5px 0; text-decoration: none;");
+    console.log("%c Single %c https://paugram.com ","color: #fff; margin: 1em 0; padding: 5px 0; background: #ffa628;","margin: 1em 0; padding: 5px 0; background: #efefef;");
 }

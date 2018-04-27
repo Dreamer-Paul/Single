@@ -2,9 +2,9 @@
 
 /* ----
 
-# Kico Style 1.5.3
+# Kico Style 1.5.4
 # By: Dreamer-Paul
-# Last Update: 2018.2.5
+# Last Update: 2018.4.22
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -113,7 +113,7 @@ body::-webkit-scrollbar-track:hover{
     max-width: 1000px;
 }
 .wrap.max{
-    max-width: 1600px;
+    max-width: 1400px;
 }
 
 .wrap.full{
@@ -193,12 +193,10 @@ kbd{
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
 
-audio{
-    vertical-align: middle;
-}
-
-img, svg, video{
+img, svg{
     height: auto;
+}
+img, svg, audio, video{
     max-width: 100%;
     vertical-align: middle;
 }
@@ -664,7 +662,12 @@ iframe{
     margin-right: 0;
 }
 
-.row.no-wrap{ flex-wrap: nowrap; }
+.row.scrollable{
+    overflow: auto;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: nowrap;
+}
 
 /* -- 对齐方式 */
 .row.right{ justify-content: flex-end; }
