@@ -1,8 +1,8 @@
 /* ----
 
-# Kico Style 1.5.4
+# Kico Style 2
 # By: Dreamer-Paul
-# Last Update: 2018.4.27
+# Last Update: 2018.7.1
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -11,7 +11,7 @@
 
 ---- */
 
-function kico_style () {
+function Kico_Style () {
     var kico = {};
     var that = this;
 
@@ -33,6 +33,15 @@ function kico_style () {
 
     // 选择对象
     this.select = function (obj) {
+        if(typeof obj === 'object'){
+            return obj;
+        }
+        else if(typeof obj === 'string'){
+            return document.querySelector(obj);
+        }
+    };
+
+    this.selectAll = function (obj) {
         if(typeof obj === 'object'){
             return obj;
         }
@@ -68,7 +77,6 @@ function kico_style () {
         }
 
         if(attr && attr.color){item.classList.add(attr.color);}
-        if(attr && attr.time && attr.overlay === true){bk_overlay({time: attr.time});}
 
         function notice_remove() {
             item.classList.add("remove");
@@ -76,6 +84,7 @@ function kico_style () {
             setTimeout(function () {
                 try{
                     kico.notice_list.removeChild(item);
+                    item = null;
                 }
                 catch(err) {}
 
@@ -96,18 +105,15 @@ function kico_style () {
             setTimeout(overlay_remove, attr.time);
         }
         else{
-            kico.overlay.addEventListener("click", function () {
-                overlay_remove();
-            });
+            kico.overlay.onclick = function (){ overlay_remove() };
         }
 
         if(attr && attr.code){
-            kico.overlay.addEventListener("click", function () {
-                attr.code();
-            });
+            kico.overlay.onclick = function (){ overlay_remove(); attr.code() }
         }
 
         function overlay_remove() {
+            kico.overlay.onclick = null;
             kico.overlay.classList.add("remove");
 
             setTimeout(function () {
@@ -125,7 +131,7 @@ function kico_style () {
     kico.image_box.appendChild(kico.image_single);
 
     this.image = function bk_image(selector) {
-        var get_images = that.select(selector);
+        var get_images = that.selectAll(selector);
 
         function item(obj) {
             obj.setAttribute("bk-image", "active");
@@ -155,7 +161,6 @@ function kico_style () {
 
     // Show Version
     console.log("%c Kico Style %c https://www.binkic.com ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-};
+}
 
-var ks = new kico_style();
-var $$ = ks.select;
+var ks = new Kico_Style();

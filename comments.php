@@ -59,6 +59,8 @@
 <?php endif; ?>
         </form>
     </div>
+<?php else: ?>
+        <p>博主关闭了评论...</p>
 <?php endif; ?>
     <?php if ($comments->have()): ?>
         <?php $comments->listComments(); ?>

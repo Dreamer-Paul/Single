@@ -2,9 +2,9 @@
 
 /* ----
 
-# Kico Style 1.5.4
+# Kico Style 2
 # By: Dreamer-Paul
-# Last Update: 2018.4.22
+# Last Update: 2018.8.5
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -30,27 +30,17 @@ body{
 }
 
 @media screen and (max-width: 500px){
-    html[resize] body{
-        font-size: 14px;
-    }
+    body.resizable{ font-size: 14px }
 }
 
 @media screen and (min-width: 1930px){
-    html[resize] body{
-        font-size: 18px;
-    }
+    body.resizable{ font-size: 18px }
 }
 
-*, *:before, *:after{
-    box-sizing: border-box;
-}
+*, *:before, *:after{ box-sizing: border-box }
 
 /* - 部分老式浏览器的更正 */
-article, aside,
-header, footer,
-nav, section, main{
-    display: block;
-}
+aside, article, section, figure, figcaption, header, main, footer, nav{ display: block }
 
 /* - 选择内容 */
 ::-moz-selection{
@@ -99,32 +89,20 @@ body::-webkit-scrollbar-track:hover{
 /* 1 - 容器
 -------------------------------- */
 .wrap{
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
     max-width: 1200px;
     padding: 0 1.25em;
     box-sizing: content-box;
 }
 
-.wrap.min{
-    max-width: 800px;
-}
-.wrap.mid{
-    max-width: 1000px;
-}
-.wrap.max{
-    max-width: 1400px;
-}
+.wrap.min{ max-width: 800px }
+.wrap.mid{ max-width: 1000px }
+.wrap.max{ max-width: 1400px }
+.wrap.full{ max-width: 100% }
 
-.wrap.full{
-    max-width: 100%;
-}
-.wrap.thin{
-    padding: 0 .75em;
-}
-.wrap.thick{
-    padding: 0 1.5em;
-}
+.wrap.thin{ padding: 0 .75em }
+.wrap.thick{ padding: 0 1.5em }
 .wrap.clear{
     padding-left: 0;
     padding-right: 0;
@@ -134,10 +112,6 @@ body::-webkit-scrollbar-track:hover{
     content: '';
     clear: both;
     display: block;
-}
-
-.overflow{
-    overflow: auto;
 }
 
 /* 2 - 元素
@@ -155,7 +129,7 @@ h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:la
 }
 
 p{
-    line-height: 1.8em;
+    line-height: 1.8;
     margin-bottom: 1em;
 }
 
@@ -193,33 +167,19 @@ kbd{
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
 
-img, svg{
-    height: auto;
-}
 img, svg, audio, video{
     max-width: 100%;
     vertical-align: middle;
 }
 
 /* - 文章 */
-article{
-    word-break: break-all;
-}
+article{ word-break: break-all }
 
-article > *{
-    margin-bottom: 1em;
-}
-article > *:last-child{
-    margin-bottom: 0;
-}
+article > *{ margin-bottom: 1em }
+article > *:last-child{ margin-bottom: 0 }
 
-article h1, article h2, article h3{
-    font-size: 1.2em;
-}
-article h4, article h5, article h6{
-    font-size: 1.1em;
-    font-weight: bold;
-}
+article h1, article h2, article h3{ font-size: 1.2em }
+article h4, article h5, article h6{ font-size: 1.1em }
 
 /* - 按钮 */
 .btn{
@@ -265,18 +225,18 @@ article h4, article h5, article h6{
 }
 
 /* -- 按钮颜色 */
-.btn.red, .btn.yellow, .btn.blue, .btn.green{ color: #fff; }
+.btn.red, .btn.yellow, .btn.blue, .btn.green,
 .btn.red:hover, .btn.yellow:hover, .btn.blue:hover, .btn.green:hover{ color: #fff; }
 
-.btn.red{ background: #c40b00; }
-.btn.yellow{ background: #ffb03a; }
-.btn.blue{ background: #3498db; }
-.btn.green{ background: #27a17e; }
+.btn.red{ background: #c40b00 }
+.btn.yellow{ background: #ffb03a }
+.btn.blue{ background: #3498db }
+.btn.green{ background: #27a17e }
 
-.btn.red:active{ background: #b00000; }
-.btn.yellow:active{ background: #eb9c26; }
-.btn.blue:active{ background: #2084c7; }
-.btn.green:active{ background: #138d6a; }
+.btn.red:active{ background: #b00000 }
+.btn.yellow:active{ background: #eb9c26 }
+.btn.blue:active{ background: #2084c7 }
+.btn.green:active{ background: #138d6a }
 
 /* - 代码 */
 pre, code{
@@ -284,9 +244,7 @@ pre, code{
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
 
-pre{
-    word-wrap: normal;
-}
+pre{ word-wrap: normal }
 
 code{
     color: #c40b00;
@@ -310,17 +268,13 @@ pre > code{
 }
 
 /* - 项目列表 */
-ul, ol{
-    margin-left: 1.25em;
-}
+ul, ol{ margin-left: 1.25em }
 ul.clear{
     margin-left: 0;
     list-style: none;
 }
 
-dl dd{
-    margin-left: 1.5em;
-}
+dl dd{ margin-left: 1.5em }
 dl dd:before{
     content: "--";
     margin-right: .25em;
@@ -337,6 +291,7 @@ a, .btn{
 /* - 引用*/
 blockquote{
     margin: 0 0 1em;
+    line-height: 1.8;
     font-style: oblique;
     background: #f5fafd;
     padding: 1em 1em 1em 2em;

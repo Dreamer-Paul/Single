@@ -20,7 +20,7 @@ function themeConfig($form) {
 
         echo "</div>";
     }
-    paul_update("Single", "1.8");
+    paul_update("Single", "1.8.5");
 
     // 自定义站点图标
     $favicon_small = new Typecho_Widget_Helper_Form_Element_Text('favicon_small', NULL, NULL, _t('站点图标'), _t('在这里填入一张 png 图片地址（<a>32x32px</a>），不填则使用默认图标'));

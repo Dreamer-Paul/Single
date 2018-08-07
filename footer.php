@@ -43,7 +43,7 @@
 <script src="<?php $this->options->themeUrl('js/kico.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('js/single.js'); ?>"></script>
 <?php if ($this->options->custom_script): ?>
-<script><?php $this->options->custom_script() ?></script>
+<?php $this->options->custom_script() ?>
 <?php endif; ?>
 <script src="https://cdn.bootcss.com/smooth-scroll/12.1.3/js/smooth-scroll.min.js"></script>
 <script>var scroll = new SmoothScroll('.to-top, .article-list a', {offset: 100});</script>

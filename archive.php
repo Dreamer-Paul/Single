@@ -13,6 +13,7 @@
             <?php if ($this->is('category')) : ?><span><?php echo $this->getDescription(); ?><?php endif; ?>
         </section>
         <section class="home-posts">
+<?php if ($this->have()): ?>
 <?php while($this->next()): ?>
             <div class="post-item">
                 <h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
@@ -31,6 +32,9 @@
                 </div>
             </div>
 <?php endwhile; ?>
+<?php else: ?>
+            <p>没有找到结果 (QWQ)</p>
+<?php endif; ?>
         </section>
         <?php $this->pageNav('&laquo;', '&raquo;'); ?>
     </div>

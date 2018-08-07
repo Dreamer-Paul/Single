@@ -4,7 +4,7 @@
  *
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.8
+ * @version 1.8.5
  * @link https://paugram.com
  */
 
