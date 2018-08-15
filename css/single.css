@@ -530,6 +530,8 @@ main img{
 .post-comments{ animation: fade-in-top .3s .5s backwards; -webkit-animation: fade-in-top .3s .5s backwards; }
 
 .post-comments input, .post-comments textarea{
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: 100%;
     display: block;
 }
