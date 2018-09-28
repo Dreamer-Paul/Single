@@ -1,16 +1,19 @@
 <?php
+
 /**
  * 一个简洁大气，含夜间模式的 Typecho 博客模板。
  *
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 1.8.5
+ * @version 1.9
  * @link https://paugram.com
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
- $this->need('header.php');
- ?>
+
+$this->need('header.php');
+
+?>
 
 <main>
     <div class="wrap min">

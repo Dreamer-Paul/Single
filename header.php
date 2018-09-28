@@ -9,22 +9,23 @@
             'tag'       =>  _t('标签 %s 下的文章'),
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
-<?php if ($this->options->favicon_small): ?>
-    <link rel="icon" href="<?php $this->options->favicon_small() ?>" sizes="32x32"/>
+<?php if($this->options->favicon): ?>
+    <link rel="icon" href="<?php $this->options->favicon() ?>" sizes="192x192"/>
 <?php else: ?>
-    <link rel="icon" href="<?php $this->options->themeUrl('img/icon/32.png'); ?>" sizes="32x32"/>
+    <link rel="icon" href="<?php $this->options->themeUrl('img/icon.png'); ?>" sizes="192x192"/>
 <?php endif; ?>
-<?php if ($this->options->favicon_large): ?>
-    <link rel="icon" href="<?php $this->options->favicon_small() ?>" sizes="192x192"/>
-<?php else: ?>
-    <link rel="icon" href="<?php $this->options->themeUrl('img/icon/192.png'); ?>" sizes="192x192"/>
-<?php endif; ?>
+<?php if($this -> options -> cdn_set == '0'): ?>
     <link href="<?php $this->options->themeUrl('css/kico.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this->options->themeUrl('css/single.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this->options->themeUrl('css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
+<?php else: ?>
+    <link href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Single/css/kico.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Single/css/single.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<?php endif; ?>
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
-<?php if ($this->options->background_img): ?>
-    <style>body:before{content:''; display:block;  opacity:.06; z-index:-1; position:fixed; top:0; bottom:0; left:0; right:0; background: url(<?php $this->options->background_img() ?>) center/cover no-repeat;}</style>
+<?php if ($this->options->background): ?>
+    <style>body:before{content: ''; background-image: url(<?php $this->options->background() ?>)}</style>
 <?php endif; ?>
 <?php if ($this->options->custom_css): ?>
     <style><?php $this->options->custom_css() ?></style>
@@ -41,7 +42,7 @@
 <![endif]-->
 <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw='); ?>
 </head>
-<body>
+<body<?php if($_COOKIE["night"] == "true"): ?> class="neon"<?php endif; ?>>
 <header>
     <div class="head-title">
         <h4><?php $this->options->title() ?></h4>

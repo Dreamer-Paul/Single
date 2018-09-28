@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2018.8.5
+# Last Update: 2018.9.28
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -11,7 +11,8 @@
 
 ---- */
 
-var single = new function () {
+var Single_Theme = function (config) {
+    var that = this;
     var body = document.body;
     var content = document.getElementsByClassName("post-content")[0] || document.getElementsByClassName("page-content")[0];
 
@@ -36,20 +37,24 @@ var single = new function () {
     this.night = function () {
         var light = document.getElementsByClassName("light-btn")[0];
 
-        if (localStorage.style === "neon") {
-            body.classList.add("neon");
-        }
-
-        light.addEventListener("click", function () {
+        light.onclick = function () {
             if(body.classList.contains("neon")){
-                body.classList.remove("neon");
-                localStorage.style = null;
+                that.night_remove();
             }
             else{
-                body.classList.add("neon");
-                localStorage.style = "neon";
+                that.night_add();
             }
-        });
+        };
+    };
+
+    this.night_add = function () {
+        body.classList.add("neon");
+        document.cookie = "night=true;" + "path=/";
+    };
+
+    this.night_remove = function () {
+        body.classList.remove("neon");
+        document.cookie = "night=false;" + "path=/";
     };
 
     // 目录树
@@ -134,6 +139,23 @@ var single = new function () {
 
     // 返回页首
     window.addEventListener("scroll", this.to_top);
+
+    // 如果开启自动夜间模式
+    if(config.toggleNight){
+        var time = new Date();
+        var hour = time.getHours();
+
+        if(document.cookie.search(/night/) == -1 && (hour <= 5 || hour >= 22)){
+            this.night_add();
+        }
+    }
+
+    // 如果开启复制内容提示
+    if(config.copyNotice){
+        document.oncopy = function () {
+            ks.notice("复制内容请注明来源并保留版权信息！", {color: "yellow", overlay: true})
+        };
+    }
 };
 
 // 图片缩放

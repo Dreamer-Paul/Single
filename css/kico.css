@@ -2,9 +2,9 @@
 
 /* ----
 
-# Kico Style 2
+# Kico Style 2.0.2
 # By: Dreamer-Paul
-# Last Update: 2018.8.5
+# Last Update: 2018.9.25
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -78,11 +78,11 @@ body::-webkit-scrollbar-track:hover{
     box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
 }
 
-.bk-scroll-hover::-webkit-scrollbar{
+.ks-scroll-hover::-webkit-scrollbar{
     display: none;
 }
 
-.bk-scroll-hover:hover::-webkit-scrollbar{
+.ks-scroll-hover:hover::-webkit-scrollbar{
     display: inherit;
 }
 
@@ -269,7 +269,7 @@ pre > code{
 
 /* - 项目列表 */
 ul, ol{ margin-left: 1.25em }
-ul.clear{
+ul.clear, ol.clear{
     margin-left: 0;
     list-style: none;
 }
@@ -314,6 +314,8 @@ hr.light{
 }
 
 /* - 表单 */
+input, textarea{ max-width: 100% }
+
 input[disabled]{
     cursor: no-drop;
 }
@@ -342,7 +344,6 @@ input[type="number"]:out-of-range{
 textarea{
     display: block;
     overflow: auto;
-    max-width: 100%;
     resize: vertical;
 }
 
@@ -356,42 +357,40 @@ progress::-webkit-progress-bar{
 }
 
 /* - 缤奇表单模组 */
-.bk-form label{
+.ks-form label{
     display: block;
     cursor: pointer;
     user-select: none;
 }
 
-.bk-form label:last-child{
+.ks-form label:last-child{
     margin-bottom: 0;
 }
 
-.bk-form label input{
+.ks-form label input{
     display: inline-block;
 }
 
-.bk-form label.submit > input[type="text"]{
+.ks-form label.submit > input[type="text"]{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.bk-form label.submit > input[type="text"] + button{
+.ks-form label.submit > input[type="text"] + button{
     vertical-align: middle;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.bk-form input{
+.ks-form input{
     display: block;
     vertical-align: middle;
 }
 
-.bk-form textarea{
-    min-width: 100%;
-}
+form textarea{ width: 100% }
 
 /* -- 单选多选框 */
-.bk-form input[type="checkbox"], .bk-form input[type="radio"]{
+.ks-form input[type="checkbox"], .ks-form input[type="radio"]{
     float: left;
     width: 1.5em;
     height: 1.5em;
@@ -402,7 +401,7 @@ progress::-webkit-progress-bar{
     -webkit-appearance: none;
 }
 
-.bk-form input[type="checkbox"]:before, .bk-form input[type="radio"]:before{
+.ks-form input[type="checkbox"]:before, .ks-form input[type="radio"]:before{
     content: '';
     width: 100%;
     height: 100%;
@@ -413,7 +412,7 @@ progress::-webkit-progress-bar{
     transition: border 0.3s, background 0.3s, box-shadow 0.3s;
 }
 
-.bk-form input[type="checkbox"]:after{
+.ks-form input[type="checkbox"]:after{
     top: 10%;
     left: 10%;
     width: 30%;
@@ -427,27 +426,27 @@ progress::-webkit-progress-bar{
     transform: rotate(45deg) scale(0);
 }
 
-.bk-form input[type="radio"]:before{
+.ks-form input[type="radio"]:before{
     border-radius: 100%;
 }
 
-.bk-form input[type="checkbox"]:checked:before{
+.ks-form input[type="checkbox"]:checked:before{
     box-shadow: none;
     background: #3498db;
 }
 
-.bk-form input[type="checkbox"]:checked:after{
+.ks-form input[type="checkbox"]:checked:after{
     transform: rotate(45deg) scale(1);
 }
 
-.bk-form input[type="radio"]:checked:before{
+.ks-form input[type="radio"]:checked:before{
     background: #3498db;
     border: 2px solid #3498db;
     box-shadow: 0 0 0 .2em #fff inset;
 }
 
 /* -- 开关按钮 */
-.bk-form input.switch{
+.ks-form input.switch{
     width: 4em;
     height: 2em;
     float: none;
@@ -460,7 +459,7 @@ progress::-webkit-progress-bar{
     transition: border .3s, background .3s;
 }
 
-.bk-form input.switch:before{
+.ks-form input.switch:before{
     margin: 0;
     border: 0;
     width: 2em;
@@ -474,55 +473,46 @@ progress::-webkit-progress-bar{
     transition: transform 0.3s;
 }
 
-.bk-form input.switch:after{
+.ks-form input.switch:after{
     content: normal;
 }
 
-.bk-form input.switch:checked{
+.ks-form input.switch:checked{
     box-shadow: none;
     background: #3498db;
     border-color: #3498db;
 }
 
-.bk-form input.switch:checked:before{
+.ks-form input.switch:checked:before{
     background: #fff;
     transform: translateX(2em);
 }
 
 /* - 表单小组 */
-.bk-form fieldset{
+fieldset{
     border: none;
-    cursor: default;
     margin-bottom: 2em;
 }
 
-.bk-form fieldset:last-child{
-    margin-bottom: 0;
-}
+fieldset > *{ margin-bottom: 1em }
 
-.bk-form fieldset > *{
-    margin-bottom: 1em;
-}
-
-.bk-form fieldset > *:last-child{
-    margin-bottom: 0;
-}
+fieldset:last-child, fieldset > *:last-child{ margin-bottom: 0 }
 
 /* -- 单行表单 */
-.bk-form.inline fieldset label, .bk-form fieldset.inline label{
+.ks-form.inline fieldset label, .ks-form fieldset.inline label{
     float: left;
     display: block;
     margin: 0 1em .5em 0;
 }
 
-.bk-form fieldset.inline:after{
+.ks-form fieldset.inline:after{
     content: '';
     clear: both;
     display: block;
 }
 
 /* - 表格*/
-.bk-table{
+.ks-table{
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -590,7 +580,7 @@ table.fill > tbody{
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
-table.fill > tbody > tr:nth-child(2n) > th, table.fill > tbody > tr:nth-child(2n){
+table.fill > tbody > tr:nth-child(even) > th, table.fill > tbody > tr:nth-child(even){
     background: #f7f7f7;
 }
 
@@ -1114,116 +1104,53 @@ iframe{
 
 /* 4 - 动画
 -------------------------------- */
-.bk-animate{
-    animation-duration: 1s; -webkit-animation-duration: 1s;
-    animation-timing-function: ease-in-out; -webkit-animation-timing-function: ease-in-out;
-}
-
-/* - 动画行为 */
-.bk-animate.loop{ animation-direction: alternate; -webkit-animation-direction: alternate; }
-.bk-animate.reverse{ animation-direction: reverse; -webkit-animation-direction: reverse; }
-.bk-animate.infinite{ animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; }
-
-/* - 动画时长 */
-.bk-animate.slow{ animation-duration: 2s; -webkit-animation-duration: 2s; }
-.bk-animate.slower{ animation-duration: 3s; -webkit-animation-duration: 3s; }
-.bk-animate.fast{ animation-duration: .5s; -webkit-animation-duration: .5s; }
-.bk-animate.faster{ animation-duration: .3s; -webkit-animation-duration: .3s; }
 
 /* - 淡入淡出 */
-.bk-animate.fade-in{
-    animation-name: fade-in; -webkit-animation-name: fade-in;
-}
 @keyframes fade-in{ from{ opacity: 0 } to{ opacity: 1 } }
 @-webkit-keyframes fade-in{ from{ opacity: 0 } to{ opacity: 1 } }
 
-.bk-animate.fade-off{
-    animation-name: fade-off; -webkit-animation-name: fade-off;
-}
 @keyframes fade-off{ from{ opacity: 1 } to{ opacity: 0 } }
 @-webkit-keyframes fade-off{ from{ opacity: 1 } to{ opacity: 0 } }
 
-.bk-animate.fade-in-top{
-    animation-name: fade-in-top; -webkit-animation-name: fade-in-top;
-}
 @keyframes fade-in-top{ from{ opacity: 0; transform: translateY(20px) } to{ opacity: 1; transform: translateY(0) } }
 @-webkit-keyframes fade-in-top{ from{ opacity: 0; transform: translateY(20px) } to{ opacity: 1; transform: translateY(0) } }
 
-.bk-animate.fade-in-bottom{
-    animation-name: fade-in-bottom; -webkit-animation-name: fade-in-bottom;
-}
 @keyframes fade-in-bottom{ from{ opacity: 0; transform: translateY(-20px) } to{ opacity: 1; transform: translateY(0) } }
 @-webkit-keyframes fade-in-bottom{ from{ opacity: 0; transform: translateY(-20px) } to{ opacity: 1; transform: translateY(0) } }
 
-.bk-animate.fade-in-left{
-    animation-name: fade-in-left; -webkit-animation-name: fade-in-left;
-}
 @keyframes fade-in-left{ from{ opacity: 0; transform: translateX(20px) } to{ opacity: 1; transform: translateX(0) } }
 @-webkit-keyframes fade-in-left{ from{ opacity: 0; transform: translateX(20px) } to{ opacity: 1; transform: translateX(0) } }
 
-.bk-animate.fade-in-right{
-    animation-name: fade-in-right; -webkit-animation-name: fade-in-right;
-}
 @keyframes fade-in-right{ from{ opacity: 0; transform: translateX(-20px) } to{ opacity: 1; transform: translateX(0) } }
 @-webkit-keyframes fade-in-right{ from{ opacity: 0; transform: translateX(-20px) } to{ opacity: 1; transform: translateX(0) } }
 
 /* - 淡入缩放 */
-.bk-animate.fade-small-large{
-    animation-name: fade-small-large; -webkit-animation-name: fade-small-large;
-}
 @keyframes fade-small-large{ from{ opacity: 0; transform: scale(.5, .5) } to{ opacity: 1; transform: scale(1, 1) } }
 @-webkit-keyframes fade-small-large{ from{ opacity: 0; transform: scale(.5, .5) } to{ opacity: 1; transform: scale(1, 1) } }
 
-.bk-animate.fade-large-small{
-    animation-name: fade-large-small; -webkit-animation-name: fade-large-small;
-}
 @keyframes fade-large-small{ from{ opacity: 1; transform: scale(1, 1) } to{ opacity: 0; transform: scale(.5, .5) } }
 @-webkit-keyframes fade-large-small{ from{ opacity: 1; transform: scale(1, 1) } to{ opacity: 0; transform: scale(.5, .5) } }
 
-.bk-animate.fade-larger-small{
-    animation-name: fade-larger-small; -webkit-animation-name: fade-larger-small;
-}
 @keyframes fade-larger-small{ from{ opacity: 0; transform: scale(1.5, 1.5) } to{ opacity: 1; transform: scale(1, 1) } }
 @-webkit-keyframes fade-larger-small{ from{ opacity: 0; transform: scale(1.5, 1.5) } to{ opacity: 1; transform: scale(1, 1) } }
 
-.bk-animate.fade-small-larger{
-    animation-name: fade-small-larger; -webkit-animation-name: fade-small-larger;
-}
 @keyframes fade-small-larger{ from{ opacity: 1; transform: scale(1, 1) } to{ opacity: 0; transform: scale(1.5, 1.5) } }
 @-webkit-keyframes fade-small-larger{ from{ opacity: 1; transform: scale(1, 1) } to{ opacity: 0; transform: scale(1.5, 1.5) } }
 
-/* - 缩放 */
-.bk-animate.scale-small-large{
-    animation-name: scale-small-large; -webkit-animation-name: scale-small-large;
-}
 @keyframes scale-small-large{ from{ transform: scale(0, 0) } to{ transform: scale(1, 1) } }
 @-webkit-keyframes scale-small-large{ from{ transform: scale(0, 0) } to{ transform: scale(1, 1) } }
 
-.bk-animate.scale-large-small{
-    animation-name: scale-large-small; -webkit-animation-name: scale-large-small;
-}
 @keyframes scale-large-small{ from{ transform: scale(1, 1) } to{ transform: scale(0, 0) } }
 @-webkit-keyframes scale-large-small{ from{ transform: scale(1, 1) } to{ transform: scale(0, 0) } }
 
 /* - 平移 */
-.bk-animate.up-and-down{
-    animation-name: up-and-down; -webkit-animation-name: up-and-down;
-    animation-direction: alternate; -webkit-animation-direction: alternate;
-}
 @keyframes up-and-down{ from{ transform: translateY(-20px) } to{ transform: translateY(20px) } }
 @-webkit-keyframes up-and-down{ from{ transform: translateY(-20px) } to{ transform: translateY(20px) } }
 
-.bk-animate.left-and-right{
-    animation-name: left-and-right; -webkit-animation-name: left-and-right;
-    animation-direction: alternate; -webkit-animation-direction: alternate;
-}
 @keyframes left-and-right{ from{ transform: translateX(-20px) } to{ transform: translateX(20px) } }
 @-webkit-keyframes left-and-right{ from{ transform: translateX(-20px) } to{ transform: translateX(20px) } }
 
 /* - 旋转 */
-.bk-animate.rotate{
-    animation-name: rotate; -webkit-animation-name: rotate;
-}
 @keyframes rotate{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
 @-webkit-keyframes rotate{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
 
@@ -1231,7 +1158,7 @@ iframe{
 -------------------------------- */
 
 /* - 弹窗 */
-.bk-notice-list{
+.ks-notice-list{
     top: 2em;
     left: 0;
     right: 0;
@@ -1241,7 +1168,7 @@ iframe{
     pointer-events: none;
 }
 
-.bk-notice{
+.ks-notice{
     color: #fff;
     display: table;
     background: #333;
@@ -1253,50 +1180,50 @@ iframe{
     -webkit-animation: fade-small-large .3s both;
 }
 
-.bk-notice.remove{
+.ks-notice.remove{
     animation: fade-in-top .3s both reverse;
     -webkit-animation: fade-in-top .3s both reverse;
 }
 
 /* -- 弹窗颜色 */
-.bk-notice.red{
+.ks-notice.red{
     background: #ea644a;
 }
 
-.bk-notice.yellow{
+.ks-notice.yellow{
     background: #f1a325;
 }
 
-.bk-notice.blue{
+.ks-notice.blue{
     background: #3498db;
 }
 
-.bk-notice.green{
+.ks-notice.green{
     background: #38b03f;
 }
 
-.bk-notice .content, .bk-notice.dismiss .close{
+.ks-notice .content, .ks-notice.dismiss .close{
     padding: .5em 1em;
     display: table-cell;
 }
 
-.bk-notice.dismiss .close{
+.ks-notice.dismiss .close{
     cursor: pointer;
     border-radius: 0 1em 1em 0;
     transition: background .3s;
 }
 
-.bk-notice.dismiss .close:hover{
+.ks-notice.dismiss .close:hover{
     background: rgba(0, 0, 0, .1);
 }
 
-.bk-notice.dismiss .close:after{
+.ks-notice.dismiss .close:after{
     content: '×';
     font: inherit;
 }
 
 /* - 遮罩 */
-.bk-overlay{
+.ks-overlay{
     top: 0;
     left: 0;
     right: 0;
@@ -1308,18 +1235,18 @@ iframe{
     background: rgba(0, 0, 0, .5);
 }
 
-.bk-overlay.remove{
+.ks-overlay.remove{
     animation: fade-off .5s both;
     -webkit-animation: fade-off .5s both;
 }
 
 /* - 图片放大 */
-img[bk-image=active]{
+[ks-image=active]{
     cursor: pointer;
     cursor: zoom-in;
 }
 
-.bk-image{
+.ks-image{
     top: 0;
     left: 0;
     right: 0;
@@ -1329,7 +1256,7 @@ img[bk-image=active]{
     user-select: none;
 }
 
-.bk-image:before{
+.ks-image:before{
     top: 0;
     left: 0;
     right: 0;
@@ -1341,7 +1268,7 @@ img[bk-image=active]{
     background: rgba(0, 0, 0, .5);
 }
 
-.bk-image img{
+.ks-image img{
     top: 0;
     left: 0;
     right: 0;
@@ -1355,17 +1282,17 @@ img[bk-image=active]{
     -webkit-animation: fade-small-large .3s both;
 }
 
-.bk-image.remove:before{
+.ks-image.remove:before{
     animation: fade-off .3s both;
     -webkit-animation: fade-off .3s both;
 }
 
-.bk-image.remove img{
+.ks-image.remove img{
     animation: fade-large-small .3s both;
     -webkit-animation: fade-large-small .3s both;
 }
 
-.bk-image img[src$=".jpg"]{
+.ks-image img[src$=".jpg"]{
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
 }
 
