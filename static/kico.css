@@ -2,9 +2,9 @@
 
 /* ----
 
-# Kico Style 2.0.2
+# Kico Style 2.2
 # By: Dreamer-Paul
-# Last Update: 2018.9.25
+# Last Update: 2019.3.2
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -24,17 +24,21 @@ fieldset, legend, figure{
     padding: 0;
 }
 
-body{
+html{
     color: #353535;
     font: 16px/1.5 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
 }
 
+html.font-s{ font-size: 14px }
+html.font-m{ font-size: 16px }
+html.font-l{ font-size: 18px }
+
 @media screen and (max-width: 500px){
-    body.resizable{ font-size: 14px }
+    html.font-auto{ font-size: 14px }
 }
 
 @media screen and (min-width: 1930px){
-    body.resizable{ font-size: 18px }
+    html.font-auto{ font-size: 18px }
 }
 
 *, *:before, *:after{ box-sizing: border-box }
@@ -187,21 +191,14 @@ article h4, article h5, article h6{ font-size: 1.1em }
     font: inherit;
     color: inherit;
     cursor: pointer;
-    background: #eee;
+    background: #fff;
     user-select: none;
     border-radius: 4px;
-    padding: .8em 1.5em;
+    padding: .5em 1em;
     display: inline-block;
     border: 1px solid transparent;
 }
-
-.btn:hover{
-    color: inherit;
-}
-
-.btn:active{
-    background: #ddd;
-}
+.btn:hover{ color: inherit }
 
 /* -- 禁用的按钮 */
 .btn[disabled]{
@@ -210,33 +207,31 @@ article h4, article h5, article h6{ font-size: 1.1em }
 }
 
 /* -- 有图标的按钮 */
-.btn i{
-    margin-right: 5px;
-}
+.btn i{ margin-right: 5px }
+.btn i:last-child{ margin-right: 0 }
 
 /* -- 按钮尺寸 */
 .btn.small{
-    padding: .5em 1em;
+    padding: .25em .5em;
+}
+
+.btn.middle{
+    padding: .75em 1.5em;
 }
 
 .btn.large{
     font-size: 1.2em;
-    padding: 1em 2.5em;
+    padding: 1em 2em;
 }
 
 /* -- 按钮颜色 */
-.btn.red, .btn.yellow, .btn.blue, .btn.green,
-.btn.red:hover, .btn.yellow:hover, .btn.blue:hover, .btn.green:hover{ color: #fff; }
+.btn.red, .btn.yellow, .btn.blue, .btn.green{ color: #fff }
 
 .btn.red{ background: #c40b00 }
 .btn.yellow{ background: #ffb03a }
 .btn.blue{ background: #3498db }
 .btn.green{ background: #27a17e }
-
-.btn.red:active{ background: #b00000 }
-.btn.yellow:active{ background: #eb9c26 }
-.btn.blue:active{ background: #2084c7 }
-.btn.green:active{ background: #138d6a }
+.btn.transparent{ background: transparent }
 
 /* - 代码 */
 pre, code{
@@ -314,31 +309,118 @@ hr.light{
 }
 
 /* - 表单 */
-input, textarea{ max-width: 100% }
-
-input[disabled]{
-    cursor: no-drop;
+input[disabled], textarea[disabled]{
+    cursor: no-drop !important;
 }
 
-input[readonly]{
+input[disabled], textarea[disabled], input[readonly]{
     background: rgb(235, 235, 228);
 }
 
-input, textarea, select{
+input, select, textarea{
     outline: none;
     font: inherit;
+    max-width: 100%;
     background: none;
+    vertical-align: middle;
 }
 
-input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="search"], textarea, select{
+input[type*="date"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"],
+select, textarea{
     padding: .5em;
     color: inherit;
     border-radius: 4px;
     border: #ccc 1px solid;
 }
 
-input[type="number"]:out-of-range{
-    background: rgba(255, 0, 0, .3);
+input.invalid, input:out-of-range{
+    border-color: #c40b00;
+    background: rgba(255, 0, 0, .1);
+}
+
+::-webkit-file-upload-button{
+    color: #fff;
+    border: none;
+    outline: none;
+    display: block;
+    padding: .5em 1em;
+    background: #3498db;
+    border-radius: .5em;
+}
+
+input[type="range"]{
+    margin: 0;
+    height: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: ew-resize;
+    cursor: grab;
+    overflow: hidden;
+    min-height: 1.5rem;
+}
+
+input[type="range"]:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    border-color: #3498db;
+    background-color: #3498db;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    border-color: #3498db;
+    background-color: #3498db;
+}
+
+input[type="range"]:focus::-ms-thumb {
+    border-color: #9C27B0;
+    background-color: #673AB7;
+}
+
+input[type="range"]::-moz-focus-outer { border: 0 }
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: #3498db;
+    content: '';
+    height: 2px;
+    pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #fff;
+    border-radius: 50px;
+    margin-top: -6px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: .3s border-color, .3s background-color;
+}
+
+input[type="range"]::-moz-range-track {
+    width: 240px;
+    height: 2px;
+    background: rgba(0, 50, 126, 0.12);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 30, 75, 0.12);
+    position: relative;
+    transition: .3s border-color, .3s background-color;
+}
+
+input[type="range"]::-moz-range-progress {
+    height: 2px;
+    background: #467fcf;
+    border: 0;
+    margin-top: 0;
 }
 
 textarea{
@@ -356,41 +438,10 @@ progress::-webkit-progress-bar{
     background-color: #eee;
 }
 
-/* - 缤奇表单模组 */
-.ks-form label{
-    display: block;
-    cursor: pointer;
-    user-select: none;
-}
-
-.ks-form label:last-child{
-    margin-bottom: 0;
-}
-
-.ks-form label input{
-    display: inline-block;
-}
-
-.ks-form label.submit > input[type="text"]{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.ks-form label.submit > input[type="text"] + button{
-    vertical-align: middle;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.ks-form input{
-    display: block;
-    vertical-align: middle;
-}
-
-form textarea{ width: 100% }
+/* - 表单模组 */
 
 /* -- 单选多选框 */
-.ks-form input[type="checkbox"], .ks-form input[type="radio"]{
+input[type="checkbox"], input[type="radio"]{
     float: left;
     width: 1.5em;
     height: 1.5em;
@@ -401,18 +452,17 @@ form textarea{ width: 100% }
     -webkit-appearance: none;
 }
 
-.ks-form input[type="checkbox"]:before, .ks-form input[type="radio"]:before{
+input[type="checkbox"]:before, input[type="radio"]:before{
     content: '';
     width: 100%;
     height: 100%;
     display: block;
     border-radius: .2em;
-    border: 0 solid #3498db;
     box-shadow: 0 0 0 1px #ccc inset;
-    transition: border 0.3s, background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
 }
 
-.ks-form input[type="checkbox"]:after{
+input[type="checkbox"]:after{
     top: 10%;
     left: 10%;
     width: 30%;
@@ -426,27 +476,26 @@ form textarea{ width: 100% }
     transform: rotate(45deg) scale(0);
 }
 
-.ks-form input[type="radio"]:before{
-    border-radius: 100%;
-}
+input[type="radio"], input[type="radio"]:before{ border-radius: 100% }
+input[type="checkbox"], input[type="checkbox"]:before{ border-radius: .2em }
 
-.ks-form input[type="checkbox"]:checked:before{
-    box-shadow: none;
-    background: #3498db;
-}
-
-.ks-form input[type="checkbox"]:checked:after{
-    transform: rotate(45deg) scale(1);
-}
-
-.ks-form input[type="radio"]:checked:before{
+input[type="radio"]:checked:before{
     background: #3498db;
     border: 2px solid #3498db;
     box-shadow: 0 0 0 .2em #fff inset;
 }
 
+input[type="checkbox"]:checked:before{
+    box-shadow: none;
+    background: #3498db;
+}
+
+input[type="checkbox"]:checked:after{
+    transform: rotate(45deg) scale(1);
+}
+
 /* -- 开关按钮 */
-.ks-form input.switch{
+input.switch{
     width: 4em;
     height: 2em;
     float: none;
@@ -459,7 +508,7 @@ form textarea{ width: 100% }
     transition: border .3s, background .3s;
 }
 
-.ks-form input.switch:before{
+input.switch:before{
     margin: 0;
     border: 0;
     width: 2em;
@@ -473,17 +522,17 @@ form textarea{ width: 100% }
     transition: transform 0.3s;
 }
 
-.ks-form input.switch:after{
+input.switch:after{
     content: normal;
 }
 
-.ks-form input.switch:checked{
+input.switch:checked{
     box-shadow: none;
     background: #3498db;
     border-color: #3498db;
 }
 
-.ks-form input.switch:checked:before{
+input.switch:checked:before{
     background: #fff;
     transform: translateX(2em);
 }
@@ -495,17 +544,60 @@ fieldset{
 }
 
 fieldset > *{ margin-bottom: 1em }
-
 fieldset:last-child, fieldset > *:last-child{ margin-bottom: 0 }
 
+fieldset input, fieldset select, fieldset textarea{ width: 100% }
+
+/* -- 控件描述 */
+fieldset label{
+    display: block;
+    user-select: none;
+    margin-bottom: 1em;
+}
+fieldset label:last-child{ margin-bottom: 0 }
+
+/* -- 含按钮描述块 */
+fieldset label.submit{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+fieldset label.submit span{ flex: 0 0 100% }
+fieldset label.submit input{
+    width: auto;
+    flex: 1 1 auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+fieldset label.submit button{
+    vertical-align: middle;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+fieldset legend{ margin: 0 0 1em }
+fieldset select{ width: 100% }
+fieldset label span:first-child{
+    font-size: .85em;
+    margin-bottom: .5rem;
+    display: inline-block;
+    color: rgba(0, 0, 0, .6);
+}
+
+fieldset label.required span:after{
+    color: red;
+    content: "*";
+    margin-left: .25em;
+}
+
 /* -- 单行表单 */
-.ks-form.inline fieldset label, .ks-form fieldset.inline label{
+form.inline fieldset label, fieldset.inline label{
     float: left;
     display: block;
     margin: 0 1em .5em 0;
 }
 
-.ks-form fieldset.inline:after{
+form fieldset.inline:after{
     content: '';
     clear: both;
     display: block;
@@ -665,6 +757,24 @@ iframe{
 @media screen and (min-width: 1024px){
     .row [class*="col-l-"]{
         margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .row [class*="wrap-s"]{
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .row [class*="wrap-m"]{
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .row [class*="wrap-l"]{
+        margin-bottom: 1em;
     }
 }
 
@@ -1154,6 +1264,29 @@ iframe{
 @keyframes rotate{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
 @-webkit-keyframes rotate{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
 
+/* - 弹跳 */
+@keyframes jump{
+    0% {
+        transform: translateY(0) scale(1.15,.8)
+    }
+
+    20% {
+        transform: translateY(-35px) scaleY(1.1)
+    }
+
+    50% {
+        transform: translateY(-50px) scale(1)
+    }
+
+    80% {
+        transform: translateY(-35px) scale(1)
+    }
+
+    to {
+        transform: translateY(0) scale(1.15,.8)
+    }
+}
+
 /* 5 - 组件
 -------------------------------- */
 
@@ -1254,6 +1387,13 @@ iframe{
     z-index: 66;
     position: fixed;
     user-select: none;
+    animation: fade-in .3s both;
+    -webkit-animation: fade-in .3s both;
+}
+.ks-image.loading{ cursor: wait }
+.ks-image.remove:before{
+    animation: fade-off .3s both;
+    -webkit-animation: fade-off .3s both;
 }
 
 .ks-image:before{
@@ -1263,9 +1403,49 @@ iframe{
     bottom: 0;
     content: '';
     position: absolute;
-    animation: fade-in .5s both;
-    -webkit-animation: fade-in .5s both;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .6);
+}
+
+.ks-image .ks-prev, .ks-image .ks-next{
+    width: 10%;
+    height: 100%;
+    max-width: 5em;
+    cursor: pointer;
+    position: absolute;
+    transition: transform .3s;
+    animation: fade-small-large .3s backwards;
+    -webkit-animation: fade-small-large .3s backwards;
+}
+.ks-image .ks-prev:hover{ transform: translateX(-.5em) }
+.ks-image .ks-next:hover{ transform: translateX(.5em)  }
+
+.ks-image .ks-prev{
+    left: 0;
+    background: center/60% no-repeat url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIj48cGF0aCBkPSJNMzI0LjIxMTUxNyA1MTEuODA1NjMxIDc4Ny44ODk1OTQgNzMuMDgyNTgzYzE2LjE5NDIyLTE2LjYzMDM2NSAxNi4xOTQyMi00My45NzQ3MDQgMC02MC42MDUwNjgtMTYuMTk0MjItMTYuNjMwMzY1LTQyLjQ5NTYwNy0xNi42MzAzNjUtNTguNjEzOTc2IDBMMjM1Ljc1MDExMyA0NzkuMzYwMzAyYy04LjY0NzAzMSA4Ljk2OTM5OC0xMi4zNDQ3NzUgMjAuOTM0OTE3LTExLjcxOTAwMyAzMi40NDUzMjktMC42NDQ3MzUgMTEuOTA4NjMgMy4wNzE5NzIgMjMuODc0MTQ5IDExLjcxOTAwMyAzMi44MjQ1ODVsNDkzLjUwNjU0MiA0NjYuODgyNzg4YzE2LjExODM2OSAxNi42NDkzMjcgNDIuNDM4NzE4IDE2LjY0OTMyNyA1OC42MTM5NzYgMCAxNi4xOTQyMi0xNy4wODU0NzEgMTYuMTk0MjItNDMuOTc0NzA0IDAtNjAuNjA1MDY4TDMyNC4yMTE1MTcgNTExLjgwNTYzMSI+PC9wYXRoPjwvc3ZnPg==);
+}
+.ks-image .ks-next{
+    right: 0;
+    background: center/60% no-repeat url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC45KSI+PHBhdGggZD0iTTEzNi43LDEwMGwtOTAuNiw4NS44Yy0zLjIsMy4yLTMuMiw4LjUsMCwxMS44YzMuMiwzLjMsOC4zLDMuMywxMS40LDBsOTYuNC05MS4yYzEuNy0xLjcsMi40LTQuMSwyLjMtNi40YzAuMS0yLjItMC42LTQuNi0yLjMtNi4zTDU3LjYsMi40Yy0zLjEtMy4yLTguMy0zLjItMTEuNCwwcy0zLjIsOC42LDAsMTEuOEwxMzYuNywxMDAiLz48L3N2Zz4NCg==);
+}
+
+.ks-image .ks-ball{
+    top: 1em;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    opacity: 0;
+    border-radius: 66%;
+    position: absolute;
+    pointer-events: none;
+    transition: opacity .3s;
+    border: .5em #fff solid;
+    border-left-color: #3498db;
+    animation: rotate .5s linear infinite paused;
+    -webkit-animation: rotate .5s linear infinite paused;
+}
+.ks-image.loading .ks-ball{
+    opacity: 1;
+    animation-play-state: running;
 }
 
 .ks-image img{
@@ -1274,30 +1454,22 @@ iframe{
     right: 0;
     bottom: 0;
     margin: auto;
-    max-width: 90%;
+    max-width: 80%;
     max-height: 90%;
     cursor: zoom-out;
     position: absolute;
-    animation: fade-small-large .3s both;
-    -webkit-animation: fade-small-large .3s both;
+    animation: fade-small-large .3s backwards;
+    -webkit-animation: fade-small-large .3s backwards;
 }
-
-.ks-image.remove:before{
-    animation: fade-off .3s both;
-    -webkit-animation: fade-off .3s both;
-}
-
-.ks-image.remove img{
+.ks-image.remove img, .ks-image.remove .ks-prev, .ks-image.remove .ks-next{
     animation: fade-large-small .3s both;
     -webkit-animation: fade-large-small .3s both;
 }
 
-.ks-image img[src$=".jpg"]{
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-}
+.ks-image img[src$=".jpg"]{ box-shadow: 0 5px 15px rgba(0, 0, 0, .5) }
 
 /* ----
 
-:) Copyright (C) 2018 Binkic Team. Made With ♥ By Paul.
+Copyright (C) Dreamer-Paul.
 
 ---- */

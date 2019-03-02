@@ -1,8 +1,8 @@
 /* ----
 
-# Kico Style 2.0.2
+# Kico Style 2.2
 # By: Dreamer-Paul
-# Last Update: 2018.9.25
+# Last Update: 2019.2.17
 
 一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
 
@@ -11,18 +11,43 @@
 
 ---- */
 
+Array.prototype.remove = function (value) {
+    var index = this.indexOf(value);
+    if(index > -1) this.splice(index, 1);
+};
+
 function Kico_Style () {
     var kico = {};
     var that = this;
+
+    // 批量执行
+    this.forEach = function (data, fn) {
+        for(var i = 0; i < data.length; i++){
+            fn(data[i], i, data);
+        }
+    };
 
     // 对象创建
     this.create = function (tag, prop) {
         var obj = document.createElement(tag);
 
         if(prop){
+            if(prop.id)    obj.id = prop.id;
+            if(prop.href)  obj.href = prop.href;
             if(prop.class) obj.className = prop.class;
-            if(prop.text) obj.innerText = prop.text;
-            if(prop.html) obj.innerHTML = prop.html;
+            if(prop.text)  obj.innerText = prop.text;
+            if(prop.html)  obj.innerHTML = prop.html;
+
+            if(prop.child){
+                if(prop.child.constructor === Array){
+                    that.forEach(prop.child, function (i) {
+                        obj.appendChild(i);
+                    });
+                }
+                else{
+                    obj.appendChild(prop.child);
+                }
+            }
         }
 
         return obj;
@@ -122,47 +147,135 @@ function Kico_Style () {
     };
 
     // 图片缩放
-    kico.image_box = this.create("div", {class: "ks-image"});
-    kico.image_single = this.create("img");
-    kico.image_box.appendChild(kico.image_single);
+    kico.image_box = [];
+    kico.image_box.img = this.create("img");
+    kico.image_box.prev = this.create("div", {class: "ks-prev"});
+    kico.image_box.next = this.create("div", {class: "ks-next"});
+    kico.image_box.ball = this.create("div", {class: "ks-ball"});
+
+    kico.image_box.wrap = this.create("div", {class: "ks-image", child: [
+        kico.image_box.img, kico.image_box.prev, kico.image_box.next, kico.image_box.ball
+    ]});
 
     this.image = function (selector) {
-        var get_images = that.selectAll(selector);
+        var current = 0;
+        var get_images = this.selectAll(selector);
 
-        function item(obj) {
-            obj.setAttribute("ks-image", "active");
-            obj.onclick = function () {
-                if(obj.getAttribute("ks-original") !== null){
-                    kico.image_single.src = obj.getAttribute("ks-original");
-                }
-                else if(obj.src){
-                    kico.image_single.src = obj.src;
-                }
-
-                if (!document.querySelector("body > .ks-image")) {
-                    document.body.appendChild(kico.image_box);
-                }
-            };
-        }
-
-        for(var i = 0; i < get_images.length; i++){
-            if(get_images[i].src || get_images[i].getAttribute("ks-original")){
-                item(get_images[i]);
+        // 设置图片
+        function set_image(img) {
+            if(img.getAttribute("ks-original") !== null){
+                kico.image_box.img.src = img.getAttribute("ks-original");
             }
+            else if(img.src){
+                kico.image_box.img.src = img.src;
+            }
+
+            kico.image_box.wrap.classList.add("loading");
         }
 
-        kico.image_box.onclick = function () {
-            kico.image_box.classList.add("remove");
+        // 设置按钮
+        function set_buttons(c) {
+            function l(){
+                if(current - 1 >= 0) current--;
+
+                set_image(get_images[current]);
+            }
+
+            function r(){
+                if(current + 1 < get_images.length) current++;
+
+                set_image(get_images[current]);
+            }
+
+            kico.image_box.prev.onclick = l;
+            kico.image_box.next.onclick = r;
+        }
+
+        // 循环内单条设定
+        function set_item(obj, num) {
+            var scale = 1;
+            var locationX, locationY;
+
+            obj.setAttribute("ks-image", "active");
+
+            function single_click(){
+                current = num;
+                set_image(obj);
+                set_buttons(num);
+
+                if(!document.body.contains(kico.image_box.wrap)) {
+                    document.body.appendChild(kico.image_box.wrap);
+                }
+            }
+
+            obj.onclick = single_click;
+        }
+
+        this.forEach(get_images, function (i, j) {
+            if(i.src || i.getAttribute("ks-original")){
+                set_item(i, j);
+            }
+        });
+
+        kico.image_box.img.onclick = function () {
+            kico.image_box.wrap.classList.add("remove");
             setTimeout(function () {
                 try{
-                    document.body.removeChild(kico.image_box);
-                    kico.image_box.classList.remove("remove");
+                    document.body.removeChild(kico.image_box.wrap);
+                    kico.image_box.wrap.classList.remove("remove");
                 }
                 catch (err){}
             }, 300);
         };
+
+        kico.image_box.img.onload = function () {
+            kico.image_box.wrap.classList.remove("loading");
+        }
     };
 
+    // 图片懒加载
+    this.lazy = function (el, bg) {
+        var list = [];
+        el = ks.selectAll(el);
+
+        ks.forEach(el, function (item) {
+            var original = item.getAttribute("ks-original");
+
+            if(original) list.push({el: item, link: original, showed: false});
+        });
+
+        function back() {
+            ks.forEach(list, function (item) {
+                var img = new Image();
+                var check = item.el.getBoundingClientRect().top <= window.innerHeight;
+
+                if(check && !item.showed){
+                    img.src = item.link;
+
+                    img.onload = function () {
+                        list.remove(item);
+                        item.el.style.backgroundImage = "url(" + item.link + ")";
+                    };
+                }
+            });
+        }
+
+        function front() {
+            ks.forEach(list, function (item) {
+                var check = item.el.getBoundingClientRect().top <= window.innerHeight;
+
+                if(check && !item.showed){
+                    item.el.src = item.link;
+                    list.remove(item);
+                }
+            });
+        }
+
+        bg ? back() : front();
+        bg ? document.addEventListener("scroll", back) : document.addEventListener("scroll", front);
+    };
+
+    // AJAX 组件
     this.ajax = function (prop) {
         if(!prop.url){
             prop.url = document.location.origin + document.location.pathname;
@@ -213,6 +326,21 @@ function Kico_Style () {
                 }
             }
         };
+    };
+
+    // 返回页头
+    this.scrollTop = function () {
+        function to_top(){
+            if(window.scrollY !== 0){
+                window.scrollTo(0, window.scrollY * 0.9);
+                requestAnimationFrame(to_top);
+            }
+            else{
+                cancelAnimationFrame(this);
+            }
+        }
+
+        window.requestAnimationFrame(to_top);
     };
 
     // Show Version
