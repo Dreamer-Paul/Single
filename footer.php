@@ -49,9 +49,9 @@
 <?php endif; ?>
 <script>var single = new Paul_Single({copyNotice: <?php if($this -> options -> copy_notice == 1): ?>true<?php else: ?>false<?php endif; ?>, toggleNight: <?php if($this -> options -> night_mode == 1): ?>true<?php else: ?>false<?php endif; ?>});</script>
 <?php $this -> options -> custom_script(); ?>
-<!--<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.min.js"></script>
 <script>var scroll = new SmoothScroll('.to-top, .article-list a, .comment-content a', {offset: 100, easing: "easeOutQuint", updateURL: false, popstate: false});</script>
--->
+
 <?php $this -> footer(); ?>
 
 </body>
