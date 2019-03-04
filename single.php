@@ -8,13 +8,16 @@ class Single {
 
     // 更新检测
     static function update(){
-        $update = file_get_contents("https://api.paugram.com/update/?name=" . self::$name . "&current=" . self::$version . "&site=" . $_SERVER['HTTP_HOST'], false, stream_context_create(array(
-            "http" => array(
-                "method" => "GET",
-                "timeout" => 10
-            )
-        )));
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.paugram.com/update/?name=" . self::$name . "&current=" . self::$version . "&site=" . $_SERVER['HTTP_HOST']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+
+        $update = curl_exec($ch);
         $update = json_decode($update, true);
+
+        curl_close($ch);
 
         if(isset($update["name"])) self::$name = $update["name"];
 ?>
@@ -42,8 +45,8 @@ class Single {
 
     // 夜间模式
     static function is_night() {
-        if(!empty($_COOKIE["night"])){
-            if($_COOKIE["night"] == "true") echo ' class="neon"';
+        if(isset($_COOKIE["night"])){
+            echo $_COOKIE["night"] == "true" ?? ' class="neon"';
         }
     }
 
