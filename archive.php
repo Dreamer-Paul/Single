@@ -36,7 +36,7 @@
             <p>没有找到结果 (QWQ)</p>
 <?php endif; ?>
         </section>
-        <?php $this -> pageNav('&laquo;', '&raquo;'); ?>
+        <?php $this -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'section', 'itemTag' => 'span')); ?>
     </div>
 </main>
 

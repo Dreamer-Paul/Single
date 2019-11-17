@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2019.3.2
+# Last Update: 2019.11.17
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -14,10 +14,17 @@
 
 /* 0 - 全局
 -------------------------------- */
+:root{
+    --primary: #6f9fc7;
+    --secondary: #9fcff7;
+    --board-back: #fff;
+    --board-border: #ccc;
+}
+
 body{
     color: #555;
+    font-weight: 300;
     background: #fafafa;
-    font-weight: lighter;
     transition: margin .3s, background .3s;
 }
 
@@ -81,20 +88,12 @@ input, textarea, code, hr, blockquote{
     transition: border .3s, background .3s;
 }
 
-.auto-border{
-    border-color: #ccc !important;
-    transition: color .3s, border-color .3s;
-}
-
-body.neon .auto-border{
-    color: #aaa;
-    border-color: #555 !important;
-}
-
 /* - 夜间风格 */
 body.neon{
-    color: #999;
+    color: #aaa;
     background: #333;
+    --board-back: #444;
+    --board-border: #555;
 }
 
 body.neon::-webkit-scrollbar{
@@ -242,6 +241,7 @@ header{
 /* -- 电脑版 */
 @media screen and (min-width: 599px){
     .head-menu{
+        top: 0;
         left: 0;
         right: 0;
         position: absolute;
@@ -462,24 +462,17 @@ main img {
 
 /* - 换页 */
 .page-navigator{
-    margin-left: 0;
     cursor: default;
-    margin-top: 60px;
+    margin-top: 3em;
     font-size: 1.25em;
     text-align: center;
+    font-weight: normal;
     animation: fade-in-top .3s .7s both; -webkit-animation: fade-in-top .3s .7s both;
 }
 
-.page-navigator li{
-    font-weight: normal;
-    display: inline-block;
-}
+.page-navigator a{ padding: 0 .3em }
+.page-navigator .current a{ color: inherit }
 
-.page-navigator li.current a{ color: inherit }
-.page-navigator li a{
-    display: block;
-    padding: .25em .3em;
-}
 
 /* - 阅读页标题 */
 .post-title, .page-title{
@@ -662,11 +655,11 @@ article h1:before{ font-weight: bold }
 .article-list h4{ text-align: center }
 
 .article-list .title{
-    color: #555;
     padding: .25em 1em;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
     display: inline-block;
+    transition: border-color .3s;
+    border-top: 1px solid var(--board-border);
+    border-bottom: 1px solid var(--board-border);
 }
 
 .article-list a{
@@ -674,19 +667,19 @@ article h1:before{ font-weight: bold }
     margin-bottom: .5em;
 }
 
-.article-list a.item-2:before,
-.article-list a.item-3:before,
-.article-list a.item-4:before,
-.article-list a.item-5:before,
-.article-list a.item-6:before{
+.article-list .item-2:before,
+.article-list .item-3:before,
+.article-list .item-4:before,
+.article-list .item-5:before,
+.article-list .item-6:before{
     margin-right: .5em;
 }
 
-.article-list a.item-2:before{ content: "-" }
-.article-list a.item-3:before{ content: "--" }
-.article-list a.item-4:before{ content: "---" }
-.article-list a.item-5:before{ content: "----" }
-.article-list a.item-6:before{ content: "-----" }
+.article-list .item-2:before{ content: "-" }
+.article-list .item-3:before{ content: "--" }
+.article-list .item-4:before{ content: "---" }
+.article-list .item-5:before{ content: "----" }
+.article-list .item-6:before{ content: "-----" }
 
 @media screen and (min-width: 800px){
     body.has-trees{ margin-right: 15em }
@@ -724,7 +717,7 @@ article h1:before{ font-weight: bold }
     line-height: 1em;
 }
 
-.error-page img{ width: 400px }
+.error-page img{ max-width: 25em }
 
 /* 3 - 页尾
 -------------------------------- */
@@ -811,16 +804,6 @@ footer .sub-footer p{ font-size: .875em }
 
 /* 4 - 附加
 -------------------------------- */
-:not(pre) > code[class*="language-"]{
-    position: relative;
-    padding: .2em;
-    border-radius: 0.3em;
-    color: #c92c2c;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    display: inline;
-    white-space: normal;
-}
-
 .token.comment, .token.block-comment, .token.prolog, .token.doctype, .token.cdata{ color: #7D8B99 }
 .token.punctuation{ color: #5F6364 }
 .token.property, .token.tag, .token.boolean, .token.number, .token.function-name, .token.constant, .token.symbol, .token.deleted{ color: #c92c2c }

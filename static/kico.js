@@ -1,12 +1,11 @@
 /* ----
 
-# Kico Style 2.2
+# Kico Style 1.0
 # By: Dreamer-Paul
-# Last Update: 2019.2.17
+# Last Update: 2019.11.13
 
-一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
+一个可口的极简响应式前端框架。
 
-欢迎你加入缤奇，和我们一起改变世界。
 本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
 ---- */
@@ -16,19 +15,45 @@ Array.prototype.remove = function (value) {
     if(index > -1) this.splice(index, 1);
 };
 
-function Kico_Style () {
-    var kico = {};
-    var that = this;
+(function (global, setting) {
+    var KStyle = function (a, b) {
+        return KStyle.fn.init(a, b);
+    };
 
-    // 批量执行
-    this.forEach = function (data, fn) {
+    KStyle.fn = KStyle.prototype = {
+        construtor: KStyle,
+        init: function (a, b) {
+            a = KStyle.selectAll(a);
+
+            a.each = function (fn){
+                return KStyle.each(a, fn);
+            };
+
+            a.image = function () {
+                return KStyle.image(a);
+            };
+
+            a.lazy = function (bg) {
+                return KStyle.lazy(a, bg);
+            };
+
+            a.scrollTo = function (offset) {
+                return KStyle.scrollTo(a, offset);
+            };
+
+            return a;
+        }
+    };
+
+    // 批量处理
+    KStyle.each = function (data, fn) {
         for(var i = 0; i < data.length; i++){
             fn(data[i], i, data);
         }
     };
 
-    // 对象创建
-    this.create = function (tag, prop) {
+    // 创建对象
+    KStyle.create = function (tag, prop) {
         var obj = document.createElement(tag);
 
         if(prop){
@@ -40,7 +65,7 @@ function Kico_Style () {
 
             if(prop.child){
                 if(prop.child.constructor === Array){
-                    that.forEach(prop.child, function (i) {
+                    KStyle.each(prop.child, function (i) {
                         obj.appendChild(i);
                     });
                 }
@@ -48,257 +73,257 @@ function Kico_Style () {
                     obj.appendChild(prop.child);
                 }
             }
+
+            if(prop.parent) prop.parent.appendChild(obj);
         }
 
         return obj;
     };
 
-    // 对象选择
-    this.select = function (obj) {
-        if(typeof obj === 'object'){
-            return obj;
-        }
-        else if(typeof obj === 'string'){
-            return document.querySelector(obj);
+    // 选择对象
+    KStyle.select = function (obj) {
+        switch(typeof obj){
+            case "object": return obj; break;
+            case "string": return document.querySelector(obj); break;
         }
     };
 
-    this.selectAll = function (obj) {
-        if(typeof obj === 'object'){
-            return obj;
-        }
-        else if(typeof obj === 'string'){
-            return document.querySelectorAll(obj);
+    KStyle.selectAll = function (obj) {
+        switch(typeof obj){
+            case "object": return obj; break;
+            case "string": return document.querySelectorAll(obj); break;
         }
     };
 
     // 弹窗
-    kico.notice_list = this.create("div", {class: "ks-notice-list"});
+    var notice = {
+        wrap: KStyle.create("notice"),
+        list: []
+    };
 
-    this.notice = function (content, attr) {
-        var item = that.create("div", {class: "ks-notice"});
-        item.innerHTML += "<span class='content'>" + content + "</span>";
+    KStyle.notice = function (content, attr) {
+        var item = KStyle.create("div", {class: "ks-notice", html: "<span class='content'>" + content + "</span>", parent: notice.wrap});
 
-        kico.notice_list.appendChild(item);
+        notice.list.push(item);
 
-        if(!document.querySelector("body > .ks-notice-list")) document.body.appendChild(kico.notice_list);
+        if(!document.querySelector("body > notice")) document.body.appendChild(notice.wrap);
 
         if(attr && attr.time){
             setTimeout(notice_remove, attr.time);
         }
         else{
-            var close = this.create("span", {class: "close"});
+            var close = KStyle.create("span", {class: "close", parent: item});
 
-            close.addEventListener("click", function () {
-                notice_remove();
-            });
-
-            item.classList.add("dismiss");
-            item.appendChild(close);
+            close.onclick = notice_remove;
         }
 
-        if(attr && attr.color){item.classList.add(attr.color);}
+        if(attr && attr.color){
+            item.classList.add(attr.color);
+        }
 
         function notice_remove() {
             item.classList.add("remove");
+            notice.list.remove(item);
 
             setTimeout(function () {
                 try{
-                    kico.notice_list.removeChild(item);
+                    notice.wrap.removeChild(item);
                     item = null;
                 }
                 catch(err) {}
 
-                if(document.querySelector("body > .ks-notice-list") && kico.notice_list.childNodes.length === 0){
-                    document.body.removeChild(kico.notice_list);
+                if(document.querySelector("body > notice") && notice.list.length === 0){
+                    document.body.removeChild(notice.wrap);
                 }
             }, 300);
         }
     };
 
-    // 遮罩
-    kico.overlay = this.create("div", {class: "ks-overlay"});
-
-    this.overlay = function (attr) {
-        document.body.appendChild(kico.overlay);
-
-        if(attr && attr.time){
-            setTimeout(overlay_remove, attr.time);
-        }
-        else{
-            kico.overlay.onclick = function (){ overlay_remove() };
-        }
-
-        if(attr && attr.code){
-            kico.overlay.onclick = function (){ overlay_remove(); attr.code() }
-        }
-
-        function overlay_remove() {
-            kico.overlay.onclick = null;
-            kico.overlay.classList.add("remove");
-
-            setTimeout(function () {
-                if(document.querySelector("body > .ks-overlay")){
-                    kico.overlay.classList.remove("remove");
-                    document.body.removeChild(kico.overlay);
-                }
-            }, 300);
-        }
+    // 灯箱
+    var image_box = {
+        img: KStyle.create("img"),
+        prev: KStyle.create("div", {class: "ks-prev"}),
+        next: KStyle.create("div", {class: "ks-next"}),
+        ball: KStyle.create("div", {class: "ks-ball"})
     };
-
-    // 图片缩放
-    kico.image_box = [];
-    kico.image_box.img = this.create("img");
-    kico.image_box.prev = this.create("div", {class: "ks-prev"});
-    kico.image_box.next = this.create("div", {class: "ks-next"});
-    kico.image_box.ball = this.create("div", {class: "ks-ball"});
-
-    kico.image_box.wrap = this.create("div", {class: "ks-image", child: [
-        kico.image_box.img, kico.image_box.prev, kico.image_box.next, kico.image_box.ball
+    image_box.wrap = KStyle.create("div", {class: "ks-image", child: [
+        image_box.prev, image_box.img, image_box.next, image_box.ball
     ]});
-
-    this.image = function (selector) {
+    
+    KStyle.image = function (selector) {
         var current = 0;
-        var get_images = this.selectAll(selector);
+        var get_images = KStyle.selectAll(selector);
 
-        // 设置图片
-        function set_image(img) {
-            if(img.getAttribute("ks-original") !== null){
-                kico.image_box.img.src = img.getAttribute("ks-original");
-            }
-            else if(img.src){
-                kico.image_box.img.src = img.src;
-            }
+        var actions = {
+            ori: function (obj, num) {
+                obj.setAttribute("ks-image", "active");
 
-            kico.image_box.wrap.classList.add("loading");
-        }
+                obj.onclick = function () {
+                    current = num;
+                    actions.set();
+                    document.body.appendChild(image_box.wrap);
+                };
+            },
+            set: function () {
+                var img = get_images[current];
 
-        // 设置按钮
-        function set_buttons(c) {
-            function l(){
-                if(current - 1 >= 0) current--;
+                console.log("now is: " + current);
 
-                set_image(get_images[current]);
-            }
+                current === 0 ? image_box.prev.classList.add("ended") : image_box.prev.classList.remove("ended");
+                current === get_images.length - 1 ? image_box.next.classList.add("ended") : image_box.next.classList.remove("ended");
 
-            function r(){
-                if(current + 1 < get_images.length) current++;
-
-                set_image(get_images[current]);
-            }
-
-            kico.image_box.prev.onclick = l;
-            kico.image_box.next.onclick = r;
-        }
-
-        // 循环内单条设定
-        function set_item(obj, num) {
-            var scale = 1;
-            var locationX, locationY;
-
-            obj.setAttribute("ks-image", "active");
-
-            function single_click(){
-                current = num;
-                set_image(obj);
-                set_buttons(num);
-
-                if(!document.body.contains(kico.image_box.wrap)) {
-                    document.body.appendChild(kico.image_box.wrap);
+                if(img.getAttribute("ks-original") !== null){
+                    image_box.img.src = img.getAttribute("ks-original");
                 }
+                else if(img.src){
+                    image_box.img.src = img.src;
+                }
+                else{
+                    console.error("This image has no valid tag!");
+                }
+
+                image_box.wrap.classList.add("loading");
             }
+        };
 
-            obj.onclick = single_click;
-        }
-
-        this.forEach(get_images, function (i, j) {
-            if(i.src || i.getAttribute("ks-original")){
-                set_item(i, j);
+        KStyle.each(get_images, function (item, id) {
+            if(item.src || item.getAttribute("ks-original")){
+                actions.ori(item, id);
             }
         });
 
-        kico.image_box.img.onclick = function () {
-            kico.image_box.wrap.classList.add("remove");
+        // 设置图片
+        image_box.img.onclick = function () {
+            image_box.wrap.classList.add("remove");
             setTimeout(function () {
                 try{
-                    document.body.removeChild(kico.image_box.wrap);
-                    kico.image_box.wrap.classList.remove("remove");
+                    document.body.removeChild(image_box.wrap);
+                    image_box.wrap.classList.remove("remove");
                 }
                 catch (err){}
             }, 300);
         };
 
-        kico.image_box.img.onload = function () {
-            kico.image_box.wrap.classList.remove("loading");
-        }
+        image_box.img.onload = function () {
+            image_box.wrap.classList.remove("loading");
+        };
+
+        // 设置按钮
+        image_box.prev.onclick = function () {
+            if(current - 1 >= 0) current--;
+
+            actions.set();
+        };
+        image_box.next.onclick = function () {
+            console.log(get_images.length);
+            if(current + 1 < get_images.length) current++;
+
+            actions.set();
+        };
     };
 
-    // 图片懒加载
-    this.lazy = function (el, bg) {
+    // 懒加载
+    KStyle.lazy = function (elements, bg) {
+        //elements = Array.from(KStyle.selectAll(elements));
+        elements = KStyle.selectAll(elements);
+
         var list = [];
-        el = ks.selectAll(el);
 
-        ks.forEach(el, function (item) {
-            var original = item.getAttribute("ks-original");
-
-            if(original) list.push({el: item, link: original, showed: false});
-        });
-
-        function back() {
-            ks.forEach(list, function (item) {
-                var img = new Image();
-                var check = item.el.getBoundingClientRect().top <= window.innerHeight;
-
-                if(check && !item.showed){
-                    img.src = item.link;
+        var action = {
+            setFront: function (item) {
+                if(item.intersectionRatio > 0) {
+                    item.target.src = item.target.link;
+                    item.target.setAttribute("ks-lazy", "finished");
+                    obs.unobserve(item.target);
+                }
+            },
+            setBack: function (item) {
+                if(item.boundingClientRect.top <= window.innerHeight + 100) {
+                    var img = new Image();
+                    img.src = item.target.link;
 
                     img.onload = function () {
-                        list.remove(item);
-                        item.el.style.backgroundImage = "url(" + item.link + ")";
+                        item.target.setAttribute("ks-lazy", "finished");
+                        item.target.style.backgroundImage = "url(" + item.target.link + ")";
                     };
+
+                    obs.unobserve(item.target);
+                }
+            }
+        };
+
+        // 是否支持 OBS
+        if(global.IntersectionObserver){
+            var obs = new IntersectionObserver(function (changes) {
+                if (bg) {
+                    changes.forEach(function (t) {
+                        action.setBack(t);
+                    });
+                }
+                else {
+                    changes.forEach(function (t) {
+                        action.setFront(t);
+                    });
                 }
             });
+
+            KStyle.each(elements, function (item) {
+                item.link = item.getAttribute("ks-thumb") || item.getAttribute("ks-original");
+
+                if(!item.getAttribute("ks-lazy")) obs.observe(item);
+            })
         }
+        else{
+            function back() {
+                KStyle.each(list, function (item) {
+                    var check = item.el.getBoundingClientRect().top <= window.innerHeight;
 
-        function front() {
-            ks.forEach(list, function (item) {
-                var check = item.el.getBoundingClientRect().top <= window.innerHeight;
+                    if(check && !item.showed){
+                        action.setBack(item.el);
+                        list.remove(item);
+                    }
+                });
+            }
 
-                if(check && !item.showed){
-                    item.el.src = item.link;
-                    list.remove(item);
-                }
+            function front() {
+                KStyle.each(list, function (item) {
+                    var check = item.el.getBoundingClientRect().top <= window.innerHeight;
+
+                    if(check && !item.showed){
+                        action.setFront(item.el);
+                        list.remove(item);
+                    }
+                });
+            }
+
+            KStyle.each(elements, function (item) {
+                item.link = item.getAttribute("ks-thumb") || item.getAttribute("ks-original");
+
+                if(!item.getAttribute("ks-lazy")) list.push({el: item, link: item.link});
             });
-        }
 
-        bg ? back() : front();
-        bg ? document.addEventListener("scroll", back) : document.addEventListener("scroll", front);
+            bg ? back() : front();
+            bg ? document.addEventListener("scroll", back) : document.addEventListener("scroll", front);
+        }
     };
 
-    // AJAX 组件
-    this.ajax = function (prop) {
-        if(!prop.url){
-            prop.url = document.location.origin + document.location.pathname;
-        }
-
-        function test_crossDomain() {
-            var a = document.createElement("a");
-            a.href = window.location.hostname;
-            return a.hostname === prop.url ? true : false;
-        }
+    // AJAX
+    KStyle.ajax = function (prop) {
+        if(!prop.url) prop.url = document.location.href;
+        if(!prop.method) prop.method = "GET";
 
         if(prop.method === "POST"){
             var data = new FormData();
 
-            for(var pk in prop.data){
-                data.append(pk, prop.data[pk]);
+            for(var d in prop.data){
+                data.append(d, prop.data[d]);
             }
         }
         else if(prop.method === "GET"){
             var url = prop.url + "?";
 
-            for(var k in prop.data){
-                url += k + "=" + prop.data[k] + "&";
+            for(var d in prop.data){
+                url += d + "=" + prop.data[d] + "&";
             }
 
             prop.url = url.substr(0, url.length - 1);
@@ -319,32 +344,56 @@ function Kico_Style () {
         request.onreadystatechange = function () {
             if(request.readyState === 4){
                 if(request.status === 200 || request.status === 304){
-                    prop.success ? prop.success(request) : console.log(prop.method + " 请求发送成功");
+                    if(prop.type){
+                        switch(prop.type){
+                            case "text": prop.success(request.responseText); break;
+                            case "json": prop.success(JSON.parse(request.response)); break;
+                        }
+                    }
+                    else{
+                        prop.success ? prop.success(request) : console.log(prop.method + " 请求发送成功");
+                    }
                 }
                 else{
                     prop.failed ? prop.failed(request) : console.log(prop.method + " 请求发送失败");
                 }
+
+                request = null;
             }
         };
+
+        return request;
     };
 
-    // 返回页头
-    this.scrollTop = function () {
-        function to_top(){
-            if(window.scrollY !== 0){
-                window.scrollTo(0, window.scrollY * 0.9);
-                requestAnimationFrame(to_top);
-            }
-            else{
-                cancelAnimationFrame(this);
-            }
-        }
+    // 平滑滚动
+    KStyle.scrollTo = function (el, offset) {
+        el = KStyle.selectAll(el);
 
-        window.requestAnimationFrame(to_top);
+        el.forEach(function (t) {
+            t.onclick = function (e) {
+                var l = e.target.pathname;
+                var c = window.location.pathname;
+
+                var t = e.target.href.match(/#[\s\S]+/);
+                if(t) t = t[0];
+
+                t = ks.select(t);
+
+                if(c === l){
+                    e.preventDefault();
+
+                    var top = t ? (offset ? t.offsetTop - offset : t.offsetTop) : 0;
+
+                    "scrollBehavior" in document.documentElement.style ? global.scrollTo({top: top, left: 0, behavior: "smooth"}) : global.scrollTo(top, 0);
+                }
+                else{
+                    console.log(c, l);
+                }
+            }
+        })
     };
 
-    // Show Version
+    global.ks = KStyle;
+
     console.log("%c Kico Style %c https://paugram.com ","color: #fff; margin: 1em 0; padding: 5px 0; background: #3498db;","margin: 1em 0; padding: 5px 0; background: #efefef;");
-}
-
-var ks = new Kico_Style();
+})(window);

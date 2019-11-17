@@ -24,7 +24,7 @@
         <article class="post-content">
 <?php if(time() - $this -> modified >= 15552000): ?>
             <blockquote>这篇文章上次修改于 <?php echo ceil((time() - $this -> modified) / 86400) ?> 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
-<?php endif ?> 
+<?php endif ?>
             <?php $this -> content(); ?>
         </article>
         <section class="post-near">
@@ -33,7 +33,7 @@
                 <li>下一篇: <?php $this -> theNext('%s','看完啦 (つд⊂)'); ?></li>
             </ul>
         </section>
-<?php if($this->options->author_text): ?>
+<?php if($this -> options -> author_text): ?>
         <section class="post-author">
             <figure class="author-avatar">
                 <?php $this -> author -> gravatar(200); ?>

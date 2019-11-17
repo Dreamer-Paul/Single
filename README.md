@@ -27,9 +27,8 @@
 
 ## 感谢
 
-感谢来自开源社区提供的解决方案，如果没有它们，Single 可能还无法如此完善 ヽ(*≧ω≦)ﾉ
+感谢来自开源社区提供的解决方案，简化了本项目的不少工作！
 
  - [Kico Style](https://github.com/Dreamer-Paul/Kico-Style)
  - [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
- - [Smooth-Scroll](https://github.com/cferdinandi/smooth-scroll)
  - [Prism](https://github.com/PrismJS/prism)

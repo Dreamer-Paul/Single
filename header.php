@@ -14,13 +14,8 @@
 <?php else: ?>
     <link rel="icon" href="<?php $this -> options -> themeUrl('img/icon.png'); ?>" sizes="192x192"/>
 <?php endif; ?>
-<?php if($this -> options -> cdn_set == '0'): ?>
     <link href="<?php $this -> options -> themeUrl('static/kico.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this -> options -> themeUrl('static/single.css'); ?>" rel="stylesheet" type="text/css"/>
-<?php else: ?>
-    <link href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Single@<?php echo Single::$version; ?>/static/kico.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Single@<?php echo Single::$version; ?>/static/single.css" rel="stylesheet" type="text/css"/>
-<?php endif; ?>
     <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
 <?php if($this -> options -> background): ?>

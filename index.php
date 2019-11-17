@@ -5,7 +5,7 @@
  *
  * @package Single Theme
  * @author Dreamer-Paul
- * @version 2.0
+ * @version 2.1
  * @link https://paugram.com
  */
 
@@ -27,7 +27,7 @@ $this -> need('header.php');
 <?php endif; ?>
         </section>
         <section class="home-posts">
-<?php while($this -> next()): ?> 
+<?php while($this -> next()): ?>
             <div class="post-item">
                 <h2>
                     <a href="<?php $this -> permalink() ?>"><?php $this->title() ?></a>
@@ -49,7 +49,7 @@ $this -> need('header.php');
             </div>
             <?php endwhile; ?>
         </section>
-        <?php $this -> pageNav('&laquo;', '&raquo;'); ?>
+        <?php $this -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'section', 'itemTag' => 'span')); ?>
     </div>
 </main>
 

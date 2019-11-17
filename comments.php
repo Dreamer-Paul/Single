@@ -5,12 +5,12 @@
 function threadedComments($comments, $options, $single = "Dreamer-Paul") {
     $commentClass = '';
 
-	if($comments -> authorId == $comments -> ownerId){
-		$commentClass .= 'comment-by-author';
-	}
-	else{
-		$commentClass .= 'comment-by-user';
-	}
+    if($comments -> authorId == $comments -> ownerId){
+        $commentClass .= 'comment-by-author';
+    }
+    else{
+        $commentClass .= 'comment-by-user';
+    }
 
     $commentLevelClass = $comments -> levels > 0 ? ' comment-child' : '';
 
@@ -59,7 +59,7 @@ $comments -> content();
 <?php if($this -> user -> hasLogin()): ?>
             <fieldset>
                 <p>欢迎回来，<a href="<?php $this -> options -> profileUrl() ?>"><?php $this -> user -> screenName(); ?></a>！不是你？<a href="<?php $this -> options -> logoutUrl() ?>">登出</a></p>
-                <textarea rows="2" name="text" id="textarea" placeholder="快来评论吧 (*≧ω≦)ﾉ" required><?php $this -> remember('text'); ?></textarea>
+                <textarea rows="2" name="text" id="textarea" placeholder="快来评论支持吧 (*≧ω≦)ﾉ" title="如发布虚假信息或广告，将无法通过审核" required><?php $this -> remember('text'); ?></textarea>
                 <button type="submit" class="btn">写好了~</button>
             </fieldset>
 <?php else: ?>
@@ -83,7 +83,7 @@ $comments -> content();
 
 <?php if($comments -> have()): ?>
         <div class="comment-list"><?php $comments -> listComments(array('before' => '', 'after' => '', 'replyWord' => '<i class="fa fa-reply"></i>')); ?></div>
-        <?php $comments -> pageNav('&laquo;', '&raquo;'); ?>
+        <?php $comments -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'section', 'itemTag' => 'span')); ?>
 <?php endif; ?>
 
 </section>

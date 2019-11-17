@@ -2,7 +2,7 @@
 
 class Single {
     static $name = "Single";
-    static $version = "2.0";
+    static $version = "2.1";
 
     static $author = "", $authorCache = "";
 
@@ -46,7 +46,10 @@ class Single {
     // 夜间模式
     static function is_night() {
         if(isset($_COOKIE["night"])){
-            echo $_COOKIE["night"] == "true" ?? ' class="neon"';
+            echo $_COOKIE["night"] == "true" ? ' class="neon"' : '';
+        }
+        else if(Typecho_Widget::widget('Widget_Options') -> night_mode == 2){
+            echo ' class="neon"';
         }
     }
 
@@ -58,16 +61,16 @@ class Single {
             return $ts;
         }
         else if($dur < 60){
-            return $dur . ' 秒前';
+            return $dur . " 秒前";
         }
         else if($dur < 3600){
-            return floor($dur / 60) . ' 分钟前';
+            return floor($dur / 60) . " 分钟前";
         }
         else if($dur < 86400){
-            return floor($dur / 3600) . ' 小时前';
+            return floor($dur / 3600) . " 小时前";
         }
         else if($dur < 604800){
-            return floor($dur / 86400) . ' 天前';
+            return floor($dur / 86400) . " 天前";
         }
         else if($dur < 2592000){
             return floor($dur / 604800) . " 周前";

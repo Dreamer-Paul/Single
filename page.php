@@ -12,9 +12,7 @@
         <article class="page-content">
             <?php $this -> content(); ?>
         </article>
-
         <?php $this -> need('comments.php'); ?>
-
     </div>
 </main>
 

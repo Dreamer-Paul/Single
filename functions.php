@@ -23,7 +23,7 @@ function themeConfig($form) {
     $custom_css = new Typecho_Widget_Helper_Form_Element_Textarea('custom_css', NULL, NULL, _t('自定义样式表'), _t('在这里填入你的自定义样式表，不填则不输出。'));
     $form -> addInput($custom_css);
 
-    // 自定义统计代码
+    // 统计代码
     $custom_script = new Typecho_Widget_Helper_Form_Element_Textarea('custom_script', NULL, NULL, _t('统计代码'), _t('在这里填入你的统计代码，不填则不输出。需要 <a>&lt;script&gt;</a> 标签'));
     $form -> addInput($custom_script);
 
@@ -50,22 +50,13 @@ function themeConfig($form) {
     '1', _t('是否在复制内容的时候提示注意事项'), _t('开启则会在访客复制内容时弹窗'));
     $form -> addInput($copy_notice);
 
-    // 开启公共 CDN
-    $cdn_set = new Typecho_Widget_Helper_Form_Element_Radio('cdn_set',
-        array(
-            '0' => _t('关闭'),
-            '1' => _t('开启'),
-        ),
-    '0', _t('是否使用公共 CDN'), _t('使用 JSDelivr 的公共 CDN 服务，确保你的主题版本为最新'));
-    $form -> addInput($cdn_set);
-
     // 信息栏
     $widget_set = new Typecho_Widget_Helper_Form_Element_Radio('widget_set',
         array(
           '0' => _t('关闭'),
           '1' => _t('开启'),
         ),
-        '0', _t('是否显示信息栏'), _t('在页尾显示 “最近评论”、“最新文章” 和 “时光机”'));
+        '0', _t('是否显示信息栏'), _t('在页尾显示 “最新文章”、“最近评论” 和 “时光机”'));
     $form -> addInput($widget_set);
 
     // 首页、存档页属性显示
@@ -73,7 +64,8 @@ function themeConfig($form) {
         array(
             'show_category' => _t('文章分类'),
             'show_tags' => _t('文章标签'),
-            'show_comments' => _t('评论数')),
+            'show_comments' => _t('评论数')
+        ),
         array('show_category', 'show_comments'), _t('首页、存档页属性显示'));
     $form -> addInput($archive_meta -> multiMode());
 
@@ -83,7 +75,7 @@ function themeConfig($form) {
             'show_category' => _t('文章分类'),
             'show_tags' => _t('文章标签'),
             'show_comments' => _t('评论数')
-        ),    
+        ),
         array('show_category', 'show_comments'), _t('文章页属性显示'));
     $form -> addInput($post_meta -> multiMode());
 }

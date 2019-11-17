@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2019.3.2
+# Last Update: 2019.11.17
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -11,9 +11,8 @@
 ---- */
 
 var Paul_Single = function (config) {
-    var that = this;
     var body = document.body;
-    var content = ks.select(".post-content") || ks.select(".page-content");
+    var content = ks.select(".post-content:not(.is-special), .page-content:not(.is-special)");
 
     // 菜单按钮
     this.header = function () {
@@ -56,10 +55,10 @@ var Paul_Single = function (config) {
 
             var trees = ks.create("section", {
                 class: "article-list",
-                html: "<h4><span class=\"title auto-border\">目录</span></h4>"
+                html: "<h4><span class=\"title\">目录</span></h4>"
             });
 
-            ks.forEach(headings, function (t) {
+            ks.each(headings, function (t) {
                 var cls, text = t.innerText;
 
                 t.id = "title-" + id;
@@ -89,20 +88,24 @@ var Paul_Single = function (config) {
                 })
             }
             toggle_tree();
+
+            ks.scrollTo(".article-list a", 100);
         }
     };
 
     // 自动添加外链
     this.links = function () {
-        if(content.getElementsByTagName("a")){
-            ks.forEach(content, function (t) {
+        var l = content.getElementsByTagName("a");
+
+        if(l){
+            ks.each(l, function (t) {
                 t.target = "_blank";
             });
         }
     };
 
     this.comment_list = function () {
-        ks.forEach(ks.selectAll(".comment-content a"), function(t){
+        ks(".comment-content a").each(function (t) {
             var item = ks.select(t.getAttribute("href"));
 
             t.onmouseover = function () {
@@ -112,7 +115,7 @@ var Paul_Single = function (config) {
             t.onmouseout = function () {
                 item.classList.remove("active");
             };
-        })
+        });
     };
 
     // 返回页首
@@ -135,17 +138,17 @@ var Paul_Single = function (config) {
     window.addEventListener("scroll", this.to_top);
 
     // 如果开启自动夜间模式
-    if(config.toggleNight){
+    if(config.night){
         var hour = new Date().getHours();
 
-        if(document.cookie.search(/night/) === -1 && (hour <= 5 || hour >= 22)){
+        if(document.cookie.indexOf("night") === -1 && (hour <= 5 || hour >= 22)){
             document.body.classList.add("neon");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
     }
 
     // 如果开启复制内容提示
-    if(config.copyNotice){
+    if(config.copyright){
         document.oncopy = function () {
             ks.notice("复制内容请注明来源并保留版权信息！", {color: "yellow", overlay: true})
         };
@@ -153,7 +156,10 @@ var Paul_Single = function (config) {
 };
 
 // 图片缩放
-ks.image(".post-content img, .page-content img");
+ks.image(".post-content:not(.is-special) img, .page-content:not(.is-special) img");
+
+// 平滑滚动
+ks.scrollTo(".to-top");
 
 // 请保留版权说明
 if (window.console && window.console.log) {

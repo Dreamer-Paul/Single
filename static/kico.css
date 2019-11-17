@@ -2,13 +2,12 @@
 
 /* ----
 
-# Kico Style 2.2
+# Kico Style 1.0
 # By: Dreamer-Paul
-# Last Update: 2019.3.2
+# Last Update: 2019.11.13
 
-一个简洁、有趣的开源响应式框架，仅包含基础样式，需按照一定规则进行二次开发。
+一个可口的极简响应式前端框架。
 
-欢迎你加入缤奇，和我们一起改变世界。
 本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
 
 ---- */
@@ -24,8 +23,13 @@ fieldset, legend, figure{
     padding: 0;
 }
 
+*, *:before, *:after{ box-sizing: border-box }
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section{ display: block }
+
 html{
     color: #353535;
+    scroll-behavior: smooth;
     font: 16px/1.5 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
 }
 
@@ -33,18 +37,20 @@ html.font-s{ font-size: 14px }
 html.font-m{ font-size: 16px }
 html.font-l{ font-size: 18px }
 
-@media screen and (max-width: 500px){
+:root{
+    --red: #ea644a;
+    --yellow: #ffb03a;
+    --blue: #3498db;
+    --green: #27a17e;
+}
+
+@media screen and (max-width: 600px){
     html.font-auto{ font-size: 14px }
 }
 
-@media screen and (min-width: 1930px){
+@media screen and (min-width: 1921px){
     html.font-auto{ font-size: 18px }
 }
-
-*, *:before, *:after{ box-sizing: border-box }
-
-/* - 部分老式浏览器的更正 */
-aside, article, section, figure, figcaption, header, main, footer, nav{ display: block }
 
 /* - 选择内容 */
 ::-moz-selection{
@@ -67,28 +73,10 @@ aside, article, section, figure, figcaption, header, main, footer, nav{ display:
     background: #ccc;
     border-radius: 5px;
 }
+::-webkit-scrollbar-track{ border-radius: 5px }
+::-webkit-scrollbar-track:hover{ background: rgba(0, 0, 0, .05) }
 
-::-webkit-scrollbar-track:hover{
-    border-radius: 5px;
-    background: rgba(0, 0, 0, .05);
-}
-
-body::-webkit-scrollbar-thumb{
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-}
-
-body::-webkit-scrollbar-track:hover{
-    border-radius: 0;
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
-}
-
-.ks-scroll-hover::-webkit-scrollbar{
-    display: none;
-}
-
-.ks-scroll-hover:hover::-webkit-scrollbar{
-    display: inherit;
-}
+body::-webkit-scrollbar-track{ border-radius: 0 }
 
 /* 1 - 容器
 -------------------------------- */
@@ -110,6 +98,7 @@ body::-webkit-scrollbar-track:hover{
 .wrap.clear{
     padding-left: 0;
     padding-right: 0;
+    padding: auto 0;
 }
 
 .clearfix:after{
@@ -120,17 +109,11 @@ body::-webkit-scrollbar-track:hover{
 
 /* 2 - 元素
 -------------------------------- */
-h1{
-    font-size: 2em;
-}
+h1{ font-size: 2em }
 
-h1, h2, h3, h4, h5, h6{
-    margin-bottom: 1rem;
-}
+h1, h2, h3, h4, h5, h6{ margin-bottom: 1rem }
 
-h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, p:last-child{
-    margin-bottom: 0;
-}
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, p:last-child{ margin-bottom: 0 }
 
 p{
     line-height: 1.8;
@@ -142,9 +125,7 @@ a{
     text-decoration: none;
 }
 
-a:hover{
-    color: #ffc670;
-}
+a:hover{ color: #ffc670 }
 
 abbr[title]{
     cursor: help;
@@ -153,9 +134,9 @@ abbr[title]{
 }
 
 em, mark, kbd{
-    padding: 0 .5em;
+    font-size: .85em;
+    padding: .25em .5em;
     border-radius: .5em;
-    display: inline-block;
 }
 
 em{
@@ -163,10 +144,13 @@ em{
     font-style: normal;
     background: #3498db;
 }
+em.red{ background: var(--red) }
+em.yellow{ background: var(--yellow) }
+em.blue{ background: var(--blue) }
+em.green{ background: var(--green) }
 
 kbd{
     color: #fff;
-    font-size: 90%;
     background: #333;
     font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
 }
@@ -176,8 +160,13 @@ img, svg, audio, video{
     vertical-align: middle;
 }
 
+audio, video{ outline: none }
+
 /* - 文章 */
-article{ word-break: break-all }
+article{
+    word-break: break-all;
+    letter-spacing: .03em;
+}
 
 article > *{ margin-bottom: 1em }
 article > *:last-child{ margin-bottom: 0 }
@@ -185,16 +174,20 @@ article > *:last-child{ margin-bottom: 0 }
 article h1, article h2, article h3{ font-size: 1.2em }
 article h4, article h5, article h6{ font-size: 1.1em }
 
+article ul, article ol, article dl{ line-height: 1.8 }
+
 /* - 按钮 */
-.btn{
+button{
     outline: 0;
     font: inherit;
+}
+
+.btn{
     color: inherit;
     cursor: pointer;
     background: #fff;
-    user-select: none;
-    border-radius: 4px;
     padding: .5em 1em;
+    border-radius: 4px;
     display: inline-block;
     border: 1px solid transparent;
 }
@@ -207,45 +200,42 @@ article h4, article h5, article h6{ font-size: 1.1em }
 }
 
 /* -- 有图标的按钮 */
-.btn i{ margin-right: 5px }
-.btn i:last-child{ margin-right: 0 }
+.btn i{ margin-right: .5em }
 
 /* -- 按钮尺寸 */
-.btn.small{
-    padding: .25em .5em;
-}
-
-.btn.middle{
-    padding: .75em 1.5em;
-}
-
-.btn.large{
-    font-size: 1.2em;
-    padding: 1em 2em;
-}
+.btn.small{ font-size: .85em }
+.btn.middle, .btn.large{ padding: .75em 1.5em }
+.btn.large{ font-size: 1.2em }
 
 /* -- 按钮颜色 */
 .btn.red, .btn.yellow, .btn.blue, .btn.green{ color: #fff }
 
-.btn.red{ background: #c40b00 }
-.btn.yellow{ background: #ffb03a }
-.btn.blue{ background: #3498db }
-.btn.green{ background: #27a17e }
+.btn.red{
+    background: #ea644a;
+    background: var(--red);
+}
+.btn.yellow{
+    background: #ffb03a;
+    background: var(--yellow);
+}
+.btn.blue{
+    background: #3498db;
+    background: var(--blue);
+}
+.btn.green{
+    background: #27a17e;
+    background: var(--green);
+}
 .btn.transparent{ background: transparent }
 
 /* - 代码 */
-pre, code{
-    font-size: 1em;
-    font-family: 'Consolas', 'Courier New', monospace, "微软雅黑";
-}
+pre, code{ font-family: 'Consolas', 'Courier New', monospace, "微软雅黑" }
 
-pre{ word-wrap: normal }
-
-code{
+:not(pre) > code{
     color: #c40b00;
-    font-size: 90%;
+    font-size: 85%;
     word-wrap: normal;
-    border-radius: 4px;
+    border-radius: .5em;
     padding: .25em .5em;
     word-break: break-all;
     background-color: #f7f2f4;
@@ -253,6 +243,7 @@ code{
 
 pre > code{
     color: #fff;
+    tab-size: 4;
     padding: 1em;
     display: block;
     overflow-x: auto;
@@ -624,17 +615,9 @@ table th, table td{
     vertical-align: top;
 }
 
-table > thead > tr{
-    border-bottom: 2px solid #ccc;
-}
-
-table > tbody > tr > td{
-    border-bottom: 1px solid #ddd;
-}
-
-table > tbody > tr:last-child > td{
-    border-bottom: 0;
-}
+table > thead > tr{ border-bottom: 2px solid #ccc }
+table > tbody > tr{ border-bottom: 1px solid #ddd }
+table > tbody > tr:last-child{ border-bottom: 0 }
 
 table > tbody > tr{
     transition: background .3s;
@@ -685,19 +668,14 @@ iframe{
 .row{
     display: flex;
     flex-wrap: wrap;
-    margin-left: -1.25em;
-    margin-right: -1.25em;
+    margin: 0 -1em -2em;
 }
 
-.row.thin{
-    margin-left: -1em;
-    margin-right: -1em;
-}
-
-.row.full{
-    margin-left: 0;
-    margin-right: 0;
-}
+.row.s{ margin: 0 -.5em -1em }
+.row.m{ margin: 0 -1.25em -2.5em }
+.row.l{ margin: 0 -1.5em -3em }
+.row.full{ margin: 0 }
+.row.clear{ margin-bottom: 0 }
 
 .row.scrollable{
     overflow: auto;
@@ -714,70 +692,30 @@ iframe{
 
 /* -- 网格间距 */
 .row [class*="col-"]{
-    position: relative;
-    padding-left: 1.25em;
-    padding-right: 1.25em;
+    flex: 0 0 100%;
+    padding: 0 1em;
+    max-width: 100%;
+    margin-bottom: 2em;
 }
 
-.row.thin [class*="col-"]{
-    padding-left: 1em;
-    padding-right: 1em;
+.row.s [class*="col-"]{
+    padding: 0 .5em;
+    margin-bottom: 1em;
 }
-
+.row.m [class*="col-"]{
+    padding: 0 1.25em;
+    margin-bottom: 2.5em;
+}
+.row.l [class*="col-"]{
+    padding: 0 1.5em;
+    margin-bottom: 3em;
+}
 .row.full [class*="col-"]{
     padding: 0;
     margin-bottom: 0;
 }
 
 /* -- 网格主体 */
-.row [class*="col-s-"],
-.row [class*="col-m-"],
-.row [class*="col-l-"]{
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 2em;
-}
-
-.row [class*="col-s-"]:last-child, .row [class*="col-m-"]:last-child, .row [class*="col-l-"]:last-child{
-    margin-bottom: 0;
-}
-
-@media screen and (min-width: 600px){
-    .row [class*="col-s-"]{
-        margin-bottom: 0;
-    }
-}
-
-@media screen and (min-width: 900px){
-    .row [class*="col-m-"]{
-        margin-bottom: 0;
-    }
-}
-
-@media screen and (min-width: 1024px){
-    .row [class*="col-l-"]{
-        margin-bottom: 0;
-    }
-}
-
-@media screen and (max-width: 600px){
-    .row [class*="wrap-s"]{
-        margin-bottom: 1em;
-    }
-}
-
-@media screen and (max-width: 900px){
-    .row [class*="wrap-m"]{
-        margin-bottom: 1em;
-    }
-}
-
-@media screen and (min-width: 1024px){
-    .row [class*="wrap-l"]{
-        margin-bottom: 1em;
-    }
-}
-
 @media screen and (min-width: 600px){
     .col-s-left-1{ right: 8.3333%; }
     .col-s-left-2{ right: 16.6666%; }
@@ -864,73 +802,61 @@ iframe{
 
 /* --- 固定的 */
 .row .col-1{
-    -ms-flex: 0 0 8.3333%;
     flex: 0 0 8.3333%;
     max-width: 8.3333%;
 }
 
 .row .col-2{
-    -ms-flex: 0 0 16.6666%;
     flex: 0 0 16.6666%;
     max-width: 16.6666%;
 }
 
 .row .col-3{
-    -ms-flex: 0 0 25%;
     flex: 0 0 25%;
     max-width: 25%;
 }
 
 .row .col-4{
-    -ms-flex: 0 0 33.3333%;
     flex: 0 0 33.3333%;
     max-width: 33.3333%;
 }
 
 .row .col-5{
-    -ms-flex: 0 0 41.3333%;
     flex: 0 0 41.6666%;
     max-width: 41.6666%;
 }
 
 .row .col-6{
-    -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%;
 }
 
 .row .col-7{
-    -ms-flex: 0 0 58.3333%;
     flex: 0 0 58.3333%;
     max-width: 58.3333%;
 }
 
 .row .col-8{
-    -ms-flex: 0 0 66.6666%;
     flex: 0 0 66.6666%;
     max-width: 66.6666%;
 }
 
 .row .col-9{
-    -ms-flex: 0 0 75%;
     flex: 0 0 75%;
     max-width: 75%;
 }
 
 .row .col-10{
-    -ms-flex: 0 0 83.3333%;
     flex: 0 0 83.3333%;
     max-width: 83.3333%;
 }
 
 .row .col-11{
-    -ms-flex: 0 0 91.6666%;
     flex: 0 0 91.6666%;
     max-width: 91.6666%;
 }
 
 .row .col-12{
-    -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
 }
@@ -938,73 +864,61 @@ iframe{
 /* --- 手机 */
 @media screen and (min-width: 600px){
     .row .col-s-1{
-        -ms-flex: 0 0 8.3333%;
         flex: 0 0 8.3333%;
         max-width: 8.3333%;
     }
 
     .row .col-s-2{
-        -ms-flex: 0 0 16.6666%;
         flex: 0 0 16.6666%;
         max-width: 16.6666%;
     }
 
     .row .col-s-3{
-        -ms-flex: 0 0 25%;
         flex: 0 0 25%;
         max-width: 25%;
     }
 
     .row .col-s-4{
-        -ms-flex: 0 0 33.3333%;
         flex: 0 0 33.3333%;
         max-width: 33.3333%;
     }
 
     .row .col-s-5{
-        -ms-flex: 0 0 41.3333%;
         flex: 0 0 41.6666%;
         max-width: 41.6666%;
     }
 
     .row .col-s-6{
-        -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
     }
 
     .row .col-s-7{
-        -ms-flex: 0 0 58.3333%;
         flex: 0 0 58.3333%;
         max-width: 58.3333%;
     }
 
     .row .col-s-8{
-        -ms-flex: 0 0 66.6666%;
         flex: 0 0 66.6666%;
         max-width: 66.6666%;
     }
 
     .row .col-s-9{
-        -ms-flex: 0 0 75%;
         flex: 0 0 75%;
         max-width: 75%;
     }
 
     .row .col-s-10{
-        -ms-flex: 0 0 83.3333%;
         flex: 0 0 83.3333%;
         max-width: 83.3333%;
     }
 
     .row .col-s-11{
-        -ms-flex: 0 0 91.6666%;
         flex: 0 0 91.6666%;
         max-width: 91.6666%;
     }
 
     .row .col-s-12{
-        -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -1013,73 +927,61 @@ iframe{
 /* --- 平板 */
 @media screen and (min-width: 900px){
     .row .col-m-1{
-        -ms-flex: 0 0 8.3333%;
         flex: 0 0 8.3333%;
         max-width: 8.3333%;
     }
 
     .row .col-m-2{
-        -ms-flex: 0 0 16.6666%;
         flex: 0 0 16.6666%;
         max-width: 16.6666%;
     }
 
     .row .col-m-3{
-        -ms-flex: 0 0 25%;
         flex: 0 0 25%;
         max-width: 25%;
     }
 
     .row .col-m-4{
-        -ms-flex: 0 0 33.3333%;
         flex: 0 0 33.3333%;
         max-width: 33.3333%;
     }
 
     .row .col-m-5{
-        -ms-flex: 0 0 41.3333%;
         flex: 0 0 41.6666%;
         max-width: 41.6666%;
     }
 
     .row .col-m-6{
-        -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
     }
 
     .row .col-m-7{
-        -ms-flex: 0 0 58.3333%;
         flex: 0 0 58.3333%;
         max-width: 58.3333%;
     }
 
     .row .col-m-8{
-        -ms-flex: 0 0 66.6666%;
         flex: 0 0 66.6666%;
         max-width: 66.6666%;
     }
 
     .row .col-m-9{
-        -ms-flex: 0 0 75%;
         flex: 0 0 75%;
         max-width: 75%;
     }
 
     .row .col-m-10{
-        -ms-flex: 0 0 83.3333%;
         flex: 0 0 83.3333%;
         max-width: 83.3333%;
     }
 
     .row .col-m-11{
-        -ms-flex: 0 0 91.6666%;
         flex: 0 0 91.6666%;
         max-width: 91.6666%;
     }
 
     .row .col-m-12{
-        -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -1088,73 +990,61 @@ iframe{
 /* --- 电脑 */
 @media screen and (min-width: 1024px){
     .row .col-l-1{
-        -ms-flex: 0 0 8.3333%;
         flex: 0 0 8.3333%;
         max-width: 8.3333%;
     }
 
     .row .col-l-2{
-        -ms-flex: 0 0 16.6666%;
         flex: 0 0 16.6666%;
         max-width: 16.6666%;
     }
 
     .row .col-l-3{
-        -ms-flex: 0 0 25%;
         flex: 0 0 25%;
         max-width: 25%;
     }
 
     .row .col-l-4{
-        -ms-flex: 0 0 33.3333%;
         flex: 0 0 33.3333%;
         max-width: 33.3333%;
     }
 
     .row .col-l-5{
-        -ms-flex: 0 0 41.3333%;
         flex: 0 0 41.6666%;
         max-width: 41.6666%;
     }
 
     .row .col-l-6{
-        -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
     }
 
     .row .col-l-7{
-        -ms-flex: 0 0 58.3333%;
         flex: 0 0 58.3333%;
         max-width: 58.3333%;
     }
 
     .row .col-l-8{
-        -ms-flex: 0 0 66.6666%;
         flex: 0 0 66.6666%;
         max-width: 66.6666%;
     }
 
     .row .col-l-9{
-        -ms-flex: 0 0 75%;
         flex: 0 0 75%;
         max-width: 75%;
     }
 
     .row .col-l-10{
-        -ms-flex: 0 0 83.3333%;
         flex: 0 0 83.3333%;
         max-width: 83.3333%;
     }
 
     .row .col-l-11{
-        -ms-flex: 0 0 91.6666%;
         flex: 0 0 91.6666%;
         max-width: 91.6666%;
     }
 
     .row .col-l-12{
-        -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -1290,12 +1180,82 @@ iframe{
 /* 5 - 组件
 -------------------------------- */
 
+[ks-tag]{ position: relative }
+[ks-tag]:before, [ks-tag]:after{ position: absolute }
+
+[ks-tag]:before{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    content: '';
+    position: absolute;
+    transition: opacity .3s;
+    border: .5rem solid transparent;
+}
+
+[ks-tag~=top]:after{
+    left: 50%;
+    bottom: 100%;
+    margin-bottom: 1rem;
+    transform: translateX(-50%);
+}
+[ks-tag~=bottom]:after{
+    top: 100%;
+    left: 50%;
+    margin-top: 1rem;
+    transform: translateX(-50%);
+}
+[ks-tag~=left]:after{
+    right: 100%;
+    margin-right: 1rem;
+}
+[ks-tag~=right]:after{
+    left: 100%;
+    margin-left: 1rem;
+}
+
+[ks-tag=top]:before{
+    bottom: 100%;
+    border-top-color: rgba(0, 0, 0, .7);
+}
+
+[ks-tag=bottom]:before{
+    top: 100%;
+    border-bottom-color: rgba(0, 0, 0, .7);
+}
+[ks-tag=left]:before{
+    right: 100%;
+    margin-top: .5rem;
+    border-left-color: rgba(0, 0, 0, .7);
+}
+[ks-tag=right]:before{
+    left: 100%;
+    margin-top: .5rem;
+    border-right-color: rgba(0, 0, 0, .7);
+}
+
+[ks-text]:hover:before, [ks-text]:hover:after{ opacity: 1 }
+
+[ks-text]:after{
+    opacity: 0;
+    color: #fff;
+    font-size: .85em;
+    padding: .25rem .5rem;
+    border-radius: .5em;
+    white-space: nowrap;
+    pointer-events: none;
+    content: attr(ks-text);
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, .7);
+}
+
 /* - 弹窗 */
-.ks-notice-list{
-    top: 2em;
+notice{
+    top: 0;
     left: 0;
     right: 0;
-    z-index: 60;
+    z-index: 10;
+    padding: 1em;
     position: fixed;
     user-select: none;
     pointer-events: none;
@@ -1321,56 +1281,43 @@ iframe{
 /* -- 弹窗颜色 */
 .ks-notice.red{
     background: #ea644a;
+    background: var(--red);
 }
 
 .ks-notice.yellow{
-    background: #f1a325;
+    background: #ffb03a;
+    background: var(--yellow);
 }
 
 .ks-notice.blue{
     background: #3498db;
+    background: var(--blue);
 }
 
 .ks-notice.green{
-    background: #38b03f;
+    background: #27a17e;
+    background: var(--green);
 }
 
-.ks-notice .content, .ks-notice.dismiss .close{
+.ks-notice > span{
     padding: .5em 1em;
     display: table-cell;
+    vertical-align: middle;
 }
 
-.ks-notice.dismiss .close{
+.ks-notice .close{
     cursor: pointer;
     border-radius: 0 1em 1em 0;
     transition: background .3s;
 }
 
-.ks-notice.dismiss .close:hover{
+.ks-notice .close:hover{
     background: rgba(0, 0, 0, .1);
 }
 
-.ks-notice.dismiss .close:after{
+.ks-notice .close:after{
     content: '×';
     font: inherit;
-}
-
-/* - 遮罩 */
-.ks-overlay{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 50;
-    position: fixed;
-    animation: fade-in .5s both;
-    -webkit-animation: fade-in .5s both;
-    background: rgba(0, 0, 0, .5);
-}
-
-.ks-overlay.remove{
-    animation: fade-off .5s both;
-    -webkit-animation: fade-off .5s both;
 }
 
 /* - 图片放大 */
@@ -1407,14 +1354,15 @@ iframe{
 }
 
 .ks-image .ks-prev, .ks-image .ks-next{
+    top: 0;
+    bottom: 0;
     width: 10%;
-    height: 100%;
+    height: 5em;
+    margin: auto;
     max-width: 5em;
     cursor: pointer;
     position: absolute;
-    transition: transform .3s;
-    animation: fade-small-large .3s backwards;
-    -webkit-animation: fade-small-large .3s backwards;
+    transition: opacity .3s, transform .3s;
 }
 .ks-image .ks-prev:hover{ transform: translateX(-.5em) }
 .ks-image .ks-next:hover{ transform: translateX(.5em)  }
@@ -1426,6 +1374,11 @@ iframe{
 .ks-image .ks-next{
     right: 0;
     background: center/60% no-repeat url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC45KSI+PHBhdGggZD0iTTEzNi43LDEwMGwtOTAuNiw4NS44Yy0zLjIsMy4yLTMuMiw4LjUsMCwxMS44YzMuMiwzLjMsOC4zLDMuMywxMS40LDBsOTYuNC05MS4yYzEuNy0xLjcsMi40LTQuMSwyLjMtNi40YzAuMS0yLjItMC42LTQuNi0yLjMtNi4zTDU3LjYsMi40Yy0zLjEtMy4yLTguMy0zLjItMTEuNCwwcy0zLjIsOC42LDAsMTEuOEwxMzYuNywxMDAiLz48L3N2Zz4NCg==);
+}
+
+.ks-image .ended{
+    opacity: .5;
+    cursor: no-drop;
 }
 
 .ks-image .ks-ball{
@@ -1458,6 +1411,7 @@ iframe{
     max-height: 90%;
     cursor: zoom-out;
     position: absolute;
+    transition: transform .3s;
     animation: fade-small-large .3s backwards;
     -webkit-animation: fade-small-large .3s backwards;
 }
@@ -1470,6 +1424,6 @@ iframe{
 
 /* ----
 
-Copyright (C) Dreamer-Paul.
+Copyright (C) 2019 Dreamer-Paul.
 
 ---- */
