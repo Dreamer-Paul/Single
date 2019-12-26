@@ -1,15 +1,11 @@
 @charset "UTF-8";
 
 /* ----
-
 # Single Theme
 # By: Dreamer-Paul
 # Last Update: 2019.11.17
-
 一个简洁大气，含夜间模式的 Typecho 博客模板。
-
 本代码为奇趣保罗原创，并遵守 MIT 开源协议。欢迎访问我的博客：https://paugram.com
-
 ---- */
 
 /* 0 - 全局
@@ -155,6 +151,78 @@ body.neon header a:hover{ color: #ddd }
 
 @media screen and (max-width: 600px){
     body.neon .head-menu .sub-menu{ background: none }
+}
+
+/* toggle style with system */
+@media (prefers-color-scheme: dark) {
+    body{
+        color: #aaa;
+        background: #333;
+        --board-back: #444;
+        --board-border: #555;
+    }
+    
+    body::-webkit-scrollbar{
+        border-color: transparent;
+        background: rgba(255, 255, 255, .2);
+    }
+    
+    body a{ color: #c9861d }
+    body a:hover{ color: #eb9c26 }
+    
+    body img{
+        filter: brightness(60%);
+        -webkit-filter: brightness(60%);
+    }
+    
+    body blockquote{
+        color: #c9861d;
+        border-color: #eb9c26;
+        background: rgba(255, 255, 255, .05);
+    }
+    
+    /* -- 边框 */
+    body header, body .head-menu .sub-menu, body main .article-list,
+    body .post-item h2 a, body .post-title, body .page-title, body .post-author,
+    body tr, body hr, body pre code, body input, body textarea, body .btn, body .toggle-list,
+    body footer, body .to-top{ border-color: #555 }
+    
+    /* -- 透明 */
+    body iframe, body em{ opacity: .6 }
+    
+    /* -- 颜色 */
+    body .btn{ color: inherit }
+    
+    /* -- 背景 */
+    body input, body textarea, body .btn, body .to-top, body .toggle-list{ background: #444 }
+    
+    /* -- 头部 */
+    body header, body .head-menu .sub-menu, body .head-menu .sub-menu:before{
+        color: #aaa;
+        background: #444;
+    }
+    body .head-menu .sub-menu:before{
+        border-color: #555 #555 transparent transparent;
+    }
+    
+    body :not(pre) > code{
+        color: #ffa5a5;
+        background: rgba(255, 255, 255, .2);
+    }
+    
+    body .head-search input{
+        background: #666;
+        border-color: transparent;
+    }
+    body .head-search input::-webkit-input-placeholder{ color: #bbb }
+    
+    body header a{ color: #aaa }
+    body header a:hover{ color: #ddd }
+    
+    @media screen and (max-width: 600px){
+        body .head-menu .sub-menu{ background: none }
+    }
+    
 }
 
 /* 1 - 页眉
@@ -693,6 +761,11 @@ article h1:before{ font-weight: bold }
         border-left: 1px solid #ccc;
     }
 }
+
+@media (min-width: 800px) and (prefers-color-scheme: dark) {
+    body .article-list{ background: rgba(0, 0, 0, .1) }
+}
+
 @media screen and (max-width: 799px){
     body.neon .article-list{ background: #444 }
 
@@ -704,6 +777,10 @@ article h1:before{ font-weight: bold }
         transform: translateY(100%);
         border-top: 1px solid #ccc;
     }
+}
+
+@media (max-width: 799px) and (prefers-color-scheme: dark) {
+    body .article-list{ background: #444 }
 }
 
 /* - 错误页面 */
