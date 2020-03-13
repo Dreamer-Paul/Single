@@ -11,7 +11,8 @@
 
 ## 主题故事
 
-详见我的博文：[Single 主题与单身狗](https://paugram.com/essay/single-theme-and-single-dog.html)
+- 开发历程：[Single 主题与单身狗](https://paugram.com/essay/single-theme-and-single-dog.html)
+- 帮助文档 & 常见问题：[传送门](https://docs.paul.ren/single)
 
 ## 主题亮点
 

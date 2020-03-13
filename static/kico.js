@@ -2,7 +2,7 @@
 
 # Kico Style 1.0
 # By: Dreamer-Paul
-# Last Update: 2019.11.13
+# Last Update: 2020.02.10
 
 一个可口的极简响应式前端框架。
 
@@ -58,6 +58,7 @@ Array.prototype.remove = function (value) {
 
         if(prop){
             if(prop.id)    obj.id = prop.id;
+            if(prop.src)   obj.src = prop.src;
             if(prop.href)  obj.href = prop.href;
             if(prop.class) obj.className = prop.class;
             if(prop.text)  obj.innerText = prop.text;
@@ -65,12 +66,23 @@ Array.prototype.remove = function (value) {
 
             if(prop.child){
                 if(prop.child.constructor === Array){
-                    KStyle.each(prop.child, function (i) {
+                    KStyle.each(prop.child, (i) => {
                         obj.appendChild(i);
                     });
                 }
                 else{
                     obj.appendChild(prop.child);
+                }
+            }
+
+            if(prop.attr){
+                if(prop.attr.constructor === Array){
+                    KStyle.each(prop.attr, (i) => {
+                        obj.setAttribute(i.name, i.value);
+                    });
+                }
+                else if(prop.attr.constructor === Object){
+                    obj.setAttribute(prop.attr.name, prop.attr.value);
                 }
             }
 
@@ -149,7 +161,22 @@ Array.prototype.remove = function (value) {
     image_box.wrap = KStyle.create("div", {class: "ks-image", child: [
         image_box.prev, image_box.img, image_box.next, image_box.ball
     ]});
-    
+
+    image_box.wrap.onclick = function (e) {
+        image_box.wrap.classList.add("remove");
+        setTimeout(function () {
+            try{
+                document.body.removeChild(image_box.wrap);
+                image_box.wrap.classList.remove("remove");
+            }
+            catch (err){}
+        }, 300);
+    };
+
+    image_box.img.onload = function () {
+        image_box.wrap.classList.remove("loading");
+    };
+
     KStyle.image = function (selector) {
         var current = 0;
         var get_images = KStyle.selectAll(selector);
@@ -166,8 +193,6 @@ Array.prototype.remove = function (value) {
             },
             set: function () {
                 var img = get_images[current];
-
-                console.log("now is: " + current);
 
                 current === 0 ? image_box.prev.classList.add("ended") : image_box.prev.classList.remove("ended");
                 current === get_images.length - 1 ? image_box.next.classList.add("ended") : image_box.next.classList.remove("ended");
@@ -192,30 +217,15 @@ Array.prototype.remove = function (value) {
             }
         });
 
-        // 设置图片
-        image_box.img.onclick = function () {
-            image_box.wrap.classList.add("remove");
-            setTimeout(function () {
-                try{
-                    document.body.removeChild(image_box.wrap);
-                    image_box.wrap.classList.remove("remove");
-                }
-                catch (err){}
-            }, 300);
-        };
-
-        image_box.img.onload = function () {
-            image_box.wrap.classList.remove("loading");
-        };
-
         // 设置按钮
-        image_box.prev.onclick = function () {
+        image_box.prev.onclick = function (e) {
+            e.stopPropagation();
             if(current - 1 >= 0) current--;
 
             actions.set();
         };
-        image_box.next.onclick = function () {
-            console.log(get_images.length);
+        image_box.next.onclick = function (e) {
+            e.stopPropagation();
             if(current + 1 < get_images.length) current++;
 
             actions.set();
@@ -375,16 +385,14 @@ Array.prototype.remove = function (value) {
                 var c = window.location.pathname;
 
                 var t = e.target.href.match(/#[\s\S]+/);
-                if(t) t = t[0];
-
-                t = ks.select(t);
+                if(t) t = ks.select(t[0]);
 
                 if(c === l){
                     e.preventDefault();
 
                     var top = t ? (offset ? t.offsetTop - offset : t.offsetTop) : 0;
 
-                    "scrollBehavior" in document.documentElement.style ? global.scrollTo({top: top, left: 0, behavior: "smooth"}) : global.scrollTo(top, 0);
+                    "scrollBehavior" in document.documentElement.style ? global.scrollTo({top: top, left: 0, behavior: "smooth"}) : global.scrollTo(0, top);
                 }
                 else{
                     console.log(c, l);

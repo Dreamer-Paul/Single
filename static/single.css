@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2019.11.17
+# Last Update: 2020.3.13
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -346,10 +346,11 @@ header{
 }
 
 .head-search input{
-    height: 2em;
     width: 10em;
-    border-radius: 50px;
-    padding: .25em .75em;
+    height: 2em;
+    padding: 0 .75em;
+    min-height: auto;
+    border-radius: 3em;
 }
 
 @media screen and (max-width: 600px){
@@ -498,6 +499,7 @@ main img {
 
 /* - 阅读页正文 */
 article a{ border-bottom: 1px dashed currentColor }
+article img{ border-radius: .5em }
 
 .post-content, .page-content{ animation: fade-in-top .3s .2s backwards; -webkit-animation: fade-in-top .3s .2s backwards; }
 .post-content, .page-content, .post-near, .post-author{ margin-bottom: 3em }
