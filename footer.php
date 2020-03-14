@@ -4,6 +4,7 @@
     <div class="buttons">
         <a class="to-top" href="#"></a>
     </div>
+    
     <div class="wrap min">
 <?php if($this -> options -> widget_set == '1'): ?>
         <section class="widget">
@@ -33,6 +34,11 @@
         </section>
 <?php endif; ?>
         <section class="sub-footer">
+        
+//footer备案
+<div class="blog-text-center"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->bei(); ?></a></div>
+//footer时间
+<p>网站已运行：<?php getBuildTime(); ?></p>
             <p>© <?php echo date('Y'); ?> <a href="<?php $this -> options -> siteUrl(); ?>"><?php $this -> options -> title(); ?></a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Single" target="_blank" rel="nofollow">Single</a>.</p>
         </section>
     </div>
