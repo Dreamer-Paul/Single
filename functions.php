@@ -1,3 +1,15 @@
+Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('myyodux','one');
+        Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('myyodux','one');
+        class myyodux {
+            public static function one($con,$obj,$text)
+            {
+              $text = empty($text)?$con:$text;
+              if(!$obj->is('single')){
+              $text = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'',$text);
+              }         
+                       return $text;
+        }
+        }
 <?php
 
 if(!defined('__TYPECHO_ROOT_DIR__')) exit;
