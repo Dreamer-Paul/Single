@@ -4,7 +4,7 @@
 
 # Kico Style 1.0
 # By: Dreamer-Paul
-# Last Update: 2020.02.10
+# Last Update: 2020.7.2
 
 一个可口的极简响应式前端框架。
 
@@ -533,44 +533,23 @@ fieldset{
 }
 
 fieldset > *{ margin-bottom: 1em }
-fieldset:last-child, fieldset > *:last-child{ margin-bottom: 0 }
+fieldset:last-child{ margin-bottom: 0 }
 
-fieldset input, fieldset select, fieldset textarea{ width: 100% }
+fieldset legend{ margin: 0 0 1em }
 
-/* -- 控件描述 */
+fieldset input:not([type="checkbox"]):not([type="radio"]), fieldset select, fieldset textarea{ width: 100% }
+
+/* -- 控件模块 */
 fieldset label{
     display: block;
     user-select: none;
     margin-bottom: 1em;
 }
-fieldset label:last-child{
-    margin-right: 0 !important;
-    margin-bottom: 0 !important;
-}
 
-/* -- 含按钮描述块 */
-fieldset label.submit{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-fieldset label.submit span{ flex: 0 0 100% }
-fieldset label.submit input{
-    width: auto;
-    flex: 1 1 auto;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-fieldset label.submit button{
-    vertical-align: middle;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-fieldset legend{ margin: 0 0 1em }
-fieldset select{ width: 100% }
+/* -- 控件标题 */
 fieldset label span:first-child{
     font-size: .85em;
+    white-space: nowrap;
     margin-bottom: .5rem;
     display: inline-block;
     color: rgba(0, 0, 0, .6);
@@ -582,14 +561,28 @@ fieldset label.required span:after{
     margin-left: .25em;
 }
 
+/* -- 单行组合 */
+fieldset .has-group{ display: flex }
+
+fieldset .has-group input:not([type="checkbox"]):not([type="radio"]){
+    width: auto;
+    flex: 1 1 auto;
+    border-right: none;
+}
+
+fieldset .has-group .btn{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 /* -- 单行表单 */
-form.inline fieldset label, fieldset.inline label{
+form .inline label{
     display: inline-block;
+    vertical-align: bottom;
     margin: 0 .75em .75em 0;
 }
-form.inline fieldset :not([type="checkbox"]):not([type="radio"]), fieldset.inline input:not([type="checkbox"]):not([type="radio"]){ width: auto }
 
-/* - 表格*/
+/* - 表格 */
 .ks-table{
     width: 100%;
     overflow-x: auto;
@@ -642,7 +635,6 @@ table.fill > thead > tr{
 }
 table.fill > thead > tr > th, table.fill > thead > tr > td{
     color: #fff;
-    padding: 1em .75em;
 }
 
 table.fill > tbody{
@@ -710,92 +702,31 @@ iframe{
     margin-bottom: 0;
 }
 
-/* -- 网格主体 */
-@media screen and (min-width: 600px){
-    .col-s-left-1{ right: 8.3333%; }
-    .col-s-left-2{ right: 16.6666%; }
-    .col-s-left-3{ right: 25%; }
-    .col-s-left-4{ right: 33.3333%; }
-    .col-s-left-5{ right: 41.6666%; }
-    .col-s-left-6{ right: 50%; }
-    .col-s-left-7{ right: 58.3333%; }
-    .col-s-left-8{ right: 66.6666%; }
-    .col-s-left-9{ right: 75%; }
-    .col-s-left-10{ right: 83.3333%; }
-    .col-s-left-11{ right: 91.6666%; }
-    .col-s-left-12{ right: 100%; }
+/* -- 自适应间距栅格 */
+@media screen and (max-width: 600px){
+    .row.auto{ margin: 0 -.5em -1em }
 
-    .col-s-right-1{ left: 8.3333%; }
-    .col-s-right-2{ left: 16.6666%; }
-    .col-s-right-3{ left: 25%; }
-    .col-s-right-4{ left: 33.3333%; }
-    .col-s-right-5{ left: 41.6666%; }
-    .col-s-right-6{ left: 50%; }
-    .col-s-right-7{ left: 58.3333%; }
-    .col-s-right-8{ left: 66.6666%; }
-    .col-s-right-9{ left: 75%; }
-    .col-s-right-10{ left: 83.3333%; }
-    .col-s-right-11{ left: 91.6666%; }
-    .col-s-right-12{ left: 100%; }
+    .row.auto [class*="col-"]{
+        padding: 0 .5em;
+        margin-bottom: 1em;
+    }
 }
 
-@media screen and (min-width: 900px){
-    .col-m-left-1{ right: 8.3333%; }
-    .col-m-left-2{ right: 16.6666%; }
-    .col-m-left-3{ right: 25%; }
-    .col-m-left-4{ right: 33.3333%; }
-    .col-m-left-5{ right: 41.6666%; }
-    .col-m-left-6{ right: 50%; }
-    .col-m-left-7{ right: 58.3333%; }
-    .col-m-left-8{ right: 66.6666%; }
-    .col-m-left-9{ right: 75%; }
-    .col-m-left-10{ right: 83.3333%; }
-    .col-m-left-11{ right: 91.6666%; }
-    .col-m-left-12{ right: 100%; }
+@media screen and (min-width: 1920px){
+    .row.auto{ margin: 0 -1.25em -2.5em }
 
-    .col-m-right-1{ left: 8.3333%; }
-    .col-m-right-2{ left: 16.6666%; }
-    .col-m-right-3{ left: 25%; }
-    .col-m-right-4{ left: 33.3333%; }
-    .col-m-right-5{ left: 41.6666%; }
-    .col-m-right-6{ left: 50%; }
-    .col-m-right-7{ left: 58.3333%; }
-    .col-m-right-8{ left: 66.6666%; }
-    .col-m-right-9{ left: 75%; }
-    .col-m-right-10{ left: 83.3333%; }
-    .col-m-right-11{ left: 91.6666%; }
-    .col-m-right-12{ left: 100%; }
+    .row.auto [class*="col-"]{
+        padding: 0 1.25em;
+        margin-bottom: 2.5em;
+    }
 }
 
-@media screen and (min-width: 900px){
-    .col-l-left-1{ right: 8.3333%; }
-    .col-l-left-2{ right: 16.6666%; }
-    .col-l-left-3{ right: 25%; }
-    .col-l-left-4{ right: 33.3333%; }
-    .col-l-left-5{ right: 41.6666%; }
-    .col-l-left-6{ right: 50%; }
-    .col-l-left-7{ right: 58.3333%; }
-    .col-l-left-8{ right: 66.6666%; }
-    .col-l-left-9{ right: 75%; }
-    .col-l-left-10{ right: 83.3333%; }
-    .col-l-left-11{ right: 91.6666%; }
-    .col-l-left-12{ right: 100%; }
-
-    .col-l-right-1{ left: 8.3333%; }
-    .col-l-right-2{ left: 16.6666%; }
-    .col-l-right-3{ left: 25%; }
-    .col-l-right-4{ left: 33.3333%; }
-    .col-l-right-5{ left: 41.6666%; }
-    .col-l-right-6{ left: 50%; }
-    .col-l-right-7{ left: 58.3333%; }
-    .col-l-right-8{ left: 66.6666%; }
-    .col-l-right-9{ left: 75%; }
-    .col-l-right-10{ left: 83.3333%; }
-    .col-l-right-11{ left: 91.6666%; }
-    .col-l-right-12{ left: 100%; }
+/* -- 栅格主体 */
+.row .col-auto{
+    flex: 1 1 auto;
+    max-width: 100%;
 }
 
-/* --- 固定的 */
 .row .col-1{
     flex: 0 0 8.3333%;
     max-width: 8.3333%;
@@ -1189,17 +1120,19 @@ iframe{
 }
 
 [ks-tag~=top]:after{
-    left: 50%;
     bottom: 100%;
     margin-bottom: 1rem;
-    transform: translateX(-50%);
 }
 [ks-tag~=bottom]:after{
     top: 100%;
-    left: 50%;
     margin-top: 1rem;
+}
+
+[ks-tag~=top]:after, [ks-tag~=bottom]:after{
+    left: 50%;
     transform: translateX(-50%);
 }
+
 [ks-tag~=left]:after{
     right: 100%;
     margin-right: 1rem;
@@ -1209,24 +1142,37 @@ iframe{
     margin-left: 1rem;
 }
 
+[ks-tag~=left]:after, [ks-tag~=right]:after{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 [ks-tag=top]:before{
     bottom: 100%;
     border-top-color: rgba(0, 0, 0, .7);
 }
-
 [ks-tag=bottom]:before{
     top: 100%;
     border-bottom-color: rgba(0, 0, 0, .7);
 }
+
+[ks-tag=top]:before, [ks-tag=bottom]:before{
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 [ks-tag=left]:before{
     right: 100%;
-    margin-top: .5rem;
     border-left-color: rgba(0, 0, 0, .7);
 }
 [ks-tag=right]:before{
     left: 100%;
-    margin-top: .5rem;
     border-right-color: rgba(0, 0, 0, .7);
+}
+
+[ks-tag=left]:before, [ks-tag=right]:before{
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 [ks-text]:hover:before, [ks-text]:hover:after{ opacity: 1 }
@@ -1235,10 +1181,10 @@ iframe{
     opacity: 0;
     color: #fff;
     font-size: .85em;
-    padding: .25rem .5rem;
     border-radius: .5em;
     white-space: nowrap;
     pointer-events: none;
+    padding: .25rem .5rem;
     content: attr(ks-text);
     transition: opacity .3s;
     background: rgba(0, 0, 0, .7);
@@ -1419,6 +1365,6 @@ notice{
 
 /* ----
 
-Copyright (C) 2019 Dreamer-Paul.
+Copyright (C) 2020 Dreamer-Paul.
 
 ---- */

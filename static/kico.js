@@ -2,7 +2,7 @@
 
 # Kico Style 1.0
 # By: Dreamer-Paul
-# Last Update: 2020.02.10
+# Last Update: 2020.4.10
 
 一个可口的极简响应式前端框架。
 
@@ -40,6 +40,10 @@ Array.prototype.remove = function (value) {
             a.scrollTo = function (offset) {
                 return KStyle.scrollTo(a, offset);
             };
+
+            a.empty = function () {
+                return KStyle.each(a, function (item) { KStyle.empty(item); });
+            }
 
             return a;
         }
@@ -106,6 +110,13 @@ Array.prototype.remove = function (value) {
             case "string": return document.querySelectorAll(obj); break;
         }
     };
+
+    // 清空子元素
+    KStyle.empty = function (obj) {
+        while(obj.firstChild){
+            obj.removeChild(obj.firstChild);
+        }
+    }
 
     // 弹窗
     var notice = {
