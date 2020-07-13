@@ -9,12 +9,9 @@
             <a class="edit-link" href="<?php $this->options -> adminUrl(); ?>write-post.php?cid=<?php echo $this -> cid; ?>" target="_blank">编辑</a>
 <?php endif; ?>
             <div class="post-meta">
-                <time class="date"><?php $this->date(); ?></time>
+                <time class="date"><?php $this -> date(); ?></time>
 <?php if(!empty($this -> options -> post_meta) && in_array('show_category', $this -> options -> post_meta)): ?>
                 <span class="category"><?php $this -> category('，'); ?></span>
-<?php endif; ?>
-<?php if(!empty($this -> options -> post_meta) && in_array('show_tags', $this -> options -> post_meta)): ?>
-                <span class="tags"><?php $this -> tags('，', true, '暂无'); ?></span>
 <?php endif; ?>
 <?php if(!empty($this -> options -> post_meta) && in_array('show_comments', $this -> options -> post_meta)): ?>
                 <span class="comments"><?php $this -> commentsNum(); ?></span>
@@ -33,6 +30,11 @@
                 <li>下一篇: <?php $this -> theNext('%s','看完啦 (つд⊂)'); ?></li>
             </ul>
         </section>
+<?php if(count($this -> tags)): ?>
+        <section class="post-tags">
+            <?php $this -> tags(NULL, true, '暂无'); ?>
+        </section>
+<?php endif; ?>
 <?php if($this -> options -> author_text): ?>
         <section class="post-author">
             <figure class="author-avatar">

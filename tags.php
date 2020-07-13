@@ -15,6 +15,7 @@ $this -> need('header.php');
     <style>
         main .tags-list{
             display: flex;
+            flex-wrap: wrap;
         }
         main .tags-list a{
             color: inherit;

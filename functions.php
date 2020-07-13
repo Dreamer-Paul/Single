@@ -73,7 +73,6 @@ function themeConfig($form) {
     $post_meta = new Typecho_Widget_Helper_Form_Element_Checkbox('post_meta',
         array(
             'show_category' => _t('文章分类'),
-            'show_tags' => _t('文章标签'),
             'show_comments' => _t('评论数')
         ),
         array('show_category', 'show_comments'), _t('文章页属性显示'));

@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2020.7.10
+# Last Update: 2020.7.13
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -15,8 +15,10 @@
 /* 0 - 全局
 -------------------------------- */
 :root{
-    --primary: #6f9fc7;
-    --secondary: #9fcff7;
+    --blue: #6f9fc7;
+    --dark-blue: #6e8aad;
+    --light-blue: #9fcff7;
+
     --board-back: #fff;
     --board-border: #ccc;
 }
@@ -457,7 +459,7 @@ main img {
 
 .post-meta .date:before{ content: "\f017" }
 .post-meta .category:before{ content: "\f07b" }
-.post-meta .tags:before{ content: "\f02c" }
+.post-meta .user:before{ content: "\f007" }
 .post-meta .comments:before{ content: "\f086" }
 .post-meta .view:before{ content: "\f080" }
 
@@ -502,7 +504,7 @@ article a{ border-bottom: 1px dashed currentColor }
 article img{ border-radius: .5em }
 
 .post-content, .page-content{ animation: fade-in-top .3s .2s backwards; -webkit-animation: fade-in-top .3s .2s backwards; }
-.post-content, .page-content, .post-near, .post-author{ margin-bottom: 3em }
+.post-content, .page-content, .post-near, .post-tags, .post-author{ margin-bottom: 3em }
 
 article h1, article h2, article h3{
     margin-top: 3rem;
@@ -525,7 +527,26 @@ article h3:before{
 
 article h1:before{ font-weight: bold }
 
-.post-near{ animation: fade-in-top .3s .3s backwards; -webkit-animation: fade-in-top .3s .3s backwards; }
+/* - 阅读页其他文章 */
+.post-near{
+    animation: fade-in-top .3s .3s backwards; -webkit-animation: fade-in-top .3s .3s backwards;
+}
+
+/* - 阅读页文章标签 */
+.post-tags{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2.5em;
+    animation: fade-in-top .3s .3s backwards; -webkit-animation: fade-in-top .3s .3s backwards;
+}
+.post-tags:before{
+    content: "\f02c";
+    margin-right: .75em;
+    font-family: "FontAwesome";
+}
+.post-tags a{
+    margin: 0 .75em .5em 0;
+}
 
 /* - 阅读页作者信息 */
 .post-author{
@@ -696,7 +717,7 @@ article h1:before{ font-weight: bold }
         top: 3.2em;
         opacity: 1;
         visibility: visible;
-        border-left: 1px solid #ccc;
+        border-left: 1px solid #ddd;
     }
 }
 @media screen and (max-width: 799px){
@@ -708,7 +729,7 @@ article h1:before{ font-weight: bold }
         min-height: 40%;
         max-height: 80%;
         transform: translateY(100%);
-        border-top: 1px solid #ccc;
+        border-top: 1px solid #ddd;
     }
 }
 
@@ -729,7 +750,7 @@ article h1:before{ font-weight: bold }
 -------------------------------- */
 footer{
     border-top: 1px solid #eee;
-    transition: border 0.3s, background 0.3s;
+    transition: border .3s, background .3s;
 }
 
 footer .buttons{
