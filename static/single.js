@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2020.7.10
+# Last Update: 2020.9.11
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -34,12 +34,12 @@ var Paul_Single = function (config) {
 
     // 关灯切换
     this.night = function () {
-        if(body.classList.contains("neon")){
-            body.classList.remove("neon");
+        if(body.classList.contains("dark-theme")){
+            body.classList.remove("dark-theme");
             document.cookie = "night=false;" + "path=/;" + "max-age=21600";
         }
         else{
-            body.classList.add("neon");
+            body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
     };
@@ -140,7 +140,7 @@ var Paul_Single = function (config) {
         var hour = new Date().getHours();
 
         if(document.cookie.indexOf("night") === -1 && (hour <= 5 || hour >= 22)){
-            document.body.classList.add("neon");
+            document.body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
     }

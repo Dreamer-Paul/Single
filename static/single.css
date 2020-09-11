@@ -91,72 +91,72 @@ input, textarea, code, hr, blockquote{
 }
 
 /* - 夜间风格 */
-body.neon{
+.dark-theme{
     color: #aaa;
     background: #333;
     --board-back: #444;
     --board-border: #555;
 }
 
-body.neon::-webkit-scrollbar{
+.dark-theme::-webkit-scrollbar{
     border-color: transparent;
     background: rgba(255, 255, 255, .2);
 }
 
-body.neon a{ color: #c9861d }
-body.neon a:hover{ color: #eb9c26 }
+.dark-theme a{ color: #6e8aad }
+.dark-theme a:hover{ color: #9fcff7 }
 
-body.neon img{
+.dark-theme img{
     filter: brightness(60%);
     -webkit-filter: brightness(60%);
 }
 
-body.neon blockquote{
-    color: #c9861d;
+.dark-theme blockquote{
+    color: #ddd;
     border-color: #eb9c26;
     background: rgba(255, 255, 255, .05);
 }
 
 /* -- 边框 */
-body.neon header, body.neon .head-menu .sub-menu, body.neon main .article-list,
-body.neon .post-item h2 a, body.neon .post-title, body.neon .page-title, body.neon .post-author,
-body.neon tr, body.neon hr, body.neon pre code, body.neon input, body.neon textarea, body.neon .btn, body.neon .toggle-list,
-body.neon footer, body.neon .to-top{ border-color: #555 }
+.dark-theme header, .dark-theme .head-menu .sub-menu, .dark-theme main .article-list,
+.dark-theme .post-item h2 a, .dark-theme .post-title, .dark-theme .page-title, .dark-theme .post-author,
+.dark-theme tr, .dark-theme hr, .dark-theme pre code, .dark-theme input, .dark-theme textarea, .dark-theme .btn, .dark-theme .toggle-list,
+.dark-theme footer, .dark-theme .to-top{ border-color: #555 }
 
 /* -- 透明 */
-body.neon iframe, body.neon em{ opacity: .6 }
+.dark-theme iframe, .dark-theme em{ opacity: .6 }
 
 /* -- 颜色 */
-body.neon .btn{ color: inherit }
+.dark-theme .btn{ color: inherit }
 
 /* -- 背景 */
-body.neon input, body.neon textarea, body.neon .btn, body.neon .to-top, body.neon .toggle-list{ background: #444 }
+.dark-theme input, .dark-theme textarea, .dark-theme .btn, .dark-theme .to-top, .dark-theme .toggle-list{ background: #444 }
 
 /* -- 头部 */
-body.neon header, body.neon .head-menu .sub-menu, body.neon .head-menu .sub-menu:before{
+.dark-theme header, .dark-theme .head-menu .sub-menu, .dark-theme .head-menu .sub-menu:before{
     color: #aaa;
     background: #444;
 }
-body.neon .head-menu .sub-menu:before{
+.dark-theme .head-menu .sub-menu:before{
     border-color: #555 #555 transparent transparent;
 }
 
-body.neon :not(pre) > code{
+.dark-theme :not(pre) > code{
     color: #ffa5a5;
     background: rgba(255, 255, 255, .2);
 }
 
-body.neon .head-search input{
+.dark-theme .head-search input{
     background: #666;
     border-color: transparent;
 }
-body.neon .head-search input::-webkit-input-placeholder{ color: #bbb }
+.dark-theme .head-search input::-webkit-input-placeholder{ color: #bbb }
 
-body.neon header a{ color: #aaa }
-body.neon header a:hover{ color: #ddd }
+.dark-theme header a{ color: #aaa }
+.dark-theme header a:hover{ color: #ddd }
 
 @media screen and (max-width: 600px){
-    body.neon .head-menu .sub-menu{ background: none }
+    .dark-theme .head-menu .sub-menu{ background: none }
 }
 
 /* 1 - 页眉
@@ -711,7 +711,7 @@ article h1:before{ font-weight: bold }
 @media screen and (min-width: 800px){
     body.has-trees{ margin-right: 15em }
 
-    body.neon .article-list{ background: rgba(0, 0, 0, .1) }
+    .dark-theme .article-list{ background: rgba(0, 0, 0, .1) }
 
     .article-list{
         top: 3.2em;
@@ -721,7 +721,7 @@ article h1:before{ font-weight: bold }
     }
 }
 @media screen and (max-width: 799px){
-    body.neon .article-list{ background: #444 }
+    .dark-theme .article-list{ background: #444 }
 
     .article-list{
         left: 0;

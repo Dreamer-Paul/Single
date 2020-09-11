@@ -6,7 +6,7 @@
         <section class="post-title">
             <h2><?php $this -> title() ?></h2>
 <?php if($this -> authorId == $this -> user -> uid): ?>
-            <a class="edit-link" href="<?php $this->options -> adminUrl(); ?>write-post.php?cid=<?php echo $this -> cid; ?>" target="_blank">编辑</a>
+            <a class="edit-link" href="<?php $this -> options -> adminUrl(); ?>write-post.php?cid=<?php echo $this -> cid; ?>" target="_blank">编辑</a>
 <?php endif; ?>
             <div class="post-meta">
                 <time class="date"><?php $this -> date(); ?></time>
