@@ -46,10 +46,10 @@ class Single {
     // 夜间模式
     static function is_night() {
         if(isset($_COOKIE["night"])){
-            echo $_COOKIE["night"] == "true" ? ' class="neon"' : '';
+            echo $_COOKIE["night"] == "true" ? ' class="dark-theme"' : '';
         }
         else if(Typecho_Widget::widget('Widget_Options') -> night_mode == 2){
-            echo ' class="neon"';
+            echo ' class="dark-theme"';
         }
     }
 

@@ -144,6 +144,14 @@ var Paul_Single = function (config) {
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
     }
+    else if(document.cookie.indexOf("night") !== -1){
+        if(document.cookie.indexOf("night=true") !== -1){
+            document.body.classList.add("dark-theme");
+        }
+        else{
+            document.body.classList.remove("dark-theme");
+        }
+    }
 
     // 如果开启复制内容提示
     if(config.copyright){

@@ -21,7 +21,15 @@ function threadedComments($comments, $options, $single = "Dreamer-Paul") {
 ?>
 
 <div class="comment-single <?php echo $commentLevelClass; ?>" id="<?php $comments -> theId() ?>">
-    <?php $comments -> gravatar('150', 'robohash'); ?>
+    <?php
+        if(preg_match('/\d{4,13}(@qq.com)/', strtolower($comments -> mail))){
+            preg_match('/\d+/', strtolower($comments -> mail), $mail_check);
+            echo '<img class="avatar" src="https://q.qlogo.cn/g?b=qq&nk=' . $mail_check[0] . '&s=100" alt=""/>';
+        }
+        else{
+            $comments -> gravatar('150', 'robohash');
+        }
+    ?>
     <div class="comment-meta">
         <span class="comment-author"><?php if($comments -> url): ?><a href="<?php $comments -> url() ?>" rel="external nofollow" target="_blank"><?php $comments->author(false) ?></a><?php else: $comments->author(); endif; ?></span>
         <time class="comment-time"><?php $comments -> created(); ?></time>
