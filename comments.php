@@ -2,17 +2,8 @@
 
 <?php
 
-function threadedComments($comments, $options, $single = "Dreamer-Paul") {
-    $commentClass = '';
-
-    if($comments -> authorId == $comments -> ownerId){
-        $commentClass .= 'comment-by-author';
-    }
-    else{
-        $commentClass .= 'comment-by-user';
-    }
-
-    $commentLevelClass = $comments -> levels > 0 ? ' comment-child' : '';
+function threadedComments($comments) {
+    $commentLevelClass = $comments -> levels > 0 ? " comment-child" : "";
 
     Single::$author = Single::$authorCache;
     Single::$authorCache = $comments -> author;
@@ -20,7 +11,7 @@ function threadedComments($comments, $options, $single = "Dreamer-Paul") {
     $comments -> created = Single::tran_time($comments -> created);
 ?>
 
-<div class="comment-single <?php echo $commentLevelClass; ?>" id="<?php $comments -> theId() ?>">
+<div class="comment-single<?php echo $commentLevelClass; ?>" id="<?php $comments -> theId() ?>">
     <?php
         if(preg_match('/\d{4,13}(@qq.com)/', strtolower($comments -> mail))){
             preg_match('/\d+/', strtolower($comments -> mail), $mail_check);
@@ -55,7 +46,7 @@ $comments -> content();
 
 <?php } ?>
 
-<section class="post-comments">
+<section class="post-comments" id="comments">
     <h3><?php $this -> commentsNum(_t('没有评论'), _t('只有一条评论 (QwQ)'), _t('已有 %d 条评论')); ?></h3>
 <?php $this -> comments() -> to($comments); ?>
 <?php if($this -> allow('comment')): ?>
