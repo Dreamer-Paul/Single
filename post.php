@@ -32,7 +32,7 @@
         </section>
 <?php if(count($this -> tags)): ?>
         <section class="post-tags">
-            <?php $this -> tags(NULL, true, '暂无'); ?>
+            <?php $this -> tags('', true, '暂无'); ?>
         </section>
 <?php endif; ?>
 <?php if($this -> options -> author_text): ?>
