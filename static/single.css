@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2022.1.8
+# Last Update: 2022.2.13
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -544,6 +544,11 @@ article h3:before{
 }
 
 article h1:before{ font-weight: bold }
+
+article ul p:first-child{
+    margin-top: .5em;
+    margin-bottom: 0;
+}
 
 /* - 阅读页其他文章 */
 .post-near{
