@@ -164,7 +164,7 @@ abbr[title]{
 }
 
 em, mark, kbd{
-    font-size: .85em;
+    font-size: .875em;
     padding: .25em .5em;
     border-radius: .5em;
     border-radius: var(--radius);
@@ -237,7 +237,7 @@ button{
 }
 
 /* -- 按钮尺寸 */
-.btn.small{ font-size: .85em }
+.btn.small{ font-size: .875em }
 .btn.middle, .btn.large{ padding: .75em 1.5em }
 .btn.large{ font-size: 1.2em }
 
@@ -339,6 +339,7 @@ input[disabled], textarea[disabled]{
 }
 
 input, select, textarea{
+    margin: 0;
     outline: none;
     font: inherit;
     max-width: 100%;
@@ -609,7 +610,7 @@ fieldset label{
 /* -- 控件标题 */
 fieldset label > span:first-child{
     opacity: .6;
-    font-size: .85em;
+    font-size: .875em;
     white-space: nowrap;
     margin-bottom: .5rem;
     display: inline-block;

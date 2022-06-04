@@ -49,7 +49,7 @@
     <nav class="head-menu">
         <a href="<?php $this -> options -> siteUrl(); ?>">首页</a>
         <div class="has-child">
-            <a>分类</a>
+            <a href="javascript:void(0)">分类</a>
             <div class="sub-menu">
                 <?php $this -> widget('Widget_Metas_Category_List') -> parse('<a href="{permalink}">{name}</a>'); ?>
             </div>

@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2022.2.25
+# Last Update: 2022.6.4
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -19,7 +19,6 @@
     --light-blue: #9fcff7;
 
     --border: #ddd;
-    --dark-border: #ccc;
     --light-border: #eee;
 
     --light-background: #fff;
@@ -72,12 +71,15 @@ h1, h2, h3, h4, h5, h6{ font-weight: normal }
 
 hr{ border-color: #eee }
 
-em{ background: #6f9fc7 }
+em{
+    background-color: #6f9fc7;
+    background-color: var(--blue);
+}
 
 .btn{
     color: #fff;
-    background: #6f9fc7;
-    background: var(--blue);
+    background-color: #6f9fc7;
+    background-color: var(--blue);
 }
 .btn:hover{
     color: #fff;
@@ -87,44 +89,43 @@ em{ background: #6f9fc7 }
 
 pre{
     color: inherit;
-    border: 1px solid #ccc;
-    border-color: var(--dark-border);
-    background: linear-gradient(rgba(18, 18, 18, .05) 50%, transparent 0);
+    border: 1px solid #ddd;
+    border-color: var(--border);
+    background: linear-gradient(rgba(0, 0, 0, .05) 50%, transparent 0);
     background-size: auto 3em;
     background-origin: content-box;
 }
 
 blockquote{
-    background: #ecf1f5;
     border-color: #6f9fc7;
     border-radius: .25em;
     border-radius: var(--radius);
+    background-color: #ecf1f5;
 }
 
 input, textarea{
-    background: #fff;
-    background: var(--light-background);
+    background-color: #fff;
+    background-color: var(--light-background);
 }
 input[type="text"], input[type="search"], input[type="email"], input[type="url"], textarea, code, hr, tr{
-    border-color: var(--dark-border);
+    border-color: var(--border);
 }
 input, textarea, pre, hr, blockquote{
-    transition: border .3s, background .3s;
+    transition: border-color .3s, background .3s;
 }
 
 /* - 夜间风格 */
 .dark-theme{
-    color: #aaa;
-    background: #333;
+    color: #bbb;
+    background-color: #222;
 
     --blue: #6e8aad;
     --light-blue: #6f9fc7;
 
-    --border: #555;
-    --dark-border: #666;
-    --light-border: #555;
+    --border: #444;
+    --light-border: #333;
 
-    --light-background: #444;
+    --light-background: #333;
 }
 
 /* -- 额外适配 */
@@ -138,10 +139,14 @@ input, textarea, pre, hr, blockquote{
     -webkit-filter: brightness(60%);
 }
 
+.dark-theme pre{
+    background-image: linear-gradient(rgba(255, 255, 255, .05) 50%, transparent 0);
+}
+
 .dark-theme blockquote{
     color: #ddd;
     border-color: #eb9c26;
-    background: rgba(255, 255, 255, .05);
+    background-color: rgba(255, 255, 255, .05);
 }
 
 .dark-theme iframe, .dark-theme em{ opacity: .6 }
@@ -166,11 +171,11 @@ header{
     z-index: 2;
     position: fixed;
     line-height: 1em;
-    background: #fff;
-    background: var(--light-background);
+    background-color: #fff;
+    background-color: var(--light-background);
     border-bottom: 1px solid #ddd;
     border-color: var(--border);
-    transition: border-color .3s, background .3s;
+    transition: border-color .3s, background-color .3s;
 }
 
 /* - 头部标题 */
@@ -267,7 +272,8 @@ header{
     .head-menu .has-child{
         position: relative;
     }
-    .head-menu .has-child:hover > .sub-menu{
+    .head-menu .has-child:hover > .sub-menu,
+    .head-menu .has-child:focus-within .sub-menu{
         opacity: 1;
         visibility: visible;
     }
@@ -276,8 +282,8 @@ header{
         opacity: 0;
         top: 3.2em;
         left: -1em;
-        background: #fff;
-        background: var(--light-background);
+        background-color: #fff;
+        background-color: var(--light-background);
         padding: .5em 1em;
         visibility: hidden;
         position: absolute;
@@ -285,7 +291,7 @@ header{
         border: 1px solid #ddd;
         border-color: var(--border);
         border-radius: 0 0 .25em .25em;
-        transition: background .15s, border-color .15s, opacity .15s, visibility .15s;
+        transition: background-color .15s, border-color .15s, opacity .15s, visibility .15s;
     }
 
     .head-menu .sub-menu:before{
@@ -295,14 +301,14 @@ header{
         height: 1em;
         content: '';
         display: block;
-        background: #fff;
-        background: var(--light-background);
+        background-color: #fff;
+        background-color: var(--light-background);
         border: 1px solid;
         position: absolute;
         transform: rotate(-45deg);
         border-color: #ddd #ddd transparent transparent;
         border-color: var(--border) var(--border) transparent transparent;
-        transition: background .15s, border-color .15s;
+        transition: background-color .15s, border-color .15s;
     }
 
     .toggle-btn{ display: none }
@@ -317,14 +323,14 @@ header{
     position: relative;
     border-radius: .25em;
     border-radius: var(--radius);
-    transition: color 0.3s, background 0.3s;
+    transition: color .3s, background-color .3s;
 }
 
 .toggle-btn{ margin-right: 0 }
 .search-btn{ float: right }
 
 .toggle-btn:hover, .light-btn:hover, .search-btn:hover{
-    background: rgba(0, 0, 0, .05);
+    background-color: rgba(0, 0, 0, .05);
 }
 
 .toggle-btn:before, .light-btn:before, .search-btn:before{
@@ -345,7 +351,7 @@ header{
     line-height: 1.5em;
     position: relative;
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity .3s;
 }
 .head-search.active{
     opacity: 1;
@@ -416,7 +422,7 @@ main img {
 /* - 文章简要 */
 .post-item{
     margin-bottom: 3em;
-    word-break: break-all;
+    word-break: break-word;
 }
 .post-item:last-child{ margin-bottom: 0 }
 
@@ -439,7 +445,7 @@ main img {
     padding-bottom: .3rem;
     border-bottom: 2px solid #eee;
     border-color: var(--light-border);
-    transition: color .3s, border .3s;
+    transition: color .3s, border-color .3s;
 }
 
 .post-item .edit-link{
@@ -472,6 +478,7 @@ main img {
 
 .post-meta .date:before{ content: "\f017" }
 .post-meta .category:before{ content: "\f07b" }
+.post-meta .tags:before{ content: "\f02c" }
 .post-meta .user:before{ content: "\f007" }
 .post-meta .comments:before{ content: "\f086" }
 .post-meta .view:before{ content: "\f080" }
@@ -494,7 +501,7 @@ main img {
 .post-title, .page-title{
     margin-bottom: 1em;
     padding-bottom: 1em;
-    transition: border 0.3s;
+    transition: border-color .3s;
     border-bottom: 1px solid #ddd;
     border-color: var(--border);
     animation: fade-in-bottom .3s both; -webkit-animation: fade-in-bottom .3s both;
@@ -579,7 +586,7 @@ article ul p:first-child{
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     border-color: var(--border);
-    transition: border .3s, filter .3s;
+    transition: border-color .3s, filter .3s;
     animation: fade-in-top .3s .4s backwards; -webkit-animation: fade-in-top .3s .4s backwards;
 }
 
@@ -628,7 +635,7 @@ article ul p:first-child{
 }
 
 /* -- 评论结构 */
-.post-comments{ word-break: break-all }
+.post-comments{ word-break: break-word }
 
 .comment-form{ margin-bottom: 2em }
 
@@ -714,13 +721,13 @@ article ul p:first-child{
     overflow: auto;
     position: fixed;
     transform: translateY(0%);
-    background: rgba(255, 255, 255, .5);
-    transition: transform .3s, border .3s, opacity .3s, background .3s;
+    background-color: rgba(255, 255, 255, .5);
+    transition: transform .3s, border-color .3s, opacity .3s, background-color .3s;
 }
 .article-list.active{
     opacity: 1;
-    background: #fff;
-    background: var(--light-background);
+    background-color: #fff;
+    background-color: var(--light-background);
     transform: translateY(0%);
 }
 .article-list::-webkit-scrollbar{ width: 0; height: 0 }
@@ -731,9 +738,9 @@ article ul p:first-child{
     padding: .25em 1em;
     display: inline-block;
     transition: border-color .3s;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-color: var(--dark-border);
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-color: var(--border);
 }
 
 .article-list a{
@@ -758,7 +765,7 @@ article ul p:first-child{
 @media screen and (min-width: 800px){
     body.has-trees{ margin-right: 15em }
 
-    .dark-theme .article-list{ background: rgba(0, 0, 0, .1) }
+    .dark-theme .article-list{ background-color: rgba(0, 0, 0, .1) }
 
     .article-list{
         top: 3.2em;
@@ -798,7 +805,7 @@ article ul p:first-child{
 footer{
     border-top: 1px solid #eee;
     border-color: var(--light-border);
-    transition: border .3s, background .3s;
+    transition: border-color .3s;
 }
 
 footer .buttons{
@@ -812,14 +819,14 @@ footer .to-top, footer .toggle-list{
     padding: .5em;
     display: block;
     cursor: pointer;
-    background: #fff;
-    background: var(--light-background);
+    background-color: #fff;
+    background-color: var(--light-background);
     border-radius: .25em;
     border-radius: var(--radius);
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     border-color: var(--border);
     transform: translateX(5em);
-    transition: color .3s, border .3s, background .3s, transform .3s;
+    transition: color .3s, border-color .3s, background-color .3s, transform .3s;
 }
 footer .to-top.active{ transform: translateX(0) }
 footer .to-top:before, footer .toggle-list:before{
@@ -890,7 +897,8 @@ footer .sub-footer p{ font-size: .875em }
         background: none;
     }
 
-    body:before, header, .post-comments, .post-near, footer{
+    body:before, header, .post-comments, .post-near, footer,
+    .post-item .edit-link, .page-title .edit-link, .post-title .edit-link{
         display: none;
     }
 
