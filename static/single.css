@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2022.6.4
+# Last Update: 2023.2.12
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -625,6 +625,7 @@ article ul p:first-child{
 
 /* - 阅读页评论 */
 .post-comments{
+    word-break: break-word;
     scroll-margin-top: 5em;
     animation: fade-in-top .3s .5s backwards; -webkit-animation: fade-in-top .3s .5s backwards;
 }
@@ -635,8 +636,6 @@ article ul p:first-child{
 }
 
 /* -- 评论结构 */
-.post-comments{ word-break: break-word }
-
 .comment-form{ margin-bottom: 2em }
 
 .comment-list .comment-single{
@@ -781,6 +780,8 @@ article ul p:first-child{
         width: 100%;
         min-height: 40%;
         max-height: 80%;
+        background-color: #fff;
+        background-color: var(--light-background);
         transform: translateY(100%);
         border-top: 1px solid #ddd;
         border-color: var(--border);
