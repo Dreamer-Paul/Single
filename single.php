@@ -7,7 +7,7 @@ class Single {
     static $author = "", $authorCache = "";
 
     // 更新检测
-    static function update(){
+    static function update() {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.paugram.com/update/?name=" . self::$name . "&current=" . self::$version . "&site=" . $_SERVER['HTTP_HOST']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -54,7 +54,7 @@ class Single {
     }
 
     // 时间转换
-    static function tran_time($ts){
+    static function tran_time($ts) {
         $dur = time() - $ts;
 
         if($dur < 0){
@@ -80,6 +80,19 @@ class Single {
         }
         else{
             return date("Y.m.d", $ts);
+        }
+    }
+
+    // 文章配图
+    static function post_image() {
+        // 寻找文章里面的图片
+        preg_match("/(http|https)(\S)+(jpg|png|webp)/", Typecho_Widget::widget('Widget_Archive') -> text, $post_image);
+
+        if ($post_image) {
+            return $post_image[0];
+        }
+        else {
+            return null;
         }
     }
 }

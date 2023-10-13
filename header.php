@@ -25,12 +25,15 @@
     <style><?php $this -> options -> custom_css(); ?></style>
 <?php endif; ?>
     <meta property="og:site_name" content="<?php $this -> options -> title(); ?>">
-    <meta property="og:title" content="<?php $this -> archiveTitle(array(
-            'category' => _t('%s'),
-            'search'   => _t('含关键词 %s 的文章'),
-            'tag'      => _t('标签 %s 下的文章'),
-            'author'   => _t('%s 发布的文章')
-        ), ""); ?>"/>
+<?php if ($this -> is("post")): ?>
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="<?php $this -> archiveTitle("", ""); ?>" />
+    <meta property="og:description" content="<?php echo $this -> description; ?>" />    
+<?php $hasImage = Single::post_image(); ?>
+<?php if ($hasImage): ?>
+    <meta property="og:image" content="<?php echo $hasImage; ?>" />
+<?php endif; ?>
+<?php endif; ?>
 <?php $this -> header('generator=&template=&pingback=&xmlrpc=&wlw='); ?>
 </head>
 <body<?php Single::is_night() ?>>
