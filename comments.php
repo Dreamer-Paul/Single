@@ -2,7 +2,7 @@
 
 <?php
 
-function threadedComments($comments) {
+function threadedComments($comments, $options) {
     $commentLevelClass = $comments -> levels > 0 ? " comment-child" : "";
 
     Single::$authorCache[$comments -> coid] = $comments -> author;
@@ -28,6 +28,10 @@ function threadedComments($comments) {
     <div class="comment-content">
         <p>
 <?php
+
+if ('waiting' === $comments -> status) {
+    echo '(' . $options -> commentStatus . ') ';
+}
 
 if($comments -> parent){
     echo '<a href="#comment-' . $comments -> parent . '">@' . Single::$authorCache[$comments -> parent] . '</a> ';
@@ -80,7 +84,9 @@ $comments -> content();
 <?php endif; ?>
 
 <?php if($comments -> have()): ?>
-        <div class="comment-list"><?php $comments -> listComments(array('before' => '', 'after' => '', 'replyWord' => '<i class="fa fa-reply"></i>')); ?></div>
+        <div class="comment-list">
+            <?php $comments -> listComments(['commentStatus' => _t('你的评论正等待审核')]); ?>
+        </div>
         <?php $comments -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'section', 'itemTag' => 'span')); ?>
 <?php endif; ?>
 
