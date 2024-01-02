@@ -5,8 +5,7 @@
 function threadedComments($comments) {
     $commentLevelClass = $comments -> levels > 0 ? " comment-child" : "";
 
-    Single::$author = Single::$authorCache;
-    Single::$authorCache = $comments -> author;
+    Single::$authorCache[$comments -> coid] = $comments -> author;
 
     $comments -> created = Single::tran_time($comments -> created);
 ?>
@@ -31,7 +30,7 @@ function threadedComments($comments) {
 <?php
 
 if($comments -> parent){
-    echo '<a href="#comment-' . $comments -> parent . '">@' . Single::$author . '</a> ';
+    echo '<a href="#comment-' . $comments -> parent . '">@' . Single::$authorCache[$comments -> parent] . '</a> ';
 }
 
 $comments -> content = preg_replace('#</?[p][^>]*>#','', $comments -> content);

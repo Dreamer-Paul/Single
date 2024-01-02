@@ -4,7 +4,7 @@ class Single {
     static $name = "Single";
     static $version = "2.1";
 
-    static $author = "", $authorCache = "";
+    static $authorCache = [];
 
     // 更新检测
     static function update() {
