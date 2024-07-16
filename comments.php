@@ -9,7 +9,6 @@ function threadedComments($comments, $options) {
 
     $comments -> created = Single::tran_time($comments -> created);
 ?>
-
 <div class="comment-single<?php echo $commentLevelClass; ?>" id="<?php $comments -> theId() ?>">
     <?php
         if(preg_match('/\d{4,13}(@qq.com)/', strtolower($comments -> mail))){
@@ -25,8 +24,7 @@ function threadedComments($comments, $options) {
         <time class="comment-time"><?php $comments -> created(); ?></time>
         <span class="comment-reply"><?php $comments -> reply('<i class="fa fa-reply" title="回复"></i>'); ?></span>
     </div>
-    <div class="comment-content">
-        <p>
+    <p class="comment-content">
 <?php
 
 if ('waiting' === $comments -> status) {
@@ -41,12 +39,9 @@ $comments -> content = preg_replace('#</?[p][^>]*>#','', $comments -> content);
 $comments -> content();
 
 ?>
-        </p>
-    </div>
+    </p>
 </div>
-
 <?php if($comments -> children) $comments -> threadedComments(); ?>
-
 <?php } ?>
 
 <section class="post-comments" id="comments">
@@ -57,7 +52,7 @@ $comments -> content();
         <span class="cancel-comment-reply">
             <?php $comments -> cancelReply(); ?>
         </span>
-        <form method="post" action="<?php $this -> commentUrl() ?>" role="form">
+        <form method="post" action="<?php $this -> commentUrl() ?>">
 <?php if($this -> user -> hasLogin()): ?>
             <fieldset>
                 <p>欢迎回来，<a href="<?php $this -> options -> profileUrl() ?>"><?php $this -> user -> screenName(); ?></a>！不是你？<a href="<?php $this -> options -> logoutUrl() ?>">登出</a></p>
@@ -84,10 +79,8 @@ $comments -> content();
 <?php endif; ?>
 
 <?php if($comments -> have()): ?>
-        <div class="comment-list">
-            <?php $comments -> listComments(['commentStatus' => _t('你的评论正等待审核')]); ?>
-        </div>
-        <?php $comments -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'section', 'itemTag' => 'span')); ?>
+        <?php $comments -> listComments(['commentStatus' => _t('你的评论正等待审核'), 'before' => '<div class="comment-list">', 'after' => '</div>']); ?>
+        <?php $comments -> pageNav('&laquo;', '&raquo;', 3, "...", array('wrapTag' => 'div', 'itemTag' => 'span')); ?>
 <?php endif; ?>
 
 </section>

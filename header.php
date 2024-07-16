@@ -1,6 +1,6 @@
 <?php if(!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title><?php $this -> archiveTitle(array(
@@ -17,7 +17,7 @@
     <link href="<?php $this -> options -> themeUrl('static/kico.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="<?php $this -> options -> themeUrl('static/single.css'); ?>" rel="stylesheet" type="text/css"/>
     <link href="https://fastly.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <?php if($this -> options -> background): ?>
     <style>body:before{content: ''; background-image: url(<?php $this -> options -> background(); ?>)}</style>
 <?php endif; ?>
@@ -28,7 +28,7 @@
 <?php if ($this -> is("post")): ?>
     <meta property="og:type" content="article" />
     <meta property="og:title" content="<?php $this -> archiveTitle("", ""); ?>" />
-    <meta property="og:description" content="<?php echo $this -> description; ?>" />    
+    <meta property="og:description" content="<?php echo $this -> description; ?>" />
 <?php $hasImage = Single::post_image(); ?>
 <?php if ($hasImage): ?>
     <meta property="og:image" content="<?php echo $hasImage; ?>" />
@@ -52,7 +52,7 @@
     <nav class="head-menu">
         <a href="<?php $this -> options -> siteUrl(); ?>">首页</a>
         <div class="has-child">
-            <a href="javascript:void(0)">分类</a>
+            <a href>分类</a>
             <div class="sub-menu">
                 <?php $this -> widget('Widget_Metas_Category_List') -> parse('<a href="{permalink}">{name}</a>'); ?>
             </div>

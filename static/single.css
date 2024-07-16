@@ -4,7 +4,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2024.2.9
+# Last Update: 2024.7.16
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -410,7 +410,7 @@ main img {
 .home-social{
     cursor: default;
     user-select: none;
- }
+}
 
 .home-social a{
     color: inherit;
@@ -828,6 +828,7 @@ footer .to-top, footer .toggle-list{
     padding: .5em;
     display: block;
     cursor: pointer;
+    color: var(--primary);
     background-color: #fff;
     background-color: var(--light-background);
     border-radius: .25em;

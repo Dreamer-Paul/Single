@@ -2,7 +2,7 @@
 
 <footer>
     <div class="buttons">
-        <a class="to-top" href="#"></a>
+        <button class="to-top" href="#"></button>
     </div>
     <div class="wrap min">
 <?php if($this -> options -> widget_set == '1'): ?>

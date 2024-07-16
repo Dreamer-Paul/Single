@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2020.9.11
+# Last Update: 2024.7.16
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -80,7 +80,12 @@ var Paul_Single = function (config) {
 
             function toggle_tree() {
                 var buttons = ks.select("footer .buttons");
-                var btn = ks.create("a", {class: "toggle-list"});
+                var btn = ks.create("button", {
+                    class: "toggle-list",
+                    attr: [
+                        {name: "title", value: "切换文章目录"},
+                    ],
+                });
                 buttons.appendChild(btn);
 
                 btn.addEventListener("click", function () {
