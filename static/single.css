@@ -653,11 +653,6 @@ article ul p:first-child{
     scroll-margin-top: 5em;
     transition: transform .3s;
 }
-.comment-list .comment-single:after{
-    content: "";
-    clear: both;
-    display: block;
-}
 .comment-list .comment-single.active{ transform: scale(1.05) }
 
 .comment-list .comment-child{ margin-left: 2em }
