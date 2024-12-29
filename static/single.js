@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2024.8.8
+# Last Update: 2024.12.29
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -34,11 +34,11 @@ var Paul_Single = function (config) {
 
     // 关灯切换
     this.night = function () {
-        if(body.classList.contains("dark-theme")){
+        if (body.classList.contains("dark-theme")) {
             body.classList.remove("dark-theme");
             document.cookie = "night=false;" + "path=/;" + "max-age=21600";
         }
-        else{
+        else {
             body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
@@ -95,7 +95,7 @@ var Paul_Single = function (config) {
         const btn = ks.create("button", {
             class: "toggle-list",
             attr: [
-                {name: "title", value: "切换文章目录"},
+                { name: "title", value: "切换文章目录" },
             ],
         });
         buttons.appendChild(btn);
@@ -107,10 +107,10 @@ var Paul_Single = function (config) {
 
     // 自动添加外链
     this.links = function () {
-        var l = content.getElementsByTagName("a");
+        var linksEl = content.getElementsByTagName("a");
 
-        if(l){
-            ks.each(l, function (t) {
+        if (linksEl) {
+            ks.each(linksEl, function (t) {
                 t.target = "_blank";
             });
         }
@@ -136,11 +136,15 @@ var Paul_Single = function (config) {
         var scroll = document.documentElement.scrollTop || document.body.scrollTop;
 
         scroll >= window.innerHeight / 2 ? btn.classList.add("active") : btn.classList.remove("active");
+
+        btn.onclick = () => {
+            window.scrollTo({ top: 0 }, { behavior: "smooth" });
+        }
     };
 
     this.header();
 
-    if(content){
+    if (content) {
         this.tree();
         this.links();
         this.comment_list();
@@ -150,27 +154,27 @@ var Paul_Single = function (config) {
     window.addEventListener("scroll", this.to_top);
 
     // 如果开启自动夜间模式
-    if(config.night){
+    if (config.night) {
         var hour = new Date().getHours();
 
-        if(document.cookie.indexOf("night") === -1 && (hour <= 5 || hour >= 22)){
+        if (!document.cookie.includes("night") && (hour <= 5 || hour >= 22)) {
             document.body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
     }
-    else if(document.cookie.indexOf("night") !== -1){
-        if(document.cookie.indexOf("night=true") !== -1){
+    else if (document.cookie.includes("night")) {
+        if (document.cookie.includes("night=true")) {
             document.body.classList.add("dark-theme");
         }
-        else{
+        else {
             document.body.classList.remove("dark-theme");
         }
     }
 
     // 如果开启复制内容提示
-    if(config.copyright){
+    if (config.copyright) {
         document.oncopy = function () {
-            ks.notice("复制内容请注明来源并保留版权信息！", {color: "yellow", overlay: true})
+            ks.notice("复制内容请注明来源并保留版权信息！", { color: "yellow", overlay: true });
         };
     }
 };
@@ -180,5 +184,5 @@ ks.image(".post-content:not(.is-special) img, .page-content:not(.is-special) img
 
 // 请保留版权说明
 if (window.console && window.console.log) {
-    console.log("%c Single %c https://paugram.com ","color: #fff; margin: 1em 0; padding: 5px 0; background: #ffa628;","margin: 1em 0; padding: 5px 0; background: #efefef;");
+    console.log("%c Single %c https://paugram.com ", "color: #fff; margin: 1em 0; padding: 5px 0; background: #ffa628;", "margin: 1em 0; padding: 5px 0; background: #efefef;");
 }
