@@ -2,7 +2,7 @@
 
 # Single Theme
 # By: Dreamer-Paul
-# Last Update: 2024.12.29
+# Last Update: 2025.11.25
 
 一个简洁大气，含夜间模式的 Typecho 博客模板。
 
@@ -111,7 +111,9 @@ var Paul_Single = function (config) {
 
         if (linksEl) {
             ks.each(linksEl, function (t) {
-                t.target = "_blank";
+                if (ev.target.host !== location.host) {
+                    t.target = "_blank";
+                }
             });
         }
     };
