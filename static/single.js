@@ -111,7 +111,7 @@ var Paul_Single = function (config) {
 
         if (linksEl) {
             ks.each(linksEl, function (t) {
-                if (ev.target.host !== location.host) {
+                if (t.host !== location.host) {
                     t.target = "_blank";
                 }
             });
